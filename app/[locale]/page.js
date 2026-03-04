@@ -271,14 +271,14 @@ export default async function HomePage({ params }) {
               <Link
                 key={i}
                 href="/destinacije"
-                className="group block rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                className="group block rounded-2xl overflow-hidden shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="aspect-[4/3] relative">
                   <OptimizedImage
                     name={dest.image}
                     alt={t(dest.nameKey)}
                     sizes="(max-width: 768px) 50vw, 25vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
