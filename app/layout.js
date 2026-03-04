@@ -27,8 +27,13 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const headersList = await headers();
-  const locale = headersList.get("x-next-intl-locale") || "bs";
+  let locale = "bs";
+  try {
+    const headersList = await headers();
+    locale = headersList.get("x-next-intl-locale") || locale;
+  } catch {
+    // Serverless/edge may not have headers in some contexts
+  }
 
   return (
     <html lang={locale} className={`${plusJakarta.variable} ${playfair.variable}`}>

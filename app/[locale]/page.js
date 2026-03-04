@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import OptimizedImage from "@/components/OptimizedImage";
 import { Icon } from "@/components/ui";
 import { Card, CardImage, CardContent, CardFeature } from "@/components/ui";
-import { Button } from "@/components/ui";
+import { ButtonLink } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
 import { HomeHeroCTAs, ScrollIndicator } from "@/components/HomeHero";
 import { HomeNewsletter } from "@/components/HomeNewsletter";
@@ -165,9 +165,9 @@ export default async function HomePage({ params }) {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Button as={Link} href="/ture" variant="outline" size="md">
+            <ButtonLink href="/ture" variant="outline" size="md">
               {t("toursCta")} →
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </section>
@@ -221,9 +221,9 @@ export default async function HomePage({ params }) {
               </h2>
               <p className="text-body text-wildher-text mb-4">{t("aboutText1")}</p>
               <p className="text-body text-wildher-text mb-8">{t("aboutText2")}</p>
-              <Button as={Link} href="/o-nama" variant="primary" size="md">
+              <ButtonLink href="/o-nama" variant="primary" size="md">
                 {t("aboutCta")}
-              </Button>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -259,9 +259,9 @@ export default async function HomePage({ params }) {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button as={Link} href="/destinacije" variant="outline" size="md">
+            <ButtonLink href="/destinacije" variant="outline" size="md">
               {t("destinationsCta")} →
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </section>
@@ -294,9 +294,9 @@ export default async function HomePage({ params }) {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button as={Link} href="/blog" variant="outline" size="md">
+            <ButtonLink href="/blog" variant="outline" size="md">
               {t("blogCta")} →
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </section>
@@ -372,9 +372,9 @@ export default async function HomePage({ params }) {
           <h2 className="font-display text-h2 md:text-4xl font-semibold text-white mb-8 max-w-2xl">
             {t("finalCtaTitle")}
           </h2>
-          <Button as={Link} href="/ture" variant="primary" size="lg" className="bg-primary-600 hover:bg-primary-700">
+          <ButtonLink href="/ture" variant="primary" size="lg" className="bg-primary-600 hover:bg-primary-700">
             {t("finalCtaButton")}
-          </Button>
+          </ButtonLink>
         </div>
       </section>
     </main>

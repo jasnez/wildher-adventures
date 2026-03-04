@@ -6,7 +6,10 @@ import { routing } from './routing';
 import messagesBs from '../messages/bs.json';
 import messagesEn from '../messages/en.json';
 
-const messagesMap = { bs: messagesBs, en: messagesEn };
+const messagesMap = {
+  bs: messagesBs?.default ?? messagesBs,
+  en: messagesEn?.default ?? messagesEn,
+};
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
@@ -14,8 +17,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
+  const messages = messagesMap[locale] ?? messagesMap[routing.defaultLocale];
   return {
     locale,
-    messages: messagesMap[locale] ?? messagesMap[routing.defaultLocale],
+    messages: messages && typeof messages === 'object' ? messages : {},
   };
 });
