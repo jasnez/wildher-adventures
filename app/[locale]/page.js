@@ -2,6 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import OptimizedImage from "@/components/OptimizedImage";
 import { Icon } from "@/components/ui";
+import { WhySectionIcon } from "@/components/WhySectionIcon";
 import { Card, CardImage, CardContent, CardFeature } from "@/components/ui";
 import { ButtonLink } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
@@ -25,10 +26,10 @@ export default async function HomePage({ params }) {
   const t = await getTranslations("home");
 
   const whyBlocks = [
-    { titleKey: "why1Title", textKey: "why1Text", icon: "users" },
-    { titleKey: "why2Title", textKey: "why2Text", icon: "check" },
-    { titleKey: "why3Title", textKey: "why3Text", icon: "mountain" },
-    { titleKey: "why4Title", textKey: "why4Text", icon: "heart" },
+    { titleKey: "why1Title", textKey: "why1Text", icon: "why-users" },
+    { titleKey: "why2Title", textKey: "why2Text", icon: "why-backpack" },
+    { titleKey: "why3Title", textKey: "why3Text", icon: "why-nature" },
+    { titleKey: "why4Title", textKey: "why4Text", icon: "why-care" },
   ];
 
   const tours = [
@@ -116,8 +117,16 @@ export default async function HomePage({ params }) {
                 key={titleKey}
                 className="flex flex-col items-center text-center gap-3"
               >
-                <div className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary-green/10 text-brand-primary-green">
-                  <Icon name={icon} size={26} />
+                <div
+                  className="mb-2 inline-flex items-center justify-center rounded-full bg-[#e8e4dc] p-3 shadow-[0_2px_6px_rgba(0,0,0,0.06)]"
+                  style={{
+                    ['--why-icon-stroke']: 'var(--color-neutral-700)',
+                    ['--why-icon-fill']: '#e8e4dc',
+                    ['--why-icon-bird']: 'var(--color-neutral-600)',
+                    ['--why-icon-plaster']: '#d4d0c8',
+                  }}
+                >
+                  <WhySectionIcon name={icon} size={44} />
                 </div>
                 <h3 className="font-display text-h3 font-semibold text-wildher-text">
                   {t(titleKey)}
