@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
     ? "WildHer Adventures — ženske outdoor ture u BiH"
     : "WildHer Adventures — Women-only outdoor adventures in Bosnia and Herzegovina";
   const description = locale === "bs"
-    ? "Women-only planinarenje, via ferrata i ekspedicije kroz planine Bosne i Hercegovine. Licencirani vodič, male grupe."
+    ? "Planinarenje samo za žene, via ferrata i ekspedicije kroz planine Bosne i Hercegovine. Licencirani vodič, male grupe."
     : "Women-only hiking tours, via ferrata and expeditions in Bosnia and Herzegovina. Licensed guide, small groups.";
   return { title, description };
 }
@@ -150,13 +150,13 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {tours.map((tour, i) => (
-              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card">
+              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-500 hover:-translate-y-1 shadow-card">
                 <CardImage>
                   <OptimizedImage
                     name={tour.image}
                     alt={t(tour.titleKey)}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </CardImage>
                 <CardContent>
@@ -196,31 +196,40 @@ export default async function HomePage({ params }) {
       </section>
 
       {/* 4. TESTIMONIALS + STATS */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-4xl px-4 md:px-6">
-          <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-12">
+      <section className="relative py-16 md:py-24">
+        <Image
+          src="/testimonials-bg.png"
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-brand-charcoal/70" />
+        <div className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 text-center text-brand-off-white">
+          <h2 className="font-display text-h1 md:text-3xl font-semibold mb-12">
             {t("testimonialsTitle")}
           </h2>
           <div className="space-y-10 mb-14">
             {testimonials.map(({ quoteKey, authorKey }, i) => (
-              <blockquote key={i} className="text-center">
-                <p className="text-body-lg md:text-xl text-wildher-text italic mb-4">&ldquo;{t(quoteKey)}&rdquo;</p>
-                <footer className="text-small text-wildher-text-muted">— {t(authorKey)}</footer>
+              <blockquote key={i}>
+                <p className="text-body-lg md:text-xl italic mb-4">&ldquo;{t(quoteKey)}&rdquo;</p>
+                <footer className="text-small text-brand-off-white/80">— {t(authorKey)}</footer>
               </blockquote>
             ))}
           </div>
           <div className="grid grid-cols-3 gap-6 text-center">
             <div>
-              <p className="text-2xl md:text-3xl font-bold text-brand-primary-green">{t("statWomen")}</p>
-              <p className="text-small text-wildher-text-muted">{t("statWomenLabel")}</p>
+              <p className="text-2xl md:text-3xl font-bold text-brand-gold-beige">{t("statWomen")}</p>
+              <p className="text-small text-brand-off-white/80">{t("statWomenLabel")}</p>
             </div>
             <div>
-              <p className="text-2xl md:text-3xl font-bold text-brand-primary-green">{t("statTours")}</p>
-              <p className="text-small text-wildher-text-muted">{t("statToursLabel")}</p>
+              <p className="text-2xl md:text-3xl font-bold text-brand-gold-beige">{t("statTours")}</p>
+              <p className="text-small text-brand-off-white/80">{t("statToursLabel")}</p>
             </div>
             <div>
-              <p className="text-2xl md:text-3xl font-bold text-brand-primary-green">{t("statRating")}</p>
-              <p className="text-small text-wildher-text-muted">{t("statRatingLabel")}</p>
+              <p className="text-2xl md:text-3xl font-bold text-brand-gold-beige">{t("statRating")}</p>
+              <p className="text-small text-brand-off-white/80">{t("statRatingLabel")}</p>
             </div>
           </div>
         </div>
@@ -280,7 +289,7 @@ export default async function HomePage({ params }) {
                     name={dest.image}
                     alt={t(dest.nameKey)}
                     sizes="(max-width: 768px) 50vw, 25vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
@@ -310,13 +319,13 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {blogPosts.map((post, i) => (
-              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card overflow-hidden">
+              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-500 hover:-translate-y-1 shadow-card overflow-hidden">
                 <CardImage>
                   <OptimizedImage
                     name={post.image}
                     alt={t(post.titleKey)}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </CardImage>
                 <CardContent>

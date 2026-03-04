@@ -100,7 +100,7 @@ export function Header() {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const goingDown = currentY > lastY;
-      const threshold = 96; // malo ispod visine hero naslova
+      const threshold = 280; // header ostaje vidljiv duže pri scrollu nadole
 
       setScrolled(currentY > 16);
 
