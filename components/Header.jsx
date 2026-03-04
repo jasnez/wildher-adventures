@@ -84,6 +84,7 @@ function HamburgerIcon({ open, className = '' }) {
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const mobileMenuRef = useRef(null);
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
@@ -94,9 +95,24 @@ export function Header() {
     if (href === '/') return pathname === '/';
     return pathname === href || pathname.startsWith(`${href}/`);
   };
-
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const goingDown = currentY > lastY;
+      const threshold = 96; // malo ispod visine hero naslova
+
+      setScrolled(currentY > 16);
+
+      if (currentY > threshold && goingDown) {
+        setHiddenByScroll(true);
+      } else if (!goingDown) {
+        setHiddenByScroll(false);
+      }
+
+      lastY = currentY;
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -126,8 +142,12 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-200 ${
-          scrolled ? 'bg-white/95 shadow-card backdrop-blur-sm' : 'bg-white'
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          hiddenByScroll ? '-translate-y-full' : 'translate-y-0'
+        } ${
+          scrolled
+            ? 'bg-[#e3ece4]/85 backdrop-blur-md shadow-card'
+            : 'bg-transparent'
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-20 md:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
