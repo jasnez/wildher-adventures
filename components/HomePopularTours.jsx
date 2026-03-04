@@ -19,7 +19,7 @@ export function HomePopularTours({t, tours}) {
         >
           <div
             data-testid={`popular-tour-card-inner-${i}`}
-            className="relative h-full w-full rounded-2xl overflow-hidden [transform-style:preserve-3d] transition-[transform] duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:[transform:rotateY(180deg)]"
+            className="relative h-full w-full min-h-[420px] rounded-2xl overflow-hidden [transform-style:preserve-3d] transition-[transform] duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:[transform:rotateY(180deg)]"
           >
             {/* Prednja strana — identičan sadržaj kao stare kartice */}
             <div

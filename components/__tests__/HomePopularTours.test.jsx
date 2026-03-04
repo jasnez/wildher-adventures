@@ -74,5 +74,12 @@ describe('HomePopularTours', () => {
     const inner = screen.getByTestId('popular-tour-card-inner-0');
     expect(inner.className).toMatch(/duration-1000/);
   });
+
+  it('ima eksplicitnu minimalnu visinu kartice da bude vidljiva u layoutu', () => {
+    render(<HomePopularTours t={t} tours={mockTours} />);
+
+    const inner = screen.getByTestId('popular-tour-card-inner-0');
+    expect(inner.className).toMatch(/min-h-\[420px\]/);
+  });
 });
 
