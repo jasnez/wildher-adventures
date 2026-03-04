@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" fill="none" aria-hidden="true">
+  <g transform="translate(0, 8) scale(0.5)">
+    <circle cx="92" cy="22" r="10" fill="#c9a227"/>
+    <g stroke="#c9a227" stroke-width="1.5" stroke-linecap="round">
+      <line x1="92" y1="10" x2="92" y2="6"/>
+      <line x1="92" y1="34" x2="92" y2="38"/>
+      <line x1="80" y1="22" x2="76" y2="22"/>
+      <line x1="104" y1="22" x2="108" y2="22"/>
+      <line x1="84" y1="14" x2="81" y2="11"/>
+      <line x1="100" y1="14" x2="103" y2="11"/>
+      <line x1="84" y1="30" x2="81" y2="33"/>
+      <line x1="100" y1="30" x2="103" y2="33"/>
+    </g>
+    <path d="M0 80 L0 35 L35 80 Z" fill="#b8d4c4"/>
+    <path d="M28 80 L28 28 L55 80 Z" fill="#c8e0d0"/>
+    <path d="M22 80 Q30 55 38 45 Q45 38 52 50 Q58 65 65 80" stroke="#8b7355" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="48" cy="32" r="3" fill="#f7f5f2"/>
+    <path d="M48 35 L48 48 L45 56 L51 56 L48 48" fill="#f7f5f2"/>
+    <path d="M48 38 L42 45" stroke="#f7f5f2" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M48 42 L52 48" stroke="#f7f5f2" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M50 40 L52 46" stroke="#a08060" stroke-width="1" stroke-linecap="round"/>
+  </g>
+  <text x="72" y="38" font-family="system-ui, 'Plus Jakarta Sans', sans-serif" font-size="26" font-weight="700" fill="#f7f5f2">WildHer</text>
+  <text x="72" y="54" font-family="system-ui, 'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="500" fill="#a08060">Adventures</text>
+</svg>

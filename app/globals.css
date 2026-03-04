@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   WildHer Adventures — design tokens (Tailwind v4 @theme)
+   Paleta, tipografija i komponentni tokeni za konzistentan UI.
+   ========================================================================== */
+
+@theme {
+  /* --------------------------------------------------------------------------
+     BREAKPOINTS (iz specifikacije: 375, 768, 1024, 1440)
+     Nadogradnja default Tailwind breakpointa.
+  -------------------------------------------------------------------------- */
+  --breakpoint-sm: 40rem;   /* 640px */
+  --breakpoint-md: 48rem;   /* 768px */
+  --breakpoint-lg: 64rem;   /* 1024px */
+  --breakpoint-xl: 90rem;   /* 1440px */
+  --breakpoint-2xl: 100rem;
+
+  /* --------------------------------------------------------------------------
+     COLOR PALETTE
+     Priroda BiH, toplo ali profesionalno, osnažujuće.
+  -------------------------------------------------------------------------- */
+  /* Primary — šumska zelena (glavna CTA, naglasci) */
+  --color-primary-50: #f0f7f2;
+  --color-primary-100: #d9ebdf;
+  --color-primary-200: #b8d9c4;
+  --color-primary-300: #8abf9a;
+  --color-primary-400: #5a9f6e;
+  --color-primary-500: #3d8354;
+  --color-primary-600: #2d6a43;
+  --color-primary-700: #265537;
+  --color-primary-800: #22442f;
+  --color-primary-900: #1d3929;
+  --color-primary-950: #0d1f14;
+
+  /* Secondary — zemljana / terakota (toplina, sekundarni CTA) */
+  --color-secondary-50: #faf7f5;
+  --color-secondary-100: #f3ede8;
+  --color-secondary-200: #e6d9d0;
+  --color-secondary-300: #d4bfb0;
+  --color-secondary-400: #be9f8a;
+  --color-secondary-500: #ab8570;
+  --color-secondary-600: #9d7360;
+  --color-secondary-700: #825d4e;
+  --color-secondary-800: #6c4e43;
+  --color-secondary-900: #5a423a;
+  --color-secondary-950: #302119;
+
+  /* Accent — nebo / voda (svježina, linkovi, hover) */
+  --color-accent-50: #f0f9fc;
+  --color-accent-100: #d9f0f7;
+  --color-accent-200: #bae4ef;
+  --color-accent-300: #8bd2e4;
+  --color-accent-400: #54b9d3;
+  --color-accent-500: #389eba;
+  --color-accent-600: #2d7f9e;
+  --color-accent-700: #286681;
+  --color-accent-800: #26556b;
+  --color-accent-900: #24475a;
+  --color-accent-950: #132d3c;
+
+  /* Neutrals — topli sivi (tekst, pozadine) */
+  --color-neutral-50: #fafaf9;
+  --color-neutral-100: #f5f5f4;
+  --color-neutral-200: #e7e5e4;
+  --color-neutral-300: #d6d3d1;
+  --color-neutral-400: #a8a29e;
+  --color-neutral-500: #78716c;
+  --color-neutral-600: #57534e;
+  --color-neutral-700: #44403c;
+  --color-neutral-800: #292524;
+  --color-neutral-900: #1c1917;
+  --color-neutral-950: #0c0a09;
+
+  /* Semantic (opciono) */
+  --color-success: var(--color-primary-600);
+  --color-warning: #ca8a04;
+  --color-error: #dc2626;
+
+  /* --------------------------------------------------------------------------
+     BRAND PALETTA (iz primary logo slike)
+     Dark Forest Green, Off-white, Gold/Beige, Dark Brown — za logotip i brending.
+  -------------------------------------------------------------------------- */
+  --color-brand-primary-green: #4a6044;   /* planine, "WildHer" tekst */
+  --color-brand-earth-tone: #715d43;      /* "Adventures" tekst */
+  --color-brand-gold-beige: #b19d70;     /* sunce, staza/rijeka */
+  --color-brand-off-white: #f2f2ec;      /* figura penjača, tekst na tamnoj pozadini */
+  --color-brand-charcoal: #2c2c2c;       /* tamna pozadina (hero, footer) */
+
+  /* Aliasi za brzu upotrebu (brand) */
+  --color-wildher-green: var(--color-primary-600);
+  --color-wildher-earth: var(--color-secondary-600);
+  --color-wildher-sky: var(--color-accent-500);
+  --color-wildher-bg: var(--color-neutral-50);
+  --color-wildher-surface: #ffffff;
+  --color-wildher-text: var(--color-neutral-800);
+  --color-wildher-text-muted: var(--color-neutral-600);
+  /* Brand vodič aliasi (logotip, dark sections) */
+  --color-wildher-logo-green: var(--color-brand-primary-green);
+  --color-wildher-logo-earth: var(--color-brand-earth-tone);
+  --color-wildher-on-dark: var(--color-brand-off-white);
+  --color-wildher-charcoal: var(--color-brand-charcoal);
+
+  /* --------------------------------------------------------------------------
+     TYPOGRAPHY
+     Plus Jakarta Sans (body), Playfair Display (display/headings).
+  -------------------------------------------------------------------------- */
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+
+  /* Font size skala (mobile-first, koristi responsive prefiks po potrebi) */
+  --text-hero: 2.5rem;      /* 40px — hero headline */
+  --text-hero--line-height: 1.15;
+  --text-hero--font-weight: 700;
+  --text-h1: 2rem;          /* 32px */
+  --text-h1--line-height: 1.2;
+  --text-h1--font-weight: 700;
+  --text-h2: 1.5rem;        /* 24px */
+  --text-h2--line-height: 1.3;
+  --text-h2--font-weight: 600;
+  --text-h3: 1.25rem;       /* 20px */
+  --text-h3--line-height: 1.35;
+  --text-h3--font-weight: 600;
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-lg--line-height: 1.6;
+  --text-body: 1rem;       /* 16px */
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;  /* 14px */
+  --text-small--line-height: 1.5;
+  --text-caption: 0.75rem;  /* 12px */
+  --text-caption--line-height: 1.4;
+
+  /* --------------------------------------------------------------------------
+     SPACING (dopuna default Tailwind spacinga)
+  -------------------------------------------------------------------------- */
+  --spacing-section: 4rem;   /* 64px — vertikalni razmak između sekcija */
+  --spacing-section-lg: 5rem;
+  --spacing-block: 1.5rem;   /* 24px — razmak unutar blokova */
+  --spacing-inline: 1rem;    /* 16px */
+
+  /* --------------------------------------------------------------------------
+     BORDER RADIUS
+  -------------------------------------------------------------------------- */
+  --radius-button: 0.5rem;   /* 8px */
+  --radius-card: 0.75rem;    /* 12px */
+  --radius-card-lg: 1rem;    /* 16px */
+  --radius-full: 9999px;
+
+  /* --------------------------------------------------------------------------
+     SHADOWS
+  -------------------------------------------------------------------------- */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+  --shadow-card-hover: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-hero: 0 25px 50px -12px rgb(0 0 0 / 0.2);
+  --shadow-button: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  /* --------------------------------------------------------------------------
+     EASING (tranzicije)
+  -------------------------------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+}

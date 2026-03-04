@@ -1,0 +1,623 @@
+{
+  "1": [
+    {
+      "width": 400,
+      "path": "/images/1-400w.webp",
+      "bytes": 10256
+    },
+    {
+      "width": 640,
+      "path": "/images/1-640w.webp",
+      "bytes": 24438
+    },
+    {
+      "width": 960,
+      "path": "/images/1-960w.webp",
+      "bytes": 54434
+    },
+    {
+      "width": 1280,
+      "path": "/images/1-1280w.webp",
+      "bytes": 92224
+    },
+    {
+      "width": 1920,
+      "path": "/images/1-1920w.webp",
+      "bytes": 203716
+    }
+  ],
+  "2": [
+    {
+      "width": 400,
+      "path": "/images/2-400w.webp",
+      "bytes": 23996
+    },
+    {
+      "width": 640,
+      "path": "/images/2-640w.webp",
+      "bytes": 58298
+    },
+    {
+      "width": 960,
+      "path": "/images/2-960w.webp",
+      "bytes": 122948
+    },
+    {
+      "width": 1280,
+      "path": "/images/2-1280w.webp",
+      "bytes": 200896
+    },
+    {
+      "width": 1920,
+      "path": "/images/2-1920w.webp",
+      "bytes": 378716
+    }
+  ],
+  "3": [
+    {
+      "width": 400,
+      "path": "/images/3-400w.webp",
+      "bytes": 37902
+    },
+    {
+      "width": 640,
+      "path": "/images/3-640w.webp",
+      "bytes": 94676
+    },
+    {
+      "width": 960,
+      "path": "/images/3-960w.webp",
+      "bytes": 212452
+    },
+    {
+      "width": 1280,
+      "path": "/images/3-1280w.webp",
+      "bytes": 374080
+    },
+    {
+      "width": 1920,
+      "path": "/images/3-1920w.webp",
+      "bytes": 791570
+    }
+  ],
+  "4": [
+    {
+      "width": 400,
+      "path": "/images/4-400w.webp",
+      "bytes": 57294
+    },
+    {
+      "width": 640,
+      "path": "/images/4-640w.webp",
+      "bytes": 148022
+    },
+    {
+      "width": 960,
+      "path": "/images/4-960w.webp",
+      "bytes": 342740
+    },
+    {
+      "width": 1280,
+      "path": "/images/4-1280w.webp",
+      "bytes": 609052
+    },
+    {
+      "width": 1920,
+      "path": "/images/4-1920w.webp",
+      "bytes": 1411086
+    }
+  ],
+  "5": [
+    {
+      "width": 400,
+      "path": "/images/5-400w.webp",
+      "bytes": 77112
+    },
+    {
+      "width": 640,
+      "path": "/images/5-640w.webp",
+      "bytes": 199978
+    },
+    {
+      "width": 960,
+      "path": "/images/5-960w.webp",
+      "bytes": 451008
+    },
+    {
+      "width": 1280,
+      "path": "/images/5-1280w.webp",
+      "bytes": 789242
+    },
+    {
+      "width": 1920,
+      "path": "/images/5-1920w.webp",
+      "bytes": 1652798
+    }
+  ],
+  "6": [
+    {
+      "width": 400,
+      "path": "/images/6-400w.webp",
+      "bytes": 53460
+    },
+    {
+      "width": 640,
+      "path": "/images/6-640w.webp",
+      "bytes": 134532
+    },
+    {
+      "width": 960,
+      "path": "/images/6-960w.webp",
+      "bytes": 300766
+    },
+    {
+      "width": 1280,
+      "path": "/images/6-1280w.webp",
+      "bytes": 541748
+    },
+    {
+      "width": 1920,
+      "path": "/images/6-1920w.webp",
+      "bytes": 1154102
+    }
+  ],
+  "7": [
+    {
+      "width": 400,
+      "path": "/images/7-400w.webp",
+      "bytes": 20032
+    },
+    {
+      "width": 640,
+      "path": "/images/7-640w.webp",
+      "bytes": 40286
+    },
+    {
+      "width": 960,
+      "path": "/images/7-960w.webp",
+      "bytes": 75970
+    },
+    {
+      "width": 1280,
+      "path": "/images/7-1280w.webp",
+      "bytes": 121394
+    },
+    {
+      "width": 1920,
+      "path": "/images/7-1920w.webp",
+      "bytes": 291268
+    }
+  ],
+  "8": [
+    {
+      "width": 400,
+      "path": "/images/8-400w.webp",
+      "bytes": 35408
+    },
+    {
+      "width": 640,
+      "path": "/images/8-640w.webp",
+      "bytes": 71676
+    },
+    {
+      "width": 960,
+      "path": "/images/8-960w.webp",
+      "bytes": 124212
+    },
+    {
+      "width": 1280,
+      "path": "/images/8-1280w.webp",
+      "bytes": 202292
+    },
+    {
+      "width": 1920,
+      "path": "/images/8-1920w.webp",
+      "bytes": 523200
+    }
+  ],
+  "9": [
+    {
+      "width": 400,
+      "path": "/images/9-400w.webp",
+      "bytes": 48896
+    },
+    {
+      "width": 640,
+      "path": "/images/9-640w.webp",
+      "bytes": 111326
+    },
+    {
+      "width": 960,
+      "path": "/images/9-960w.webp",
+      "bytes": 238826
+    },
+    {
+      "width": 1280,
+      "path": "/images/9-1280w.webp",
+      "bytes": 404546
+    },
+    {
+      "width": 1920,
+      "path": "/images/9-1920w.webp",
+      "bytes": 783778
+    }
+  ],
+  "10": [
+    {
+      "width": 400,
+      "path": "/images/10-400w.webp",
+      "bytes": 72520
+    },
+    {
+      "width": 640,
+      "path": "/images/10-640w.webp",
+      "bytes": 192504
+    },
+    {
+      "width": 960,
+      "path": "/images/10-960w.webp",
+      "bytes": 463422
+    },
+    {
+      "width": 1280,
+      "path": "/images/10-1280w.webp",
+      "bytes": 803658
+    },
+    {
+      "width": 1920,
+      "path": "/images/10-1920w.webp",
+      "bytes": 1827002
+    }
+  ],
+  "11": [
+    {
+      "width": 400,
+      "path": "/images/11-400w.webp",
+      "bytes": 37726
+    },
+    {
+      "width": 640,
+      "path": "/images/11-640w.webp",
+      "bytes": 96132
+    },
+    {
+      "width": 960,
+      "path": "/images/11-960w.webp",
+      "bytes": 210202
+    },
+    {
+      "width": 1280,
+      "path": "/images/11-1280w.webp",
+      "bytes": 362288
+    },
+    {
+      "width": 1691,
+      "path": "/images/11-1691w.webp",
+      "bytes": 634760
+    }
+  ],
+  "12": [
+    {
+      "width": 400,
+      "path": "/images/12-400w.webp",
+      "bytes": 23188
+    },
+    {
+      "width": 640,
+      "path": "/images/12-640w.webp",
+      "bytes": 57322
+    },
+    {
+      "width": 960,
+      "path": "/images/12-960w.webp",
+      "bytes": 126628
+    },
+    {
+      "width": 1280,
+      "path": "/images/12-1280w.webp",
+      "bytes": 212310
+    },
+    {
+      "width": 1920,
+      "path": "/images/12-1920w.webp",
+      "bytes": 443658
+    }
+  ],
+  "13": [
+    {
+      "width": 400,
+      "path": "/images/13-400w.webp",
+      "bytes": 28408
+    },
+    {
+      "width": 640,
+      "path": "/images/13-640w.webp",
+      "bytes": 73224
+    },
+    {
+      "width": 960,
+      "path": "/images/13-960w.webp",
+      "bytes": 161582
+    },
+    {
+      "width": 1280,
+      "path": "/images/13-1280w.webp",
+      "bytes": 298914
+    },
+    {
+      "width": 1920,
+      "path": "/images/13-1920w.webp",
+      "bytes": 699480
+    }
+  ],
+  "14": [
+    {
+      "width": 400,
+      "path": "/images/14-400w.webp",
+      "bytes": 33818
+    },
+    {
+      "width": 640,
+      "path": "/images/14-640w.webp",
+      "bytes": 86626
+    },
+    {
+      "width": 960,
+      "path": "/images/14-960w.webp",
+      "bytes": 199790
+    },
+    {
+      "width": 1280,
+      "path": "/images/14-1280w.webp",
+      "bytes": 362546
+    },
+    {
+      "width": 1920,
+      "path": "/images/14-1920w.webp",
+      "bytes": 775206
+    }
+  ],
+  "15": [
+    {
+      "width": 400,
+      "path": "/images/15-400w.webp",
+      "bytes": 35566
+    },
+    {
+      "width": 640,
+      "path": "/images/15-640w.webp",
+      "bytes": 90390
+    },
+    {
+      "width": 960,
+      "path": "/images/15-960w.webp",
+      "bytes": 204908
+    },
+    {
+      "width": 1280,
+      "path": "/images/15-1280w.webp",
+      "bytes": 361386
+    },
+    {
+      "width": 1920,
+      "path": "/images/15-1920w.webp",
+      "bytes": 818398
+    }
+  ],
+  "16": [
+    {
+      "width": 400,
+      "path": "/images/16-400w.webp",
+      "bytes": 31046
+    },
+    {
+      "width": 640,
+      "path": "/images/16-640w.webp",
+      "bytes": 80396
+    },
+    {
+      "width": 960,
+      "path": "/images/16-960w.webp",
+      "bytes": 188748
+    },
+    {
+      "width": 1280,
+      "path": "/images/16-1280w.webp",
+      "bytes": 336182
+    },
+    {
+      "width": 1920,
+      "path": "/images/16-1920w.webp",
+      "bytes": 768528
+    }
+  ],
+  "17": [
+    {
+      "width": 400,
+      "path": "/images/17-400w.webp",
+      "bytes": 9846
+    },
+    {
+      "width": 640,
+      "path": "/images/17-640w.webp",
+      "bytes": 22934
+    },
+    {
+      "width": 960,
+      "path": "/images/17-960w.webp",
+      "bytes": 46886
+    },
+    {
+      "width": 1280,
+      "path": "/images/17-1280w.webp",
+      "bytes": 76676
+    },
+    {
+      "width": 1920,
+      "path": "/images/17-1920w.webp",
+      "bytes": 149638
+    }
+  ],
+  "18": [
+    {
+      "width": 400,
+      "path": "/images/18-400w.webp",
+      "bytes": 27114
+    },
+    {
+      "width": 640,
+      "path": "/images/18-640w.webp",
+      "bytes": 65478
+    },
+    {
+      "width": 960,
+      "path": "/images/18-960w.webp",
+      "bytes": 134868
+    },
+    {
+      "width": 1280,
+      "path": "/images/18-1280w.webp",
+      "bytes": 237768
+    },
+    {
+      "width": 1920,
+      "path": "/images/18-1920w.webp",
+      "bytes": 500872
+    }
+  ],
+  "19": [
+    {
+      "width": 400,
+      "path": "/images/19-400w.webp",
+      "bytes": 69650
+    },
+    {
+      "width": 640,
+      "path": "/images/19-640w.webp",
+      "bytes": 165974
+    },
+    {
+      "width": 960,
+      "path": "/images/19-960w.webp",
+      "bytes": 340534
+    },
+    {
+      "width": 1280,
+      "path": "/images/19-1280w.webp",
+      "bytes": 580406
+    },
+    {
+      "width": 1920,
+      "path": "/images/19-1920w.webp",
+      "bytes": 1111360
+    }
+  ],
+  "20": [
+    {
+      "width": 400,
+      "path": "/images/20-400w.webp",
+      "bytes": 59000
+    },
+    {
+      "width": 640,
+      "path": "/images/20-640w.webp",
+      "bytes": 119246
+    },
+    {
+      "width": 960,
+      "path": "/images/20-960w.webp",
+      "bytes": 222290
+    },
+    {
+      "width": 1280,
+      "path": "/images/20-1280w.webp",
+      "bytes": 332496
+    },
+    {
+      "width": 1920,
+      "path": "/images/20-1920w.webp",
+      "bytes": 613560
+    }
+  ],
+  "21": [
+    {
+      "width": 400,
+      "path": "/images/21-400w.webp",
+      "bytes": 41034
+    },
+    {
+      "width": 640,
+      "path": "/images/21-640w.webp",
+      "bytes": 104318
+    },
+    {
+      "width": 960,
+      "path": "/images/21-960w.webp",
+      "bytes": 234436
+    },
+    {
+      "width": 1280,
+      "path": "/images/21-1280w.webp",
+      "bytes": 405048
+    },
+    {
+      "width": 1920,
+      "path": "/images/21-1920w.webp",
+      "bytes": 905248
+    }
+  ],
+  "22": [
+    {
+      "width": 400,
+      "path": "/images/22-400w.webp",
+      "bytes": 17574
+    },
+    {
+      "width": 640,
+      "path": "/images/22-640w.webp",
+      "bytes": 37776
+    },
+    {
+      "width": 960,
+      "path": "/images/22-960w.webp",
+      "bytes": 75818
+    },
+    {
+      "width": 1280,
+      "path": "/images/22-1280w.webp",
+      "bytes": 121766
+    },
+    {
+      "width": 1920,
+      "path": "/images/22-1920w.webp",
+      "bytes": 222984
+    }
+  ],
+  "23": [
+    {
+      "width": 400,
+      "path": "/images/23-400w.webp",
+      "bytes": 9452
+    },
+    {
+      "width": 640,
+      "path": "/images/23-640w.webp",
+      "bytes": 20850
+    },
+    {
+      "width": 960,
+      "path": "/images/23-960w.webp",
+      "bytes": 43714
+    },
+    {
+      "width": 1280,
+      "path": "/images/23-1280w.webp",
+      "bytes": 73944
+    },
+    {
+      "width": 1920,
+      "path": "/images/23-1920w.webp",
+      "bytes": 147382
+    }
+  ]
+}
