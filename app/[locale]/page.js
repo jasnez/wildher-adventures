@@ -148,7 +148,7 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {tours.map((tour, i) => (
-              <Card key={i} className="group hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
+              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card">
                 <CardImage>
                   <OptimizedImage
                     name={tour.image}
