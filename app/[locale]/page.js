@@ -150,41 +150,50 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {tours.map((tour, i) => (
-              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-700 hover:-translate-y-1 shadow-card">
-                <CardImage>
-                  <OptimizedImage
-                    name={tour.image}
-                    alt={t(tour.titleKey)}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </CardImage>
-                <CardContent>
-                  <p className="text-small text-wildher-text-muted mb-1">{t(tour.locationKey)}</p>
-                  <h3 className="text-h3 font-semibold text-wildher-text mb-3">{t(tour.titleKey)}</h3>
-                  <div className="flex flex-wrap gap-3 text-small text-wildher-text-muted mb-3">
-                    <span className="flex items-center gap-1">
-                      <Icon name="calendar" size={16} />
-                      {t(tour.durationKey)}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Icon name="mountain" size={16} />
-                      {t(tour.difficultyKey)}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Icon name="users" size={16} />
-                      {t(tour.groupKey)}
-                    </span>
+              <Link
+                key={i}
+                href="/ture"
+                className="group/card block h-[420px] min-h-0 [perspective:1000px] rounded-2xl shadow-card hover:shadow-xl transition-shadow duration-700"
+              >
+                <div className="relative h-full w-full rounded-2xl overflow-hidden [transform-style:preserve-3d] transition-[transform] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:[transform:rotateY(180deg)]">
+                  {/* Prednja strana */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(0deg)] flex flex-col rounded-2xl overflow-hidden bg-white">
+                    <div className="aspect-[4/3] shrink-0 overflow-hidden">
+                      <OptimizedImage
+                        name={tour.image}
+                        alt={t(tour.titleKey)}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-105"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col justify-between p-4 md:p-5">
+                      <div>
+                        <p className="text-small text-wildher-text-muted mb-1">{t(tour.locationKey)}</p>
+                        <h3 className="text-h3 font-semibold text-wildher-text">{t(tour.titleKey)}</h3>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="font-semibold text-brand-primary-green">Od {t(tour.priceKey)}€</span>
+                        <span className="text-small font-semibold text-brand-primary-green">Saznaj više →</span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-small text-wildher-text-muted mb-4 line-clamp-2">{t(tour.descKey)}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-brand-primary-green">Od {t(tour.priceKey)}€</span>
-                    <Link href="/ture" className="text-small font-semibold text-brand-primary-green hover:underline">
-                      {t("learnMore")} →
-                    </Link>
+                  {/* Stražnja strana — opis s fokusom na mjesto */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-center rounded-2xl bg-[#e3ece4] p-6 text-left">
+                    <p className="text-small font-semibold uppercase tracking-wide text-brand-primary-green">
+                      {t(tour.locationKey)}
+                    </p>
+                    <h3 className="font-display text-h2 font-semibold text-wildher-text mt-1 mb-3">
+                      {t(tour.titleKey)}
+                    </h3>
+                    <p className="text-small text-wildher-text-muted line-clamp-4">
+                      {t(tour.descKey)}
+                    </p>
+                    <p className="mt-4 text-small font-semibold text-brand-primary-green">
+                      Saznaj više →
+                    </p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
             ))}
           </div>
           <div className="text-center mt-10">
