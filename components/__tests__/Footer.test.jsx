@@ -1,6 +1,5 @@
 import React from 'react';
 import {render, screen, within} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {vi} from 'vitest';
 
 vi.mock('next-intl', () => {
@@ -80,20 +79,14 @@ describe('Footer', () => {
     expect(faq).toBeInTheDocument();
     expect(privacy).toBeInTheDocument();
     expect(terms).toBeInTheDocument();
+
+    // Novi dizajn: footer više nema newsletter heading
+    expect(screen.queryByText(/newsletter/i)).not.toBeInTheDocument();
   });
 
-  it('ima newsletter formu koja prikazuje poruku zahvalnosti nakon submit-a', async () => {
-    const user = userEvent.setup();
+  it('nema newsletter input polje u footeru', () => {
     render(<Footer />);
-
-    const input = screen.getByPlaceholderText(/@/i);
-    const button = screen.getByRole('button', {name: /prijavi se/i});
-
-    await user.type(input, 'test@example.com');
-    await user.click(button);
-
-    const thanks = await screen.findByText(/prijavljeni ste na vijesti/i);
-    expect(thanks).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText(/@/i)).not.toBeInTheDocument();
   });
 
   it('prikazuje social linkove sa aria-label atributima', () => {
