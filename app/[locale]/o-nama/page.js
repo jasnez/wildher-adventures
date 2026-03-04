@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
+import { AboutHero } from "@/components/AboutHero";
 import OptimizedImage from "@/components/OptimizedImage";
 import { Icon } from "@/components/ui";
 import { AboutCta } from "@/components/AboutCta";
@@ -47,23 +48,12 @@ export default async function AboutPage({ params }) {
 
   return (
     <main id="main-content" className="min-h-screen">
-      {/* Hero — panoramska slika + Naša priča */}
-      <section className="relative min-h-[50vh] flex flex-col justify-end">
-        <OptimizedImage
-          name="7"
-          alt="WildHer Adventures — planine i tim u prirodi"
-          sizes="100vw"
-          className="absolute inset-0 w-full h-full object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 mx-auto w-full max-w-4xl px-4 pb-16 pt-32 text-center md:pb-20 md:pt-40">
-          <h1 className="text-hero font-bold text-white mb-4">{t("heroTitle")}</h1>
-          <p className="text-body-lg text-white/95 max-w-2xl mx-auto">
-            {t("heroSubtitle")}
-          </p>
-        </div>
-      </section>
+      <AboutHero
+        heroImageSrc="/about-hero.png"
+        heroAlt="WildHer Adventures — priroda i vodopad"
+        heroTitle={t("heroTitle")}
+        heroSubtitle={t("heroSubtitle")}
+      />
 
       <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16 lg:px-8">
         {/* Priča osnivačice */}
