@@ -88,7 +88,7 @@ export default async function HomePage({ params }) {
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
                 <Icon name="users" size={18} className="text-brand-gold-beige" />
               </span>
-              <span className="text-[0.78rem] md:text-small font-medium tracking-wide text-brand-primary-green">
+              <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-brand-primary-green">
                 {t("trust1")}
               </span>
             </div>
@@ -96,7 +96,7 @@ export default async function HomePage({ params }) {
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
                 <Icon name="shield" size={18} className="text-brand-gold-beige" />
               </span>
-              <span className="text-[0.78rem] md:text-small font-medium tracking-wide text-brand-primary-green">
+              <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-brand-primary-green">
                 {t("trust2")}
               </span>
             </div>
@@ -104,7 +104,7 @@ export default async function HomePage({ params }) {
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
                 <Icon name="zap" size={18} className="text-brand-gold-beige" />
               </span>
-              <span className="text-[0.78rem] md:text-small font-medium tracking-wide text-brand-primary-green">
+              <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-brand-primary-green">
                 {t("trust3")}
               </span>
             </div>
