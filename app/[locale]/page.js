@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import { Icon } from "@/components/ui";
 import { WhySectionIcon } from "@/components/WhySectionIcon";
@@ -65,11 +66,12 @@ export default async function HomePage({ params }) {
     <main id="main-content" className="min-h-screen">
       {/* 1. HERO */}
       <section className="relative min-h-screen flex flex-col justify-end">
-        <OptimizedImage
-          name="7"
+        <Image
+          src="/hero-mountains.png"
           alt="Planine BiH — WildHer Adventures"
+          fill
           sizes="100vw"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="object-cover"
           priority
         />
         <div className="absolute inset-0 bg-black/45" />
