@@ -37,7 +37,7 @@ export function Footer() {
         <div className="max-w-sm">
           <Link href="/" className="inline-block" aria-label="WildHer Adventures">
             <Image
-              src="/logo-primary-dark.png"
+              src="/logo-dark.svg"
               alt="WildHer Adventures"
               width={260}
               height={84}

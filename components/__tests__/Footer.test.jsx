@@ -52,8 +52,10 @@ describe('Footer', () => {
   it('prikazuje logo, glavnu navigaciju i pravne linkove', () => {
     render(<Footer />);
 
-    const logo = screen.getByRole('link', {name: /wildher adventures/i});
-    expect(logo).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', {name: /wildher adventures/i});
+    expect(logoLink).toBeInTheDocument();
+    const logoImg = logoLink.querySelector('img');
+    expect(logoImg?.getAttribute('src')).toContain('logo-dark.svg');
 
     const nav = screen.getByRole('navigation', {name: /footer/i});
     expect(
