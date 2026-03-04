@@ -150,7 +150,7 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {tours.map((tour, i) => (
-              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-500 hover:-translate-y-1 shadow-card">
+              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-700 hover:-translate-y-1 shadow-card">
                 <CardImage>
                   <OptimizedImage
                     name={tour.image}
@@ -319,7 +319,7 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {blogPosts.map((post, i) => (
-              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-500 hover:-translate-y-1 shadow-card overflow-hidden">
+              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-700 hover:-translate-y-1 shadow-card overflow-hidden">
                 <CardImage>
                   <OptimizedImage
                     name={post.image}
