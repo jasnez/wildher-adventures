@@ -39,9 +39,9 @@ export function Footer() {
             <Image
               src="/logo-primary-dark.png"
               alt="WildHer Adventures"
-              width={320}
-              height={82}
-              className="w-[240px] h-auto md:w-[280px] lg:w-[320px]"
+              width={360}
+              height={92}
+              className="w-[260px] h-auto md:w-[320px] lg:w-[360px]"
               unoptimized
             />
           </Link>
