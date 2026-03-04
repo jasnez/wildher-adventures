@@ -50,7 +50,7 @@ export default async function AboutPage({ params }) {
     <main id="main-content" className="min-h-screen">
       <AboutHero
         heroImageSrc="/about-hero.png"
-        heroAlt="WildHer Adventures — priroda i vodopad"
+        heroAlt="WildHer Adventures — rijeka u zelenoj šumi"
         heroTitle={t("heroTitle")}
         heroSubtitle={t("heroSubtitle")}
       />

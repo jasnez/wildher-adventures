@@ -13,13 +13,13 @@ describe('O nama — hero sekcija', () => {
     render(
       <AboutHero
         heroImageSrc="/about-hero.png"
-        heroAlt="WildHer Adventures — priroda i vodopad"
+        heroAlt="WildHer Adventures — rijeka u zelenoj šumi"
         heroTitle="Naša priča"
         heroSubtitle="WildHer Adventures je nastao iz ljubavi prema planinama."
       />
     );
 
-    const img = screen.getByRole('img', { name: /wildher adventures.*priroda i vodopad/i });
+    const img = screen.getByRole('img', { name: /wildher adventures.*rijeka u zelenoj šumi/i });
     expect(img).toBeInTheDocument();
     expect(img.getAttribute('src')).toContain('about-hero');
   });
