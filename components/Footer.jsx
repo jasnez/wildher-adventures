@@ -83,27 +83,27 @@ export function Footer() {
   return (
     <footer className="bg-brand-charcoal text-brand-off-white" role="contentinfo">
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:px-8">
-        {/* Glavni blok: logo, nav, newsletter */}
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          {/* Logo + tagline */}
-          <div className="lg:col-span-4">
-            <Link href="/" className="inline-block" aria-label="WildHer Adventures">
-              <Image
-                src="/logo-dark.svg"
-                alt="WildHer Adventures"
-                width={180}
-                height={54}
-                className="h-10 w-auto md:h-11"
-                unoptimized
-              />
-            </Link>
-            <p className="mt-4 text-small text-neutral-400 max-w-xs">
-              {t('tagline')}
-            </p>
-          </div>
+        {/* Logo centriran iznad svega */}
+        <div className="flex flex-col items-center text-center">
+          <Link href="/" className="inline-block" aria-label="WildHer Adventures">
+            <Image
+              src="/logo-dark.svg"
+              alt="WildHer Adventures"
+              width={200}
+              height={60}
+              className="h-11 w-auto md:h-12"
+              unoptimized
+            />
+          </Link>
+          <p className="mt-3 max-w-md text-small text-neutral-400">
+            {t('tagline')}
+          </p>
+        </div>
 
-          <nav className="lg:col-span-4" aria-label="Footer navigacija">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+        {/* Navigacija i newsletter ispod loga */}
+        <div className="mt-10 flex flex-col gap-10 md:mt-12 md:flex-row md:items-start md:justify-between">
+          <nav className="md:w-1/2" aria-label="Footer navigacija">
+            <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 md:justify-start">
               {FOOTER_NAV.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -117,48 +117,53 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div className="lg:col-span-4">
-            <h3 className="text-body font-semibold text-brand-off-white mb-3">
+          <div className="md:w-1/2 md:max-w-md md:text-right">
+            <h3 className="mb-3 text-body font-semibold text-brand-off-white">
               {t('newsletter')}
             </h3>
-            <p className="text-small text-neutral-400 mb-4">
+            <p className="mb-4 text-small text-neutral-400">
               {t('newsletterDesc')}
             </p>
             <NewsletterSignup />
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-neutral-700 pt-8 md:flex-row">
-          <nav aria-label="Pravne stranice">
-            <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              {LEGAL_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-caption text-neutral-400 hover:text-brand-off-white transition-colors"
-                  >
-                    {t(link.key)}
-                  </Link>
-                </li>
+        {/* Donja traka: pravne stranice + social */}
+        <div className="mt-12 border-t border-neutral-700 pt-8">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <nav aria-label="Pravne stranice">
+              <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+                {LEGAL_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-caption text-neutral-400 hover:text-brand-off-white transition-colors"
+                    >
+                      {t(link.key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <p className="text-caption text-neutral-500">
+              © {new Date().getFullYear()} WildHer Adventures
+            </p>
+
+            <div className="flex items-center gap-4">
+              {SOCIAL_LINKS.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-400 hover:text-brand-gold-beige transition-colors"
+                  aria-label={s.label}
+                >
+                  <Icon name={s.icon} size={20} />
+                </a>
               ))}
-            </ul>
-          </nav>
-          <p className="text-caption text-neutral-500">
-            © {new Date().getFullYear()} WildHer Adventures
-          </p>
-          <div className="flex items-center gap-4">
-            {SOCIAL_LINKS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-400 hover:text-brand-gold-beige transition-colors"
-                aria-label={s.label}
-              >
-                <Icon name={s.icon} size={20} />
-              </a>
-            ))}
+            </div>
           </div>
         </div>
       </div>
