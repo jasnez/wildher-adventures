@@ -19,12 +19,12 @@ export function HomePopularTours({t, tours}) {
         >
           <div
             data-testid={`popular-tour-card-inner-${i}`}
-            className="relative h-full w-full min-h-[420px] rounded-2xl overflow-hidden [transform-style:preserve-3d] transition-[transform] duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:[transform:rotateY(180deg)]"
+            className="relative h-full w-full min-h-[420px] rounded-2xl overflow-hidden transition-transform duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:-translate-y-1"
           >
             {/* Prednja strana — identičan sadržaj kao stare kartice */}
             <div
               data-testid={`popular-tour-card-front-${i}`}
-              className="absolute inset-0 flex flex-col bg-white [backface-visibility:hidden] [transform:rotateY(0deg)]"
+              className="absolute inset-0 flex flex-col bg-white transition-opacity duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:opacity-0"
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <OptimizedImage
@@ -72,7 +72,7 @@ export function HomePopularTours({t, tours}) {
             {/* Stražnja strana — detalji o turi, fokus na destinaciju */}
             <div
               data-testid={`popular-tour-card-back-${i}`}
-              className="absolute inset-0 flex flex-col justify-center rounded-2xl bg-[#e3ece4] p-6 text-left [backface-visibility:hidden] [transform:rotateY(180deg)]"
+              className="absolute inset-0 flex flex-col justify-center rounded-2xl bg-[#e3ece4] p-6 text-left opacity-0 transition-opacity duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/card:opacity-100"
             >
               <p className="text-small font-semibold uppercase tracking-wide text-brand-primary-green">
                 {t(tour.locationKey)}
