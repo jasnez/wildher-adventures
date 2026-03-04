@@ -100,7 +100,7 @@ export function Header() {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const goingDown = currentY > lastY;
-      const threshold = 280; // header ostaje vidljiv duže pri scrollu nadole
+      const threshold = 160; // header sada nestaje malo ranije pri scrollu nadole
 
       setScrolled(currentY > 16);
 
@@ -142,7 +142,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-500 ${
+        className={`sticky top-0 z-50 w-full transition-all duration-700 ${
           hiddenByScroll ? '-translate-y-full' : 'translate-y-0'
         } ${
           scrolled

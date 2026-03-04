@@ -83,19 +83,31 @@ export default async function HomePage({ params }) {
             {t("subtitle")}
           </p>
           <HomeHeroCTAs />
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8 mt-12 text-white/90 text-small">
-            <span className="flex items-center gap-2">
-              <Icon name="check" size={18} className="text-brand-gold-beige" />
-              {t("trust1")}
-            </span>
-            <span className="flex items-center gap-2">
-              <Icon name="check" size={18} className="text-brand-gold-beige" />
-              {t("trust2")}
-            </span>
-            <span className="flex items-center gap-2">
-              <Icon name="check" size={18} className="text-brand-gold-beige" />
-              {t("trust3")}
-            </span>
+          <div className="mt-12 flex flex-wrap justify-center gap-4 md:gap-6">
+            <div className="inline-flex items-center gap-3 rounded-full bg-white/8 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
+                <Icon name="users" size={18} className="text-brand-gold-beige" />
+              </span>
+              <span className="text-[0.78rem] md:text-small font-medium tracking-wide text-white/90">
+                {t("trust1")}
+              </span>
+            </div>
+            <div className="inline-flex items-center gap-3 rounded-full bg-white/8 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
+                <Icon name="shield" size={18} className="text-brand-gold-beige" />
+              </span>
+              <span className="text-[0.78rem] md:text-small font-medium tracking-wide text-white/90">
+                {t("trust2")}
+              </span>
+            </div>
+            <div className="inline-flex items-center gap-3 rounded-full bg-white/8 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
+                <Icon name="zap" size={18} className="text-brand-gold-beige" />
+              </span>
+              <span className="text-[0.78rem] md:text-small font-medium tracking-wide text-white/90">
+                {t("trust3")}
+              </span>
+            </div>
           </div>
         </div>
         <ScrollIndicator />
