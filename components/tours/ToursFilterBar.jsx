@@ -14,7 +14,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
   const [month, setMonth] = useState('');
   const [sort, setSort] = useState('popularity');
 
-  const notify = () => onFilterChange?.({ type, duration, difficulty, priceMin, priceMax, month, sort });
+  const notify = (override = {}) => onFilterChange?.({ type, duration, difficulty, priceMin, priceMax, month, sort, ...override });
 
   return (
     <div className="bg-white border-b border-neutral-200 py-4 px-4 md:px-6">
@@ -28,7 +28,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
             <select
               id="filter-type"
               value={type}
-              onChange={(e) => { setType(e.target.value); notify(); }}
+              onChange={(e) => { const v = e.target.value; setType(v); notify({ type: v }); }}
               className="rounded-lg border border-neutral-300 px-3 py-2 text-small bg-white min-w-[120px]"
               aria-label={labels.filterType}
             >
@@ -48,7 +48,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
             <select
               id="filter-duration"
               value={duration}
-              onChange={(e) => { setDuration(e.target.value); notify(); }}
+              onChange={(e) => { const v = e.target.value; setDuration(v); notify({ duration: v }); }}
               className="rounded-lg border border-neutral-300 px-3 py-2 text-small bg-white min-w-[120px]"
               aria-label={labels.filterDuration}
             >
@@ -68,7 +68,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
             <select
               id="filter-difficulty"
               value={difficulty}
-              onChange={(e) => { setDifficulty(e.target.value); notify(); }}
+              onChange={(e) => { const v = e.target.value; setDifficulty(v); notify({ difficulty: v }); }}
               className="rounded-lg border border-neutral-300 px-3 py-2 text-small bg-white min-w-[120px]"
               aria-label={labels.filterDifficulty}
             >
@@ -92,7 +92,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                 min="0"
                 max="500"
                 value={priceMax}
-                onChange={(e) => { setPriceMax(Number(e.target.value)); notify(); }}
+                onChange={(e) => { const v = Number(e.target.value); setPriceMax(v); notify({ priceMax: v }); }}
                 className="w-24"
                 aria-label={`${labels.filterPrice} do ${priceMax}€`}
               />
@@ -109,7 +109,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
               id="filter-month"
               type="month"
               value={month}
-              onChange={(e) => { setMonth(e.target.value); notify(); }}
+              onChange={(e) => { const v = e.target.value; setMonth(v); notify({ month: v }); }}
               className="rounded-lg border border-neutral-300 px-3 py-2 text-small bg-white"
               aria-label={labels.filterMonth}
             />
@@ -122,7 +122,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
             </span>
             <select
               value={sort}
-              onChange={(e) => { setSort(e.target.value); notify(); }}
+              onChange={(e) => { const v = e.target.value; setSort(v); notify({ sort: v }); }}
               className="rounded-lg border border-neutral-300 px-3 py-2 text-small bg-white min-w-[120px]"
               aria-label={labels.sortBy}
             >

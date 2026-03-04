@@ -2,8 +2,8 @@ import React from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { getTours } from '@/lib/tours';
-import { ToursHero, TourCard, GiftVoucherBanner } from '@/components/tours';
-import ToursFilterBarClient from '@/components/tours/ToursFilterBar';
+import { ToursHero, GiftVoucherBanner } from '@/components/tours';
+import ToursListingClient from '@/components/tours/ToursListingClient';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -79,25 +79,16 @@ export default async function ToursPage({ params }) {
         heroTitle={t('heroTitle')}
         heroSubtitle={t('heroSubtitle')}
       />
-      <ToursFilterBarClient labels={labels} />
-      <section className="py-12 md:py-16 bg-neutral-50">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {resolvedTours.map((tour) => (
-              <TourCard
-                key={tour.id}
-                tour={tour}
-                ctaLabel={t('ctaDetailsBooking')}
-                badgeLabels={{
-                  popular: t('badgePopular'),
-                  new: t('badgeNew'),
-                  coming: t('badgeComing'),
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      <ToursListingClient
+        tours={resolvedTours}
+        labels={labels}
+        ctaLabel={t('ctaDetailsBooking')}
+        badgeLabels={{
+          popular: t('badgePopular'),
+          new: t('badgeNew'),
+          coming: t('badgeComing'),
+        }}
+      />
       <GiftVoucherBanner
         title={t('giftVoucherTitle')}
         description={t('giftVoucherDesc')}
