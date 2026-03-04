@@ -101,24 +101,28 @@ export default async function HomePage({ params }) {
       {/* 2. ZAŠTO WILDHER */}
       <section className="bg-[#f6f1e7] py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-4 md:px-6">
-          <div className="mb-10 text-center">
-            <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text">
+          {/* Naslov sa tankim linijama lijevo/desno */}
+          <div className="mb-10 flex items-center gap-6">
+            <span className="hidden flex-1 border-t border-neutral-200 md:block" />
+            <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center">
               {t("whyTitle")}
             </h2>
+            <span className="hidden flex-1 border-t border-neutral-200 md:block" />
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {whyBlocks.map(({ titleKey, textKey, icon }) => (
               <div
                 key={titleKey}
-                className="flex flex-col items-center gap-4 rounded-radius-card bg-white/90 px-6 py-8 text-center shadow-card hover:shadow-card-hover transition-shadow"
+                className="flex flex-col items-center text-center gap-3"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-primary-green/10 text-brand-primary-green">
-                  <Icon name={icon} size={28} />
+                <div className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary-green/10 text-brand-primary-green">
+                  <Icon name={icon} size={26} />
                 </div>
                 <h3 className="font-display text-h3 font-semibold text-wildher-text">
                   {t(titleKey)}
                 </h3>
-                <p className="text-small text-wildher-text-muted">
+                <p className="text-small text-wildher-text-muted max-w-[14rem]">
                   {t(textKey)}
                 </p>
               </div>
