@@ -15,6 +15,9 @@ const NAV_LINKS = [
   { href: '/kontakt', key: 'contact' },
 ];
 
+const LEFT_NAV_KEYS = new Set(['tours', 'destinations', 'blog']);
+const RIGHT_NAV_KEYS = new Set(['about', 'gallery', 'contact']);
+
 export function LanguageToggle({ className = '' }) {
   const locale = useLocale();
   const router = useRouter();
@@ -127,20 +130,10 @@ export function Header() {
           scrolled ? 'bg-white/95 shadow-card backdrop-blur-sm' : 'bg-white'
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-20 md:px-6 lg:px-8">
-          <Link href="/" className="flex shrink-0 items-center" aria-label={`WildHer Adventures — ${tCommon('home')}`}>
-            <Image
-              src="/logo-primary.png"
-              alt="WildHer Adventures"
-              width={160}
-              height={48}
-              className="h-9 w-auto md:h-10"
-              priority
-            />
-          </Link>
-
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-20 md:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+          {/* Lijevi nav (desktop) */}
           <nav className="hidden items-center gap-8 lg:flex" aria-label={t('mainNavAria')}>
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.filter((link) => LEFT_NAV_KEYS.has(link.key)).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -156,7 +149,42 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-4 lg:flex">
+          {/* Logo u centru */}
+          <div className="flex items-center justify-start lg:justify-center">
+            <Link
+              href="/"
+              className="flex shrink-0 items-center"
+              aria-label={`WildHer Adventures — ${tCommon('home')}`}
+            >
+              <Image
+                src="/logo-primary.png"
+                alt="WildHer Adventures"
+                width={160}
+                height={48}
+                className="h-9 w-auto md:h-10"
+                priority
+              />
+            </Link>
+          </div>
+
+          {/* Desni blok: dodatni linkovi + jezik + booking (desktop) */}
+          <div className="hidden items-center justify-end gap-6 lg:flex">
+            <div className="flex items-center gap-6">
+              {NAV_LINKS.filter((link) => RIGHT_NAV_KEYS.has(link.key)).map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                  className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green ${
+                    isActive(link.href)
+                      ? 'text-brand-primary-green border-brand-primary-green'
+                      : 'text-wildher-text'
+                  }`}
+                >
+                  {t(link.key)}
+                </Link>
+              ))}
+            </div>
             <LanguageToggle />
             <ButtonLink href="/prijava" variant="primary" size="md">
               {tCommon('book')}
