@@ -79,7 +79,7 @@ export default async function ToursPage({ params }) {
         heroTitle={t('heroTitle')}
         heroSubtitle={t('heroSubtitle')}
       />
-      <ToursFilterBarClient labels={labels} onFilterChange={() => {}} />
+      <ToursFilterBarClient labels={labels} />
       <section className="py-12 md:py-16 bg-neutral-50">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
