@@ -9,7 +9,7 @@ const WIDTHS = [400, 640, 960, 1280, 1920];
 
 /**
  * OptimizedImage — koristi WebP placeholder slike s lazy load i srcset.
- * Za slike generisane npm run optimize-images (Public/images/*.webp).
+ * Za slike generisane npm run optimize-images (public/images/*.webp).
  *
  * @param {string} name - Ime slike bez ekstenzije (npr. "1", "2", "10")
  * @param {string} alt - Alt tekst (obavezan za pristupačnost)

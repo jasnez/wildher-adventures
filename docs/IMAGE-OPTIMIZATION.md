@@ -7,7 +7,7 @@ Placeholder slike su optimizirane za web: **WebP**, više rezolucija za **srcset
 ## Šta je urađeno
 
 1. **Skripta** `scripts/optimize-images.js`  
-   Čita sve JPG/JPEG iz `Public/`, za svaku generiše WebP u širinama **400, 640, 960, 1280, 1920** px i sprema u `Public/images/`.  
+   Čita sve JPG/JPEG iz `public/`, za svaku generiše WebP u širinama **400, 640, 960, 1280, 1920** px i sprema u `public/images/`.  
    Izlaz: npr. `1-400w.webp`, `1-640w.webp`, … i `manifest.json` s putanjama.
 
 2. **Komponenta** `components/OptimizedImage.jsx`  
@@ -18,13 +18,13 @@ Placeholder slike su optimizirane za web: **WebP**, više rezolucija za **srcset
 
 ## Kako ponovo pokrenuti optimizaciju
 
-Kad dodaš nove JPG u `Public/`:
+Kad dodaš nove JPG u `public/`:
 
 ```bash
 npm run optimize-images
 ```
 
-Generirat će se novi WebP u `Public/images/` i ažurirat će se `manifest.json`.
+Generirat će se novi WebP u `public/images/` i ažurirat će se `manifest.json`.
 
 ---
 
@@ -84,10 +84,10 @@ import OptimizedImage from '@/components/OptimizedImage';
 ## Napomene
 
 - **Public vs public**  
-  Slike čitaju se iz `public/` (Next.js konvencija). Ako su ti originali u `Public/`, prekopiraj ih u `public/` i pokreni `npm run optimize-images`.
+  Slike čitaju se iz `public/` (Next.js konvencija). Pokreni `npm run optimize-images` da generiše WebP iz JPG u `public/`.
 
 - **Performanse**  
   WebP + srcset + lazy load drže LCP i CLS u okviru zahtjeva iz specifikacije. Za hero sliku ostavi `priority={true}` i koristi širinu koja odgovara najvećem prikazu (npr. 1920px).
 
 - **Zamjena placeholdera**  
-  Kad imaš konačne fotografije, zamijeni JPG u `Public/` (ili u `public/`) i ponovo pokreni `npm run optimize-images`. Imena fajlova (1, 2, …) možeš mapirati na destinacije/ture u CMS-u ili konfiguraciji.
+  Kad imaš konačne fotografije, zamijeni JPG u `public/` i ponovo pokreni `npm run optimize-images`. Imena fajlova (1, 2, …) možeš mapirati na destinacije/ture u CMS-u ili konfiguraciji.
