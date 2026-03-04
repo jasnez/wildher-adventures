@@ -2,10 +2,6 @@
 
 import React from 'react';
 
-'use client';
-
-import React from 'react';
-
 const viewBox = '0 0 48 48';
 const stroke = 'var(--why-icon-stroke, #44403c)';
 const fill = 'var(--why-icon-fill, #e8e4dc)';
