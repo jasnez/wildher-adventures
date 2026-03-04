@@ -5,7 +5,11 @@
     "about": "O nama",
     "blog": "Blog",
     "gallery": "Galerija",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "mainNavAria": "Glavna navigacija",
+    "mobileNavAria": "Mobilna navigacija",
+    "openMenu": "Otvori meni",
+    "closeMenu": "Zatvori meni"
   },
   "common": {
     "book": "Booking",

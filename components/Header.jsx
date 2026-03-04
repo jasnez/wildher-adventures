@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
-import { Button } from '@/components/ui';
+import { ButtonLink } from '@/components/ui';
 
 const NAV_LINKS = [
   { href: '/ture', key: 'tours' },
@@ -81,8 +81,16 @@ function HamburgerIcon({ open, className = '' }) {
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobileMenuRef = useRef(null);
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
+  const pathname = usePathname();
+
+  const isActive = (href) => {
+    if (!pathname) return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -94,6 +102,22 @@ export function Header() {
     if (mobileOpen) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = '';
     return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (mobileOpen && mobileMenuRef.current) {
+      const firstLink = mobileMenuRef.current.querySelector('a');
+      if (firstLink) firstLink.focus();
+    }
   }, [mobileOpen]);
 
   return (
@@ -115,12 +139,17 @@ export function Header() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Glavna navigacija">
+          <nav className="hidden items-center gap-8 lg:flex" aria-label={t('mainNavAria')}>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-body font-medium text-wildher-text hover:text-brand-primary-green transition-colors"
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green ${
+                  isActive(link.href)
+                    ? 'text-brand-primary-green border-brand-primary-green'
+                    : 'text-wildher-text'
+                }`}
               >
                 {t(link.key)}
               </Link>
@@ -129,9 +158,9 @@ export function Header() {
 
           <div className="hidden items-center gap-4 lg:flex">
             <LanguageToggle />
-            <Button as="a" href="/prijava" variant="primary" size="md">
+            <ButtonLink href="/prijava" variant="primary" size="md">
               {tCommon('book')}
-            </Button>
+            </ButtonLink>
           </div>
 
           <button
@@ -140,7 +169,7 @@ export function Header() {
             className="flex min-h-[44px] min-w-[44px] items-center justify-center text-wildher-text lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            aria-label={mobileOpen ? 'Zatvori meni' : 'Otvori meni'}
+            aria-label={mobileOpen ? t('closeMenu') : t('openMenu')}
           >
             <HamburgerIcon open={mobileOpen} />
           </button>
@@ -149,13 +178,15 @@ export function Header() {
 
       <div
         id="mobile-menu"
+        ref={mobileMenuRef}
+        data-testid="mobile-overlay"
         className={`fixed inset-0 z-40 bg-white lg:hidden transition-opacity duration-300 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         aria-hidden={!mobileOpen}
       >
         <div className="flex min-h-full flex-col pt-20 pb-8 px-6">
-          <nav className="flex flex-col gap-2" aria-label="Mobilna navigacija">
+          <nav className="flex flex-col gap-2" aria-label={t('mobileNavAria')}>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -174,8 +205,7 @@ export function Header() {
               </span>
               <LanguageToggle />
             </div>
-            <Button
-              as="a"
+            <ButtonLink
               href="/prijava"
               variant="primary"
               size="lg"
@@ -183,7 +213,7 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
             >
               {tCommon('book')}
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </div>

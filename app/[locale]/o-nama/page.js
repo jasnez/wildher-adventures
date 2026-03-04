@@ -46,7 +46,7 @@ export default async function AboutPage({ params }) {
   ];
 
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       {/* Hero — panoramska slika + Naša priča */}
       <section className="relative min-h-[50vh] flex flex-col justify-end">
         <OptimizedImage

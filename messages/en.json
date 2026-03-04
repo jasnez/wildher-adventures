@@ -5,7 +5,11 @@
     "about": "About",
     "blog": "Blog",
     "gallery": "Gallery",
-    "contact": "Contact"
+    "contact": "Contact",
+    "mainNavAria": "Main navigation",
+    "mobileNavAria": "Mobile navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "common": {
     "book": "Book",

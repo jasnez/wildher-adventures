@@ -61,7 +61,7 @@ export default async function HomePage({ params }) {
   const instagramImages = ["20", "21", "22", "23", "1", "2", "3", "4", "5"];
 
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       {/* 1. HERO */}
       <section className="relative min-h-screen flex flex-col justify-end">
         <OptimizedImage
