@@ -308,13 +308,13 @@ export default async function HomePage({ params }) {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {blogPosts.map((post, i) => (
-              <Card key={i} className="hover:shadow-card-hover transition-shadow overflow-hidden">
+              <Card key={i} className="group rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card overflow-hidden">
                 <CardImage>
                   <OptimizedImage
                     name={post.image}
                     alt={t(post.titleKey)}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </CardImage>
                 <CardContent>
