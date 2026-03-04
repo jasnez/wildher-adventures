@@ -8,7 +8,6 @@ import { Card, CardImage, CardContent, CardFeature } from "@/components/ui";
 import { ButtonLink } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
 import { HomeHeroCTAs, ScrollIndicator } from "@/components/HomeHero";
-import { HomePopularTours } from "@/components/HomePopularTours";
 import { HomeNewsletter } from "@/components/HomeNewsletter";
 
 export async function generateMetadata({ params }) {
@@ -149,7 +148,59 @@ export default async function HomePage({ params }) {
           <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-12">
             {t("toursTitle")}
           </h2>
-          <HomePopularTours t={t} tours={tours} />
+          <div className="grid gap-8 md:grid-cols-3">
+            {tours.map((tour, i) => (
+              <Card
+                key={i}
+                className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1"
+              >
+                <CardImage>
+                  <OptimizedImage
+                    name={tour.image}
+                    alt={t(tour.titleKey)}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </CardImage>
+                <CardContent>
+                  <p className="text-small text-wildher-text-muted mb-1">
+                    {t(tour.locationKey)}
+                  </p>
+                  <h3 className="text-h3 font-semibold text-wildher-text mb-3">
+                    {t(tour.titleKey)}
+                  </h3>
+                  <div className="flex flex-wrap gap-3 text-small text-wildher-text-muted mb-3">
+                    <span className="flex items-center gap-1">
+                      <Icon name="calendar" size={16} />
+                      {t(tour.durationKey)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Icon name="mountain" size={16} />
+                      {t(tour.difficultyKey)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Icon name="users" size={16} />
+                      {t(tour.groupKey)}
+                    </span>
+                  </div>
+                  <p className="text-small text-wildher-text-muted mb-4 line-clamp-2">
+                    {t(tour.descKey)}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-brand-primary-green">
+                      Od {t(tour.priceKey)}€
+                    </span>
+                    <Link
+                      href="/ture"
+                      className="text-small font-semibold text-brand-primary-green hover:underline"
+                    >
+                      {t("learnMore")} →
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
           <div className="text-center mt-10">
             <ButtonLink href="/ture" variant="outline" size="md">
               {t("toursCta")} →
