@@ -224,66 +224,79 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 5. ABOUT FOUNDER */}
-      <section className="py-16 md:py-24 bg-neutral-50">
+      {/* 5. UPOZNAJ OSNIVAČICU */}
+      <section className="py-16 md:py-24 bg-[#fafaf9]">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-radius-card-lg overflow-hidden shadow-card">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
+            <div className="rounded-xl overflow-hidden shadow-card aspect-[4/3] md:aspect-[16/10]">
               <OptimizedImage
                 name="2"
                 alt="Osnivačica WildHer Adventures"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="w-full aspect-[4/5] object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
             <div>
-              <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text mb-6">
+              <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text mb-6 text-left">
                 {t("aboutTitle")}
               </h2>
-              <p className="text-body text-wildher-text mb-4">{t("aboutText1")}</p>
-              <p className="text-body text-wildher-text mb-8">{t("aboutText2")}</p>
-              <ButtonLink href="/o-nama" variant="primary" size="md">
+              <p className="text-body text-wildher-text mb-6 text-left">
+                {t("aboutText1")}
+              </p>
+              <p className="text-body text-wildher-text mb-8 text-left">
+                {t("aboutText2")}
+              </p>
+              <ButtonLink
+                href="/o-nama"
+                variant="primary"
+                size="md"
+                className="inline-flex items-center gap-2 bg-brand-earth-tone hover:bg-brand-earth-tone/90 text-white shadow-button"
+              >
                 {t("aboutCta")}
+                <Icon name="plus" size={18} className="text-white" />
               </ButtonLink>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. DESTINACIJE PREVIEW */}
+      {/* 6. ISTRAŽI DESTINACIJE */}
       <section className="py-16 md:py-24 bg-white">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-12">
+          <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-10">
             {t("destinationsTitle")}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {destinations.map((dest, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {destinations.slice(0, 4).map((dest, i) => (
               <Link
                 key={i}
                 href="/destinacije"
-                className="group rounded-radius-card overflow-hidden shadow-card hover:shadow-card-hover transition-all"
+                className="group block rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="aspect-[3/4] relative">
+                <div className="aspect-[4/3] relative">
                   <OptimizedImage
                     name={dest.image}
                     alt={t(dest.nameKey)}
-                    sizes="(max-width: 768px) 50vw, 16vw"
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                    <p className="font-semibold">{t(dest.nameKey)}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
+                    <p className="font-semibold text-sm md:text-body">{t(dest.nameKey)}</p>
                     <p className="text-small text-white/90">{t(dest.metaKey)}</p>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <ButtonLink href="/destinacije" variant="outline" size="md">
+          <p className="text-center mt-8">
+            <Link
+              href="/destinacije"
+              className="text-body font-semibold text-wildher-text hover:text-brand-primary-green transition-colors"
+            >
               {t("destinationsCta")} →
-            </ButtonLink>
-          </div>
+            </Link>
+          </p>
         </div>
       </section>
 
