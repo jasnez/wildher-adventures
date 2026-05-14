@@ -6,15 +6,99 @@
     "blog": "Blog",
     "gallery": "Gallery",
     "contact": "Contact",
+    "guides": "Our guides",
+    "faq": "FAQ",
     "mainNavAria": "Main navigation",
     "mobileNavAria": "Mobile navigation",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "guides": {
+    "metaTitle": "Our guides — WildHer Adventures",
+    "metaDescription": "Meet our female guides — licensed mountaineers, instructors and adventurers who lead WildHer trips.",
+    "title": "Our guides",
+    "intro": "Every WildHer trip is led by a licensed female guide. Meet them before you book.",
+    "comingSoon": "Guide profiles are on the way — we're working on it.",
+    "languagesLabel": "Languages",
+    "certificationsLabel": "Certifications",
+    "specialtiesLabel": "Specialties",
+    "toursLedLabel": "Tours led",
+    "backToGuides": "All guides"
+  },
+  "faqPage": {
+    "metaTitle": "Frequently asked questions — WildHer Adventures",
+    "metaDescription": "Answers to common questions about our tours: solo travel, fitness, safety, what to bring.",
+    "title": "Frequently asked questions",
+    "intro": "These are the questions we hear most often. If yours isn't here, get in touch and we'll answer it.",
+    "categories": {
+      "general": "General",
+      "booking": "Booking & payment",
+      "fitness": "Fitness & difficulty",
+      "solo": "Solo travel",
+      "safety": "Safety",
+      "gear": "What to bring",
+      "accommodation": "Accommodation"
+    },
+    "empty": "FAQs are coming soon. Have a question now? Write to us at bookings@wildheradventures.ba.",
+    "ctaTitle": "Still have a question?",
+    "ctaText": "The easiest path is to schedule a short chat — we'll answer everything.",
+    "ctaButton": "Get in touch"
+  },
+  "safety": {
+    "metaTitle": "Safety — WildHer Adventures",
+    "metaDescription": "Our safety standards, certifications, insurance and what to expect on tour.",
+    "title": "Safety is our priority",
+    "introFallback": "Every tour is planned with careful assessment of route, weather conditions, and group composition. It is led by a licensed tour guide with first-aid training and certified equipment for technical activities.",
+    "comingSoon": "A detailed safety page is on the way."
+  },
+  "terms": {
+    "metaTitle": "Booking conditions — WildHer Adventures",
+    "metaDescription": "Booking, cancellation and payment terms.",
+    "title": "Booking conditions",
+    "comingSoon": "Detailed booking conditions are on the way. For questions: bookings@wildheradventures.ba.",
+    "lastUpdatedLabel": "Last updated"
+  },
+  "privacy": {
+    "metaTitle": "Privacy — WildHer Adventures",
+    "metaDescription": "Our privacy policy and how we handle your data.",
+    "title": "Privacy policy",
+    "comingSoon": "Our privacy policy is on the way."
+  },
   "common": {
     "book": "Book",
     "language": "Language",
     "home": "Home"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundText": "The page you are looking for doesn't exist or has moved.",
+    "notFoundCta": "Back to home",
+    "errorTitle": "Something went wrong",
+    "errorText": "An unexpected error occurred. Please try again in a moment.",
+    "errorRetry": "Try again",
+    "loading": "Loading…"
+  },
+  "comingSoon": {
+    "title": "Coming soon",
+    "text": "This page is in the works. Sign up for the newsletter to be the first to know when it launches.",
+    "cta": "Explore tours"
+  },
+  "newsletter": {
+    "subject": "Newsletter signup",
+    "comingSoonNote": "Coming soon — send us an email to be on the list."
+  },
+  "contact": {
+    "metaTitle": "Contact — WildHer Adventures",
+    "metaDescription": "Get in touch with WildHer Adventures. Book a chat about an adventure or send an email inquiry.",
+    "title": "Get in touch",
+    "intro": "Have a question about a tour or want to book an adventure? The easiest way is to schedule a short chat — we'll answer everything and help you choose the right trip.",
+    "scheduleTitle": "Schedule a chat",
+    "scheduleText": "A 20-minute online conversation at a time that works for you.",
+    "scheduleCta": "Open calendar",
+    "emailTitle": "Send an email",
+    "emailText": "Write to us directly at",
+    "emailCta": "Send email",
+    "responseTime": "We respond within 24h, Monday to Friday."
   },
   "footer": {
     "tagline": "Women's adventure brand in BiH — outdoor tours, wellbeing and community.",
@@ -23,8 +107,9 @@
     "submit": "Subscribe",
     "thanks": "Thanks! You're subscribed.",
     "faq": "FAQ",
+    "safety": "Safety",
     "privacy": "Privacy",
-    "terms": "Terms of use"
+    "terms": "Booking conditions"
   },
   "home": {
     "title": "Discover your strength in the wilds of Bosnia",
@@ -139,7 +224,10 @@
     "difficultyEasy": "Easy",
     "difficultyModerate": "Moderate",
     "difficultyChallenging": "Challenging",
+    "difficultyDemanding": "Demanding",
+    "difficultyExpert": "Expert",
     "ctaDetailsBooking": "Details & Booking",
+    "emptyResults": "No tours match your filters. Try adjusting them.",
     "badgePopular": "Most popular",
     "badgeNew": "New",
     "badgeComing": "Coming soon",
@@ -150,7 +238,9 @@
     "categoryJednodnevneIntro": "One-day tours — the perfect choice for those who want a day in nature. Leave the city, hit the trail, and return the same evening.",
     "categoryVikendIntro": "Weekend packages — two days of adventure. Ideal for those who want a bit more than a day trip.",
     "categoryEkspedicijeIntro": "Multi-day expeditions — for true adventurers. Several days in nature, mountain peaks and unforgettable experiences.",
-    "categoryRetreatIntro": "Wellness and mindfulness programmes — a blend of nature, movement and relaxation in a women's community."
+    "categoryRetreatIntro": "Wellness and mindfulness programmes — a blend of nature, movement and relaxation in a women's community.",
+    "metaTitle": "Tours and experiences — WildHer Adventures",
+    "metaDescription": "From one-day hiking trips to multi-day expeditions. Filter by type, duration, difficulty and price."
   },
   "tourDetail": {
     "bookCta": "Book a spot",
@@ -174,6 +264,8 @@
     "spotsLeft": "{count} spots left",
     "date": "Date",
     "guests": "Number of guests",
+    "heroGroupMax": "up to {count} women",
+    "mailSubjectPrefix": "Tour inquiry",
     "viaFerrataSubtitle": "Women's adventure above the Neretva canyon",
     "viaFerrataStory": "The morning starts in Blagaj as the sun lights up the cliffs above the Neretva. The path climbs gently through pine forest, and the view of the canyon becomes more dramatic. After a short break we reach the via ferrata — metal rungs lead us up the rock, and each step opens a wider view of the river below.",
     "stepMeet": "Starting point",

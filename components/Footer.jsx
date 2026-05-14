@@ -9,6 +9,7 @@ import { Icon } from '@/components/ui';
 const FOOTER_NAV = [
   { href: '/ture', key: 'tours' },
   { href: '/destinacije', key: 'destinations' },
+  { href: '/vodice', key: 'guides' },
   { href: '/o-nama', key: 'about' },
   { href: '/blog', key: 'blog' },
   { href: '/galerija', key: 'gallery' },
@@ -17,8 +18,9 @@ const FOOTER_NAV = [
 
 const LEGAL_LINKS = [
   { href: '/faq', key: 'faq' },
+  { href: '/sigurnost', key: 'safety' },
   { href: '/privatnost', key: 'privacy' },
-  { href: '/uslovi', key: 'terms' },
+  { href: '/uvjeti', key: 'terms' },
 ];
 
 const SOCIAL_LINKS = [

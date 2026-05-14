@@ -2,30 +2,55 @@
 
 import React from 'react';
 
-/**
- * Širine generisane skriptom optimize-images.js — moraju odgovarati scripts/optimize-images.js
- */
 const WIDTHS = [400, 640, 960, 1280, 1920];
 
+function isAbsoluteUrl(value) {
+  return typeof value === 'string' && /^https?:\/\//.test(value);
+}
+
+function sanityVariant(url, width) {
+  if (!url.includes('cdn.sanity.io')) return url;
+  const sep = url.includes('?') ? '&' : '?';
+  return `${url}${sep}w=${width}&auto=format&fit=max&q=80`;
+}
+
 /**
- * OptimizedImage — koristi WebP placeholder slike s lazy load i srcset.
- * Za slike generisane npm run optimize-images (public/images/*.webp).
- *
- * @param {string} name - Ime slike bez ekstenzije (npr. "1", "2", "10")
- * @param {string} alt - Alt tekst (obavezan za pristupačnost)
- * @param {string} [sizes] - CSS sizes za srcset (default: full width na svim breakpointima)
- * @param {string} [className] - CSS klasa za <img>
- * @param {boolean} [priority] - Ako true, isključuje lazy load (za hero/LCP slike)
- * @param {object} [imgProps] - Ostali props za <img> (npr. width, height za layout)
+ * Image component that handles three sources:
+ *   1. `src` prop pointing at a Sanity CDN URL → builds responsive srcset via Sanity image API.
+ *   2. `src` prop pointing at any other absolute URL → renders <img src>.
+ *   3. `name` prop (legacy mock data) → renders pre-generated /images/{name}-{w}w.webp.
  */
 export function OptimizedImage({
   name,
+  src,
   alt,
   sizes = '100vw',
   className,
   priority = false,
+  width,
+  height,
   ...imgProps
 }) {
+  // Allow legacy callers to pass a URL into `name` too — treat as src.
+  const effectiveSrc = isAbsoluteUrl(src) ? src : isAbsoluteUrl(name) ? name : null;
+  if (effectiveSrc) {
+    const srcSet = WIDTHS.map((w) => `${sanityVariant(effectiveSrc, w)} ${w}w`).join(', ');
+    return (
+      <img
+        src={sanityVariant(effectiveSrc, WIDTHS[WIDTHS.length - 1])}
+        srcSet={srcSet}
+        alt={alt}
+        sizes={sizes}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        className={className}
+        width={width}
+        height={height}
+        {...imgProps}
+      />
+    );
+  }
+
   const base = `/images/${name}`;
   const srcSet = WIDTHS.map((w) => `${base}-${w}w.webp ${w}w`).join(', ');
   const defaultSrc = `${base}-${WIDTHS[WIDTHS.length - 1]}w.webp`;
@@ -40,6 +65,8 @@ export function OptimizedImage({
         decoding="async"
         sizes={sizes}
         className={className}
+        width={width}
+        height={height}
         {...imgProps}
       />
     </picture>

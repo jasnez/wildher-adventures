@@ -1,6 +1,5 @@
 import React from 'react';
 import OptimizedImage from '@/components/OptimizedImage';
-import { Link } from '@/i18n/navigation';
 
 export function ExperienceStory({ title, storyText, imageName, ctaLabel, ctaHref }) {
   return (
@@ -11,12 +10,12 @@ export function ExperienceStory({ title, storyText, imageName, ctaLabel, ctaHref
           <div>
             <p className="text-body text-wildher-text-muted whitespace-pre-line mb-6">{storyText}</p>
             {ctaHref && (
-              <Link
+              <a
                 href={ctaHref}
                 className="inline-flex items-center justify-center rounded-lg bg-brand-primary-green px-5 py-2.5 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
               >
                 {ctaLabel}
-              </Link>
+              </a>
             )}
           </div>
           {imageName && (

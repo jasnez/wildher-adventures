@@ -1,7 +1,4 @@
-'use client';
-
 import React from 'react';
-import { Link } from '@/i18n/navigation';
 
 export function BookingPanel({ priceFrom, priceLabel, spotsLeft, dateLabel, guestsLabel, bookCta, bookHref }) {
   return (
@@ -15,12 +12,12 @@ export function BookingPanel({ priceFrom, priceLabel, spotsLeft, dateLabel, gues
         {spotsLeft != null && (
           <p className="text-small text-brand-primary-green font-medium mb-4">{spotsLeft}</p>
         )}
-        <Link
+        <a
           href={bookHref}
           className="block w-full text-center rounded-lg bg-brand-primary-green px-4 py-3 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
         >
           {bookCta}
-        </Link>
+        </a>
       </div>
     </aside>
   );

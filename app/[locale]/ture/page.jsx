@@ -2,20 +2,18 @@ import React from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { getTours } from '@/lib/tours';
+import { getAllTours } from '@/lib/sanity/fetch';
+import { mapTourCard } from '@/lib/sanity/adapters';
 import { ToursHero, GiftVoucherBanner } from '@/components/tours';
 import ToursListingClient from '@/components/tours/ToursListingClient';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
-  const title =
-    locale === 'bs'
-      ? 'Ture i iskustva — WildHer Adventures'
-      : 'Tours and experiences — WildHer Adventures';
-  const description =
-    locale === 'bs'
-      ? 'Od jednodnevnih hiking tura do višednevnih ekspedicija. Filtriraj po tipu, trajanju, težini i cijeni.'
-      : 'From one-day hiking trips to multi-day expeditions. Filter by type, duration, difficulty and price.';
-  return { title, description };
+  const t = await getTranslations({ locale, namespace: 'tours' });
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+  };
 }
 
 function stripNamespace(key) {
@@ -30,14 +28,12 @@ export default async function ToursPage({ params }) {
   const t = await getTranslations('tours');
   const tHome = await getTranslations('home');
   const tAbout = await getTranslations('about');
-  const tours = getTours();
 
   const labels = {
     filterType: t('filterType'),
     filterDuration: t('filterDuration'),
     filterDifficulty: t('filterDifficulty'),
     filterPrice: t('filterPrice'),
-    filterMonth: t('filterMonth'),
     sortBy: t('sortBy'),
     sortDate: t('sortDate'),
     sortPrice: t('sortPrice'),
@@ -53,23 +49,49 @@ export default async function ToursPage({ params }) {
     difficultyEasy: t('difficultyEasy'),
     difficultyModerate: t('difficultyModerate'),
     difficultyChallenging: t('difficultyChallenging'),
+    difficultyDemanding: t('difficultyDemanding'),
+    difficultyExpert: t('difficultyExpert'),
   };
 
-  const resolvedTours = tours.map((tour) => {
-    const title = tHome(stripNamespace(tour.titleKey));
-    const location = tour.locationKey?.startsWith('dest') ? tHome(tour.locationKey) : tHome(stripNamespace(tour.locationKey));
-    const duration = tHome(stripNamespace(tour.durationKey));
-    const difficultyLabel = tour.difficultyKey?.startsWith('tours.') ? t(tour.difficultyKey.replace('tours.', '')) : tHome(stripNamespace(tour.difficultyKey));
-    const description = tour.descKey?.startsWith('about.') ? tAbout(stripNamespace(tour.descKey)) : tHome(stripNamespace(tour.descKey));
-    return {
-      ...tour,
-      title,
-      location,
-      duration,
-      difficultyLabel,
-      description,
-    };
-  });
+  const fallbackDurationLabel = (days) => {
+    if (days <= 1) return t('duration1day');
+    if (days <= 2) return t('durationWeekend');
+    if (days <= 5) return t('duration3to5');
+    return t('duration5plus');
+  };
+  const difficultyLookup = (key) => t(key);
+
+  // Try Sanity first; fall back to mock data when empty/unconfigured.
+  const sanityTours = await getAllTours();
+  let resolvedTours;
+  if (sanityTours && sanityTours.length > 0) {
+    resolvedTours = sanityTours.map((tour) =>
+      mapTourCard(tour, locale, difficultyLookup, fallbackDurationLabel)
+    );
+  } else {
+    const tours = getTours();
+    resolvedTours = tours.map((tour) => {
+      const title = tHome(stripNamespace(tour.titleKey));
+      const location = tour.locationKey?.startsWith('dest')
+        ? tHome(tour.locationKey)
+        : tHome(stripNamespace(tour.locationKey));
+      const duration = tHome(stripNamespace(tour.durationKey));
+      const difficultyLabel = tour.difficultyKey?.startsWith('tours.')
+        ? t(tour.difficultyKey.replace('tours.', ''))
+        : tHome(stripNamespace(tour.difficultyKey));
+      const description = tour.descKey?.startsWith('about.')
+        ? tAbout(stripNamespace(tour.descKey))
+        : tHome(stripNamespace(tour.descKey));
+      return {
+        ...tour,
+        title,
+        location,
+        duration,
+        difficultyLabel,
+        description,
+      };
+    });
+  }
 
   return (
     <main id="main-content" className="min-h-screen">
@@ -83,6 +105,8 @@ export default async function ToursPage({ params }) {
         tours={resolvedTours}
         labels={labels}
         ctaLabel={t('ctaDetailsBooking')}
+        priceFromLabel={t('priceFrom')}
+        emptyStateLabel={t('emptyResults')}
         badgeLabels={{
           popular: t('badgePopular'),
           new: t('badgeNew'),
