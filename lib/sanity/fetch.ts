@@ -19,6 +19,7 @@ import {
   safetyPageQuery,
   termsPageQuery,
   privacyPageQuery,
+  giftVoucherPageQuery,
 } from './queries';
 import {
   tourCardSchema,
@@ -166,3 +167,6 @@ export const getTermsPage = () =>
 
 export const getPrivacyPage = () =>
   fetchAndParse(privacyPageQuery, z.unknown(), {}, ['sanity', 'privacy']);
+
+export const getGiftVoucherPage = () =>
+  fetchAndParse(giftVoucherPageQuery, z.unknown(), {}, ['sanity', 'gift-voucher']);

@@ -64,6 +64,15 @@
     "title": "Politika privatnosti",
     "comingSoon": "Politika privatnosti uskoro stiže."
   },
+  "giftVoucher": {
+    "metaTitle": "Pokloni avanturu — WildHer Adventures",
+    "metaDescription": "Pokloni iskustvo umjesto stvari. Vaučeri za WildHer ture, sve vrijednosti.",
+    "title": "Pokloni avanturu",
+    "introFallback": "Vaučer za ženu koja voli prirodu — koristi se za bilo koju WildHer turu ili retreat. Vrijedi 12 mjeseci od datuma kupovine.",
+    "tiersTitle": "Dostupne vrijednosti",
+    "cta": "Pošalji upit za vaučer",
+    "ctaNote": "Nakon upita vraćamo se mailom sa detaljima i Stripe linkom za uplatu."
+  },
   "common": {
     "book": "Booking",
     "language": "Jezik",
