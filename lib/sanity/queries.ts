@@ -261,3 +261,12 @@ export const privacyPageQuery = groq`
     lastUpdated
   }
 `;
+
+export const giftVoucherPageQuery = groq`
+  *[_type == "giftVoucherPage"][0]{
+    title,
+    description,
+    "heroImage": heroImage.asset->url,
+    tiers[]{ amount, currency, label }
+  }
+`;

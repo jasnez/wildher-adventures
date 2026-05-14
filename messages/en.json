@@ -64,6 +64,15 @@
     "title": "Privacy policy",
     "comingSoon": "Our privacy policy is on the way."
   },
+  "giftVoucher": {
+    "metaTitle": "Gift an adventure — WildHer Adventures",
+    "metaDescription": "Give an experience, not a thing. Vouchers for any WildHer tour, any value.",
+    "title": "Gift an adventure",
+    "introFallback": "A voucher for a woman who loves nature — redeemable on any WildHer tour or retreat. Valid 12 months from purchase.",
+    "tiersTitle": "Available values",
+    "cta": "Request a voucher",
+    "ctaNote": "After your request we'll reply by email with details and a Stripe payment link."
+  },
   "common": {
     "book": "Book",
     "language": "Language",

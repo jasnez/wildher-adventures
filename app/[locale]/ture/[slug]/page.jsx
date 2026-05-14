@@ -7,6 +7,11 @@ import { getTourDetail } from '@/lib/tourDetailData';
 import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
 import { mapTourDetail } from '@/lib/sanity/adapters';
 import {
+  tourJsonLd,
+  serializeJsonLd,
+  absoluteUrl,
+} from '@/lib/seo/structuredData';
+import {
   TourDetailHero,
   QuickFactsBar,
   ExperienceStory,
@@ -18,6 +23,50 @@ import {
   SimilarAdventures,
   BookingPanel,
 } from '@/components/tour-detail';
+
+export async function generateMetadata({ params }) {
+  const { locale, slug } = await params;
+  const tour = await getTourBySlugFromCms(slug);
+  if (!tour) {
+    return { title: 'WildHer Adventures' };
+  }
+  const title =
+    (locale === 'en' && tour.title?.en) || tour.title?.bs || 'WildHer Adventures';
+  const description =
+    (locale === 'en' && tour.shortDescription?.en) ||
+    tour.shortDescription?.bs ||
+    undefined;
+  const cover = tour.cover ? absoluteUrl(tour.cover) : undefined;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wildheradventures.ba'}${
+    locale === 'en' ? '/en' : ''
+  }/ture/${slug}`;
+  return {
+    title: `${title} — WildHer Adventures`,
+    description,
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url,
+      siteName: 'WildHer Adventures',
+      locale: locale === 'en' ? 'en_GB' : 'bs_BA',
+      images: cover ? [{ url: cover, alt: title }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: cover ? [cover] : undefined,
+    },
+    alternates: {
+      canonical: url,
+      languages: {
+        bs: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wildheradventures.ba'}/ture/${slug}`,
+        en: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wildheradventures.ba'}/en/ture/${slug}`,
+      },
+    },
+  };
+}
 
 function resolveKey(tHome, tTours, fullKey) {
   if (!fullKey) return '';
@@ -69,8 +118,15 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
 
   const featuredTestimonial = detail.testimonials[0];
 
+  const jsonLd = tourJsonLd(detail, locale === 'en' ? 'en' : 'bs');
+
   return (
-    <main id="main-content" className="min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+      />
+      <main id="main-content" className="min-h-screen">
       <TourDetailHero
         title={detail.title}
         subtitle={detail.subtitle}
@@ -179,6 +235,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
         />
       </div>
     </main>
+    </>
   );
 }
 

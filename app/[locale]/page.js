@@ -16,6 +16,10 @@ import {
   getAllDestinations,
   getAllStories,
 } from "@/lib/sanity/fetch";
+import {
+  travelAgencyJsonLd,
+  serializeJsonLd,
+} from "@/lib/seo/structuredData";
 
 function pickLocale(value, locale) {
   if (!value || typeof value !== "object") return "";
@@ -142,8 +146,15 @@ export default async function HomePage({ params }) {
   const priceFromLabel = tTours("priceFrom");
   const learnMore = t("learnMore");
 
+  const homeJsonLd = travelAgencyJsonLd();
+
   return (
-    <main id="main-content" className="min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd) }}
+      />
+      <main id="main-content" className="min-h-screen">
       {/* 1. HERO */}
       <section className="relative min-h-screen flex flex-col justify-end">
         {homeDoc?.heroImage ? (
@@ -530,5 +541,6 @@ export default async function HomePage({ params }) {
         </div>
       </section>
     </main>
+    </>
   );
 }
