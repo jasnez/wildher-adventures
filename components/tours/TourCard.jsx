@@ -8,9 +8,6 @@ import { Link } from '@/i18n/navigation';
 
 const BADGE_KEYS = { popular: 'popular', new: 'new', coming: 'coming' };
 
-/**
- * Težina 1–5: prikaz kao ikone (puni krugovi).
- */
 function DifficultyIcons({ level, label }) {
   const n = Math.min(5, Math.max(1, Number(level) || 1));
   return (
@@ -26,13 +23,10 @@ function DifficultyIcons({ level, label }) {
   );
 }
 
-/**
- * TourCard — kartica ture: slika, badge, naziv, lokacija, trajanje, težina (1–5), cijena, opis (2 reda), CTA.
- * tour: { title, location, duration, difficulty, difficultyLabel, priceFrom, description, image, badge, slug }
- */
 export function TourCard({
   tour,
-  ctaLabel = 'Detalji & Booking',
+  ctaLabel,
+  priceFromLabel,
   badgeLabels = {},
 }) {
   const {
@@ -55,7 +49,9 @@ export function TourCard({
     <Card className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1 overflow-hidden">
       <CardImage className="relative">
         <OptimizedImage
-          name={image}
+          {...(typeof image === 'string' && /^https?:\/\//.test(image)
+            ? { src: image }
+            : { name: image })}
           alt={title}
           sizes="(max-width: 768px) 100vw, 33vw"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -89,7 +85,7 @@ export function TourCard({
         </p>
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <span className="font-semibold text-brand-primary-green">
-            Od {priceFrom}€
+            {priceFromLabel} {priceFrom}€
           </span>
           <Link
             href={slug ? `/ture/${slug}` : '/ture'}

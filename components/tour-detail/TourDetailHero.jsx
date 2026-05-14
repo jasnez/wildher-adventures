@@ -1,8 +1,19 @@
 import React from 'react';
 import OptimizedImage from '@/components/OptimizedImage';
-import { Link } from '@/i18n/navigation';
 
-export function TourDetailHero({ title, subtitle, location, duration, difficultyLabel, maxGroup, imageName, bookCta, bookHref }) {
+export function TourDetailHero({
+  title,
+  subtitle,
+  location,
+  duration,
+  difficultyLabel,
+  difficultyPrefix,
+  maxGroup,
+  maxGroupLabel,
+  imageName,
+  bookCta,
+  bookHref,
+}) {
   return (
     <section className="relative min-h-[85vh] flex flex-col justify-end">
       <OptimizedImage
@@ -20,15 +31,15 @@ export function TourDetailHero({ title, subtitle, location, duration, difficulty
           <div className="flex flex-wrap gap-4 text-sm text-white/90 mb-6">
             {location && <span>📍 {location}</span>}
             {duration && <span>⏱ {duration}</span>}
-            {difficultyLabel && <span>🥾 Težina: {difficultyLabel}</span>}
-            {maxGroup != null && <span>👩‍👩‍👧 max {maxGroup} žena</span>}
+            {difficultyLabel && <span>🥾 {difficultyPrefix}: {difficultyLabel}</span>}
+            {maxGroup != null && <span>👩‍👩‍👧 {maxGroupLabel}</span>}
           </div>
-          <Link
+          <a
             href={bookHref}
             className="inline-flex items-center justify-center rounded-lg bg-brand-primary-green px-6 py-3 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
           >
             {bookCta}
-          </Link>
+          </a>
         </div>
       </div>
     </section>

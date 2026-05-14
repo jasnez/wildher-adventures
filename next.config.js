@@ -8,21 +8,13 @@ const nextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   images: {
     remotePatterns: [
+      // Sanity CDN — serves all hosted images.
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-        pathname: '/uploads/**',
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/**',
       },
     ],
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/cms-api/:path*',
-        destination: 'http://localhost:1337/:path*',
-      },
-    ];
   },
 };
 

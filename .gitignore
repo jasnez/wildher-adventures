@@ -31,8 +31,5 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# Strapi (nested)
-WildHer-Adventures/node_modules
-WildHer-Adventures/.tmp
-WildHer-Adventures/dist
-WildHer-Adventures/build
+# Sanity
+sanity/.sanity

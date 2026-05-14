@@ -9,14 +9,16 @@ import { ButtonLink } from '@/components/ui';
 const NAV_LINKS = [
   { href: '/ture', key: 'tours' },
   { href: '/destinacije', key: 'destinations' },
+  { href: '/vodice', key: 'guides' },
   { href: '/o-nama', key: 'about' },
   { href: '/blog', key: 'blog' },
+  { href: '/faq', key: 'faq' },
   { href: '/galerija', key: 'gallery' },
   { href: '/kontakt', key: 'contact' },
 ];
 
-const LEFT_NAV_KEYS = new Set(['tours', 'destinations', 'blog']);
-const RIGHT_NAV_KEYS = new Set(['about', 'gallery', 'contact']);
+const LEFT_NAV_KEYS = new Set(['tours', 'destinations', 'guides', 'blog']);
+const RIGHT_NAV_KEYS = new Set(['about', 'gallery', 'faq', 'contact']);
 
 export function LanguageToggle({ className = '' }) {
   const locale = useLocale();
@@ -206,7 +208,7 @@ export function Header() {
               ))}
             </div>
             <LanguageToggle />
-            <ButtonLink href="/prijava" variant="primary" size="md">
+            <ButtonLink href="/kontakt" variant="primary" size="md">
               {tCommon('book')}
             </ButtonLink>
           </div>
@@ -254,7 +256,7 @@ export function Header() {
               <LanguageToggle />
             </div>
             <ButtonLink
-              href="/prijava"
+              href="/kontakt"
               variant="primary"
               size="lg"
               className="w-full justify-center"

@@ -4,6 +4,8 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { getTourBySlug } from '@/lib/tours';
 import { getTourDetail } from '@/lib/tourDetailData';
+import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
+import { mapTourDetail } from '@/lib/sanity/adapters';
 import {
   TourDetailHero,
   QuickFactsBar,
@@ -16,7 +18,6 @@ import {
   SimilarAdventures,
   BookingPanel,
 } from '@/components/tour-detail';
-import { TourCard } from '@/components/tours/TourCard';
 
 function resolveKey(tHome, tTours, fullKey) {
   if (!fullKey) return '';
@@ -28,15 +29,175 @@ function resolveKey(tHome, tTours, fullKey) {
   return tHome(key);
 }
 
-export default async function TourDetailPage({ params }) {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
-  const tour = getTourBySlug(slug);
-  if (!tour) notFound();
+function buildBookHref(tTourDetail, title) {
+  const mailSubject = encodeURIComponent(`${tTourDetail('mailSubjectPrefix')}: ${title}`);
+  return `mailto:bookings@wildheradventures.ba?subject=${mailSubject}`;
+}
 
-  const tTourDetail = await getTranslations('tourDetail');
-  const tHome = await getTranslations('home');
-  const tTours = await getTranslations('tours');
+async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
+  const sanityTour = await getTourBySlugFromCms(slug);
+  if (!sanityTour) return null;
+
+  const fallbackDurationLabel = (days) => {
+    if (days <= 1) return t('duration1day');
+    if (days <= 2) return t('durationWeekend');
+    if (days <= 5) return t('duration3to5');
+    return t('duration5plus');
+  };
+  const difficultyLookup = (key) => t(key);
+  const detail = mapTourDetail(sanityTour, locale, difficultyLookup, fallbackDurationLabel);
+
+  const bookCta = tTourDetail('bookCta');
+  const bookHref = buildBookHref(tTourDetail, detail.title);
+
+  const quickFactsLabels = {
+    duration: tTourDetail('quickFacts.duration'),
+    difficulty: tTourDetail('quickFacts.difficulty'),
+    ascent: tTourDetail('quickFacts.ascent'),
+    length: tTourDetail('quickFacts.length'),
+    group: tTourDetail('quickFacts.group'),
+    price: tTourDetail('quickFacts.price'),
+    priceFrom: tTourDetail('priceFrom'),
+  };
+
+  const upcomingDate = detail.availableDates.find((d) =>
+    ['open', 'almost_full'].includes(d.status)
+  );
+  const spotsLeftText = upcomingDate?.spotsLeft
+    ? tTourDetail('spotsLeft', { count: upcomingDate.spotsLeft })
+    : null;
+
+  const featuredTestimonial = detail.testimonials[0];
+
+  return (
+    <main id="main-content" className="min-h-screen">
+      <TourDetailHero
+        title={detail.title}
+        subtitle={detail.subtitle}
+        location={detail.location}
+        duration={detail.duration}
+        difficultyLabel={detail.difficultyLabel}
+        difficultyPrefix={tTourDetail('quickFacts.difficulty')}
+        maxGroup={detail.maxGroup}
+        maxGroupLabel={tTourDetail('heroGroupMax', { count: detail.maxGroup })}
+        imageName={detail.image}
+        bookCta={bookCta}
+        bookHref={bookHref}
+      />
+
+      <QuickFactsBar
+        duration={detail.duration}
+        difficultyLabel={detail.difficultyLabel}
+        ascent={detail.elevationM}
+        length={detail.lengthKm}
+        group={detail.maxGroup}
+        priceFrom={detail.priceFrom}
+        labels={quickFactsLabels}
+      />
+
+      <div className="flex flex-col lg:flex-row lg:items-start gap-8 max-w-6xl mx-auto px-4 py-8">
+        <div className="flex-1 min-w-0">
+          {detail.experienceStory && (
+            <ExperienceStory
+              title={tTourDetail('experienceTitle')}
+              storyText={
+                Array.isArray(detail.experienceStory)
+                  ? blocksToPlainText(detail.experienceStory)
+                  : detail.subtitle
+              }
+              imageName={detail.gallery[0] || detail.image}
+              ctaLabel={tTourDetail('experienceCta')}
+              ctaHref={bookHref}
+            />
+          )}
+
+          {detail.itinerary.length > 0 && (
+            <VisualItinerary
+              steps={detail.itinerary.map((s) => ({ label: s.label, image: s.image || detail.image }))}
+            />
+          )}
+
+          {(detail.whoIsForIncluded.length > 0 || detail.whoIsForExcluded.length > 0) && (
+            <WhoIsFor
+              title={tTourDetail('whoIsForTitle')}
+              included={detail.whoIsForIncluded}
+              excluded={detail.whoIsForExcluded}
+              imageName={detail.image}
+            />
+          )}
+
+          {detail.whatToBring.length > 0 && (
+            <GearChecklist
+              title={tTourDetail('gearTitle')}
+              items={detail.whatToBring.map((label, i) => ({ key: `gear-${i}`, label }))}
+            />
+          )}
+
+          {(detail.mapImage || detail.gpxFile) && (
+            <MapElevation
+              title={tTourDetail('mapElevationTitle')}
+              showDetailsLabel={tTourDetail('mapShowDetails')}
+            />
+          )}
+
+          {featuredTestimonial && (
+            <TestimonialStory
+              quote={featuredTestimonial.quote}
+              author={`${featuredTestimonial.author}${featuredTestimonial.city ? `, ${featuredTestimonial.city}` : ''}`}
+              imageName={featuredTestimonial.photo || detail.image}
+            />
+          )}
+
+          {detail.similarTours.length > 0 && (
+            <SimilarAdventures
+              title={tTourDetail('similarTitle')}
+              tours={detail.similarTours.map((t) => ({
+                title: t.title,
+                location: t.location,
+                duration: t.duration,
+                difficulty: t.difficulty,
+                difficultyLabel: t.difficultyLabel,
+                priceFrom: t.priceFrom,
+                description: t.description,
+                image: t.image,
+                badge: t.badge,
+                slug: t.slug,
+              }))}
+              ctaDetailsLabel={tTours('ctaDetailsBooking')}
+            />
+          )}
+        </div>
+
+        <BookingPanel
+          priceFrom={detail.priceFrom}
+          priceLabel={tTourDetail('priceFrom')}
+          spotsLeft={spotsLeftText}
+          dateLabel={tTourDetail('date')}
+          guestsLabel={tTourDetail('guests')}
+          bookCta={bookCta}
+          bookHref={bookHref}
+        />
+      </div>
+    </main>
+  );
+}
+
+function blocksToPlainText(blocks) {
+  if (!Array.isArray(blocks)) return '';
+  return blocks
+    .map((b) => {
+      if (b?._type === 'block' && Array.isArray(b.children)) {
+        return b.children.map((c) => c.text || '').join('');
+      }
+      return '';
+    })
+    .filter(Boolean)
+    .join('\n\n');
+}
+
+async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
+  const tour = getTourBySlug(slug);
+  if (!tour) return null;
 
   const title = resolveKey(tHome, tTours, tour.titleKey) || tHome(tour.titleKey);
   const location = resolveKey(tHome, tTours, tour.locationKey) || tHome(tour.locationKey);
@@ -46,18 +207,15 @@ export default async function TourDetailPage({ params }) {
   const subtitle = tTourDetail(detail.subtitleKey);
   const experienceStory = tTourDetail(detail.experienceStoryKey);
   const bookCta = tTourDetail('bookCta');
-  const bookHref = `#booking`;
+  const bookHref = buildBookHref(tTourDetail, title);
 
   const itinerarySteps = detail.itinerary.map((step) => ({
     label: tTourDetail(step.labelKey),
     image: step.image,
   }));
-
   const whoIncluded = detail.whoIsForIncludedKeys.map((k) => tTourDetail(k));
   const whoExcluded = detail.whoIsForExcludedKeys.map((k) => tTourDetail(k));
-
   const gearItems = detail.gearKeys.map((k) => ({ key: k, label: tTourDetail(k) }));
-
   const spotsLeft = tTourDetail('spotsLeft', { count: 4 });
 
   const similarTours = (detail.similarSlugs || [])
@@ -94,7 +252,9 @@ export default async function TourDetailPage({ params }) {
         location={location}
         duration={duration}
         difficultyLabel={difficultyLabel}
-        maxGroup={tour.maxGroup ?? tour.maxGroup}
+        difficultyPrefix={tTourDetail('quickFacts.difficulty')}
+        maxGroup={tour.maxGroup ?? 8}
+        maxGroupLabel={tTourDetail('heroGroupMax', { count: tour.maxGroup ?? 8 })}
         imageName={tour.image}
         bookCta={bookCta}
         bookHref={bookHref}
@@ -161,4 +321,20 @@ export default async function TourDetailPage({ params }) {
       </div>
     </main>
   );
+}
+
+export default async function TourDetailPage({ params }) {
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const tTourDetail = await getTranslations('tourDetail');
+  const tHome = await getTranslations('home');
+  const tTours = await getTranslations('tours');
+
+  const sanityResult = await renderFromSanity({ slug, locale, tTourDetail, tTours, t: tTours });
+  if (sanityResult) return sanityResult;
+
+  const mockResult = await renderFromMock({ slug, locale, tTourDetail, tHome, tTours });
+  if (mockResult) return mockResult;
+
+  notFound();
 }

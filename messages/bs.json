@@ -6,15 +6,99 @@
     "blog": "Blog",
     "gallery": "Galerija",
     "contact": "Kontakt",
+    "guides": "Vodičice",
+    "faq": "FAQ",
     "mainNavAria": "Glavna navigacija",
     "mobileNavAria": "Mobilna navigacija",
     "openMenu": "Otvori meni",
     "closeMenu": "Zatvori meni"
   },
+  "guides": {
+    "metaTitle": "Vodičice — WildHer Adventures",
+    "metaDescription": "Upoznaj naše ženske vodičice — licencirane planinarke, instruktorice i avanturistkinje koje vode WildHer ture.",
+    "title": "Naše vodičice",
+    "intro": "Sve naše ture vodi licencirana ženska vodičica. Upoznaj ih prije nego rezervišeš.",
+    "comingSoon": "Profili vodičica uskoro stižu — radimo na tome.",
+    "languagesLabel": "Jezici",
+    "certificationsLabel": "Certifikati",
+    "specialtiesLabel": "Specijalnosti",
+    "toursLedLabel": "Ture koje vodi",
+    "backToGuides": "Sve vodičice"
+  },
+  "faqPage": {
+    "metaTitle": "Često postavljana pitanja — WildHer Adventures",
+    "metaDescription": "Odgovori na česta pitanja o našim turama: solo putovanje, kondicija, sigurnost, šta ponijeti.",
+    "title": "Često postavljena pitanja",
+    "intro": "Ovo su pitanja koja nam najčešće postavljaju. Ako tvoje pitanje nije ovdje, slobodno nas kontaktiraj.",
+    "categories": {
+      "general": "Opšta pitanja",
+      "booking": "Rezervacije i plaćanje",
+      "fitness": "Kondicija i težina ture",
+      "solo": "Solo putovanje",
+      "safety": "Sigurnost",
+      "gear": "Šta ponijeti",
+      "accommodation": "Smještaj"
+    },
+    "empty": "Pitanja uskoro stižu. Imaš pitanje već sad? Piši nam na bookings@wildheradventures.ba.",
+    "ctaTitle": "Imaš još neko pitanje?",
+    "ctaText": "Najlakše je da zakažeš kratak razgovor — odgovorit ćemo na sve.",
+    "ctaButton": "Stupi u kontakt"
+  },
+  "safety": {
+    "metaTitle": "Sigurnost — WildHer Adventures",
+    "metaDescription": "Naši sigurnosni standardi, certifikati, osiguranje i šta očekivati na turama.",
+    "title": "Sigurnost je naš prioritet",
+    "introFallback": "Svaka tura planira se sa pažljivom procjenom rute, vremenskih uslova i sastava grupe. Vodi je licencirani turistički vodič, sa obukom iz prve pomoći i certificiranom opremom za tehničke aktivnosti.",
+    "comingSoon": "Detaljna stranica o sigurnosti uskoro stiže."
+  },
+  "terms": {
+    "metaTitle": "Uslovi rezervacije — WildHer Adventures",
+    "metaDescription": "Uslovi rezervacije, otkazivanja i plaćanja.",
+    "title": "Uslovi rezervacije",
+    "comingSoon": "Detaljni uslovi rezervacije uskoro stižu. Za sva pitanja: bookings@wildheradventures.ba.",
+    "lastUpdatedLabel": "Posljednje ažuriranje"
+  },
+  "privacy": {
+    "metaTitle": "Privatnost — WildHer Adventures",
+    "metaDescription": "Naša politika privatnosti i kako čuvamo tvoje podatke.",
+    "title": "Politika privatnosti",
+    "comingSoon": "Politika privatnosti uskoro stiže."
+  },
   "common": {
     "book": "Booking",
     "language": "Jezik",
     "home": "Početna"
+  },
+  "errors": {
+    "notFoundTitle": "Stranica nije pronađena",
+    "notFoundText": "Stranica koju tražiš ne postoji ili je premještena.",
+    "notFoundCta": "Nazad na početnu",
+    "errorTitle": "Nešto je pošlo po zlu",
+    "errorText": "Dogodila se neočekivana greška. Pokušaj ponovo za trenutak.",
+    "errorRetry": "Pokušaj ponovo",
+    "loading": "Učitavanje…"
+  },
+  "comingSoon": {
+    "title": "Uskoro stiže",
+    "text": "Ova stranica je u izradi. Pretplati se na newsletter da budeš prva koja saznaje kada bude objavljena.",
+    "cta": "Istraži ture"
+  },
+  "newsletter": {
+    "subject": "Newsletter prijava",
+    "comingSoonNote": "Stiže uskoro — pošalji nam mail da budeš na listi."
+  },
+  "contact": {
+    "metaTitle": "Kontakt — WildHer Adventures",
+    "metaDescription": "Stupi u kontakt sa WildHer Adventures. Rezerviši razgovor o avanturi ili pošalji upit mailom.",
+    "title": "Stupi u kontakt",
+    "intro": "Imaš pitanje o turi ili želiš rezervisati avanturu? Najlakše je da zakažemo kratak razgovor — odgovorit ćemo na sve i pomoći ti odabrati pravu turu.",
+    "scheduleTitle": "Zakaži razgovor",
+    "scheduleText": "20-minutni online razgovor u terminu koji ti odgovara.",
+    "scheduleCta": "Otvori kalendar",
+    "emailTitle": "Pošalji upit mailom",
+    "emailText": "Napiši nam direktno na",
+    "emailCta": "Pošalji email",
+    "responseTime": "Odgovaramo unutar 24h, ponedjeljkom–petkom."
   },
   "footer": {
     "tagline": "Ženski avanturistički brend u BiH — outdoor ture, wellbeing i zajednica.",
@@ -23,8 +107,9 @@
     "submit": "Prijavi se",
     "thanks": "Hvala! Prijavljeni ste na vijesti.",
     "faq": "FAQ",
+    "safety": "Sigurnost",
     "privacy": "Privatnost",
-    "terms": "Uslovi korištenja"
+    "terms": "Uslovi rezervacije"
   },
   "home": {
     "title": "Otkrij svoju snagu u divljini Bosne",
@@ -139,7 +224,10 @@
     "difficultyEasy": "Lagano",
     "difficultyModerate": "Umjereno",
     "difficultyChallenging": "Zahtjevno",
+    "difficultyDemanding": "Zahtjevno+",
+    "difficultyExpert": "Ekspertno",
     "ctaDetailsBooking": "Detalji & Booking",
+    "emptyResults": "Nema tura koje odgovaraju filterima. Pokušaj promijeniti kriterije.",
     "badgePopular": "Najpopularnije",
     "badgeNew": "Novo",
     "badgeComing": "Uskoro",
@@ -150,7 +238,9 @@
     "categoryJednodnevneIntro": "Jednodnevne ture — savršen izbor za one koji žele jedan dan u prirodi. Izlazak iz grada, planinska staza i vraćanje iste večeri.",
     "categoryVikendIntro": "Vikend paketi — dva dana avanture. Idealno za one koji žele malo više od jednodnevnog izleta.",
     "categoryEkspedicijeIntro": "Višednevne ekspedicije — za istinske avanturiste. Nekoliko dana u prirodi, planinski vrhovi i nezaboravna iskustva.",
-    "categoryRetreatIntro": "Wellness i mindfulness programi — spoj prirode, pokreta i opuštanja u ženskoj zajednici."
+    "categoryRetreatIntro": "Wellness i mindfulness programi — spoj prirode, pokreta i opuštanja u ženskoj zajednici.",
+    "metaTitle": "Ture i iskustva — WildHer Adventures",
+    "metaDescription": "Od jednodnevnih hiking tura do višednevnih ekspedicija. Filtriraj po tipu, trajanju, težini i cijeni."
   },
   "tourDetail": {
     "bookCta": "Rezerviši mjesto",
@@ -174,6 +264,8 @@
     "spotsLeft": "Još {count} mjesta",
     "date": "Datum",
     "guests": "Broj osoba",
+    "heroGroupMax": "max {count} žena",
+    "mailSubjectPrefix": "Upit za turu",
     "viaFerrataSubtitle": "Ženska avantura iznad kanjona Neretve",
     "viaFerrataStory": "Jutro počinje u Blagaju dok sunce tek obasjava stijene iznad Neretve. Staza se lagano penje kroz borovu šumu, a pogled na kanjon postaje sve dramatičniji. Nakon kratke pauze stižemo do via ferrata staze — metalni klinovi vode nas uz stijenu, a svaki korak otvara sve veći pogled na rijeku ispod.",
     "stepMeet": "Polazna tačka",
