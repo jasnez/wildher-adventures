@@ -2,28 +2,29 @@ import { z } from 'zod';
 
 /**
  * Zod schemas mirroring the GROQ projections in queries.ts.
- * Parse every Sanity response through these at the boundary so a stale
- * schema or partially-published draft can't crash a server component.
+ *
+ * All object schemas use `.passthrough()` because Sanity always returns extra
+ * system fields (`_type`, `_key`, `_id`, `_rev`, `_createdAt`, `_updatedAt`)
+ * on every document and on every array element. Without passthrough, Zod
+ * (strict by default in v4) rejects the response and we silently return null.
  */
 
-export const localeStringSchema = z
-  .object({
-    bs: z.string(),
-    en: z.string().nullable().optional(),
-  })
-  .passthrough();
+const obj = z.object; // shorter alias
+
+export const localeStringSchema = obj({
+  bs: z.string(),
+  en: z.string().nullable().optional(),
+}).passthrough();
 
 export const localeTextSchema = localeStringSchema;
-export const localeRichTextSchema = z
-  .object({
-    bs: z.array(z.unknown()).optional().nullable(),
-    en: z.array(z.unknown()).optional().nullable(),
-  })
-  .passthrough();
+export const localeRichTextSchema = obj({
+  bs: z.array(z.unknown()).optional().nullable(),
+  en: z.array(z.unknown()).optional().nullable(),
+}).passthrough();
 
-export const slugSchema = z.object({ current: z.string() });
+export const slugSchema = obj({ current: z.string() }).passthrough();
 
-export const guideRefSchema = z.object({
+export const guideRefSchema = obj({
   _id: z.string(),
   name: z.string(),
   slug: slugSchema,
@@ -31,17 +32,17 @@ export const guideRefSchema = z.object({
   photo: z.string().nullable().optional(),
   languages: z.array(z.string()).nullable().optional(),
   certifications: z.array(z.string()).nullable().optional(),
-});
+}).passthrough();
 
-export const destinationRefSchema = z.object({
+export const destinationRefSchema = obj({
   _id: z.string(),
   name: localeStringSchema,
   slug: slugSchema,
   region: z.string(),
   heroImage: z.string().nullable().optional(),
-});
+}).passthrough();
 
-export const testimonialSchema = z.object({
+export const testimonialSchema = obj({
   _id: z.string(),
   quote: localeTextSchema,
   authorName: z.string(),
@@ -49,16 +50,16 @@ export const testimonialSchema = z.object({
   authorPhoto: z.string().nullable().optional(),
   rating: z.number().min(1).max(5),
   publishedAt: z.string(),
-});
+}).passthrough();
 
-export const faqSchema = z.object({
+export const faqSchema = obj({
   _id: z.string(),
   question: localeStringSchema,
   answer: localeRichTextSchema,
   category: z.string(),
-});
+}).passthrough();
 
-export const tourCardSchema = z.object({
+export const tourCardSchema = obj({
   _id: z.string(),
   title: localeStringSchema,
   slug: slugSchema,
@@ -75,21 +76,21 @@ export const tourCardSchema = z.object({
   badge: z.string().nullable().optional(),
   featured: z.boolean().nullable().optional(),
   sortOrder: z.number().nullable().optional(),
-});
+}).passthrough();
 
-export const itineraryStepSchema = z.object({
+export const itineraryStepSchema = obj({
   label: localeStringSchema,
   description: localeTextSchema.nullable().optional(),
   time: z.string().nullable().optional(),
   image: z.string().nullable().optional(),
-});
+}).passthrough();
 
-export const tourDateSchema = z.object({
+export const tourDateSchema = obj({
   startDate: z.string(),
   endDate: z.string().nullable().optional(),
   spotsLeft: z.number().nullable().optional(),
   status: z.enum(['open', 'almost_full', 'sold_out', 'waitlist', 'cancelled']),
-});
+}).passthrough();
 
 export const tourFullSchema = tourCardSchema.extend({
   subtitle: localeStringSchema.nullable().optional(),
@@ -115,7 +116,7 @@ export const tourFullSchema = tourCardSchema.extend({
   similarTours: z.array(tourCardSchema).nullable().optional(),
   gpxFile: z.string().nullable().optional(),
   mapImage: z.string().nullable().optional(),
-});
+}).passthrough();
 
 export type LocaleString = z.infer<typeof localeStringSchema>;
 export type TourCard = z.infer<typeof tourCardSchema>;
@@ -124,9 +125,8 @@ export type Guide = z.infer<typeof guideRefSchema>;
 export type Destination = z.infer<typeof destinationRefSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type Faq = z.infer<typeof faqSchema>;
-export type Story = z.infer<typeof tourCardSchema>; // placeholder; full story schema below
 
-export const storyCardSchema = z.object({
+export const storyCardSchema = obj({
   _id: z.string(),
   title: localeStringSchema,
   slug: slugSchema,
@@ -135,6 +135,6 @@ export const storyCardSchema = z.object({
   publishedAt: z.string(),
   tags: z.array(z.string()).nullable().optional(),
   author: guideRefSchema.partial().nullable().optional(),
-});
+}).passthrough();
 
 export type StoryCard = z.infer<typeof storyCardSchema>;
