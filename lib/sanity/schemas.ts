@@ -98,6 +98,7 @@ export const tourDateSchema = obj({
 export const tourFullSchema = tourCardSchema.extend({
   subtitle: localeStringSchema.nullable().optional(),
   experienceStory: localeRichTextSchema.nullable().optional(),
+  stripePaymentLinkUrl: z.string().url().nullable().optional(),
   gallery: z.array(z.string()).nullable().optional(),
   lengthKm: z.number().nullable().optional(),
   elevationM: z.number().nullable().optional(),

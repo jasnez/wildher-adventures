@@ -115,6 +115,7 @@ export function mapTourCard(
 export type DetailTour = CardTour & {
   subtitle: string;
   experienceStory: unknown;
+  stripePaymentLinkUrl: string | null;
   lengthKm: number | null;
   elevationM: number | null;
   minAge: number | null;
@@ -171,6 +172,7 @@ export function mapTourDetail(
     ...base,
     subtitle: pickLocale(tour.subtitle, locale),
     experienceStory: pickRichText(tour.experienceStory, locale),
+    stripePaymentLinkUrl: tour.stripePaymentLinkUrl ?? null,
     lengthKm: tour.lengthKm ?? null,
     elevationM: tour.elevationM ?? null,
     minAge: tour.minAge ?? null,
