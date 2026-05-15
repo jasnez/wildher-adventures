@@ -159,7 +159,13 @@
   },
   "newsletter": {
     "subject": "Newsletter signup",
-    "comingSoonNote": "Coming soon — send us an email to be on the list."
+    "comingSoonNote": "Coming soon — send us an email to be on the list.",
+    "emailPlaceholder": "your@email.com",
+    "submitting": "Sending…",
+    "successMessage": "Thanks! You're on the list — we'll be in touch when the first trip opens.",
+    "emptyEmail": "Please enter an email address.",
+    "invalidEmail": "That email doesn't look right. Try again.",
+    "providerError": "Something went wrong. Please try again later or email us directly."
   },
   "contact": {
     "metaTitle": "Contact — WildHer Adventures",
@@ -344,6 +350,11 @@
     "mailSubjectPrefix": "Tour inquiry",
     "yourGuide": "Your guide",
     "viewGuideProfile": "View profile",
+    "statusSoldOut": "Currently sold out",
+    "statusAlmostFull": "Almost full",
+    "statusWaitlist": "Waitlist open",
+    "statusByRequest": "By request",
+    "nextDateLabel": "Next departure",
     "bookCtaDeposit": "Reserve with deposit",
     "bookCtaDepositNote": "Secure deposit payment. The balance is due before the trip.",
     "bookCtaMailNote": "Send an inquiry — we reply within 24h.",

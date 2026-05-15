@@ -236,7 +236,7 @@ export default async function HomePage({ params }) {
         <ScrollIndicator />
       </section>
 
-      {/* 2. ZAŠTO WILDHER */}
+      {/* 2. WHY WILDHER */}
       <section className="bg-[#f6f1e7] py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-4 md:px-6">
           <div className="mb-10 flex items-center gap-6">
@@ -273,7 +273,7 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 3. FEATURED TURE */}
+      {/* 3. FEATURED TOURS */}
       {tours && tours.length > 0 && (
         <section className="py-16 md:py-24 bg-neutral-50">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -416,7 +416,7 @@ export default async function HomePage({ params }) {
         </section>
       )}
 
-      {/* 5. UPOZNAJ OSNIVAČICU */}
+      {/* 5. MEET THE FOUNDER */}
       <section className="py-16 md:py-24 bg-[#fafaf9]">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
@@ -460,7 +460,7 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 6. ISTRAŽI DESTINACIJE */}
+      {/* 6. EXPLORE DESTINATIONS */}
       <section className="py-16 md:py-24 bg-white">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-10">

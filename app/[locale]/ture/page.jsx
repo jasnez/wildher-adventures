@@ -6,6 +6,7 @@ import { getAllTours } from '@/lib/sanity/fetch';
 import { mapTourCard } from '@/lib/sanity/adapters';
 import { ToursHero, GiftVoucherBanner } from '@/components/tours';
 import ToursListingClient from '@/components/tours/ToursListingClient';
+import { stripNamespace } from '@/lib/i18nKeys';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -14,12 +15,6 @@ export async function generateMetadata({ params }) {
     title: t('metaTitle'),
     description: t('metaDescription'),
   };
-}
-
-function stripNamespace(key) {
-  if (typeof key !== 'string') return key;
-  const i = key.indexOf('.');
-  return i > 0 ? key.slice(i + 1) : key;
 }
 
 export default async function ToursPage({ params }) {
