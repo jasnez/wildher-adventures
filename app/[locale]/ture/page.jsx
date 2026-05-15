@@ -106,6 +106,7 @@ export default async function ToursPage({ params }) {
         labels={labels}
         ctaLabel={t('ctaDetailsBooking')}
         priceFromLabel={t('priceFrom')}
+        soloFriendlyLabel={t('soloFriendly')}
         emptyStateLabel={t('emptyResults')}
         badgeLabels={{
           popular: t('badgePopular'),

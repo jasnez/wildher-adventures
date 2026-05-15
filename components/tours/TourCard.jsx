@@ -6,7 +6,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { Icon } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
 
-const BADGE_KEYS = { popular: 'popular', new: 'new', coming: 'coming' };
+const BADGE_KEYS = { popular: 'popular', new: 'new', coming: 'coming', inaugural: 'inaugural' };
 
 function DifficultyIcons({ level, label }) {
   const n = Math.min(5, Math.max(1, Number(level) || 1));
@@ -23,10 +23,27 @@ function DifficultyIcons({ level, label }) {
   );
 }
 
+function RatingPill({ rating, count, ariaLabel }) {
+  if (rating == null || !count) return null;
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-caption font-semibold text-wildher-text shadow-sm"
+      aria-label={ariaLabel}
+    >
+      <span className="text-brand-gold-beige" aria-hidden="true">
+        ★
+      </span>
+      <span>{rating.toFixed(1)}</span>
+      <span className="text-wildher-text-muted">({count})</span>
+    </span>
+  );
+}
+
 export function TourCard({
   tour,
   ctaLabel,
   priceFromLabel,
+  soloFriendlyLabel,
   badgeLabels = {},
 }) {
   const {
@@ -40,6 +57,9 @@ export function TourCard({
     image,
     badge,
     slug,
+    soloFriendly,
+    averageRating,
+    reviewCount,
   } = tour;
 
   const badgeText =
@@ -56,14 +76,30 @@ export function TourCard({
           sizes="(max-width: 768px) 100vw, 33vw"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
-        {badgeText && (
-          <span
-            className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-small font-semibold text-wildher-text shadow-sm"
-            data-badge={badge}
-          >
-            {badgeText}
-          </span>
-        )}
+        <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2 pointer-events-none">
+          <div className="flex flex-col gap-1.5 items-start">
+            {badgeText && (
+              <span
+                className="rounded-full bg-white/95 px-3 py-1 text-small font-semibold text-wildher-text shadow-sm"
+                data-badge={badge}
+              >
+                {badgeText}
+              </span>
+            )}
+            {soloFriendly && soloFriendlyLabel && (
+              <span className="rounded-full bg-brand-primary-green/95 text-white px-3 py-1 text-caption font-semibold shadow-sm">
+                {soloFriendlyLabel}
+              </span>
+            )}
+          </div>
+          {averageRating != null && reviewCount > 0 && (
+            <RatingPill
+              rating={averageRating}
+              count={reviewCount}
+              ariaLabel={`${averageRating} stars, ${reviewCount} reviews`}
+            />
+          )}
+        </div>
       </CardImage>
       <CardContent>
         <p className="text-small text-wildher-text-muted mb-1">{location}</p>

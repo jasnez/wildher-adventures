@@ -16,6 +16,7 @@ import {
   allTestimonialsQuery,
   homePageQuery,
   aboutPageQuery,
+  homeFounderTeaserQuery,
   contactPageQuery,
   safetyPageQuery,
   termsPageQuery,
@@ -183,6 +184,9 @@ export const getHomePage = () =>
 
 export const getAboutPage = () =>
   fetchAndParse(aboutPageQuery, z.unknown(), {}, ['sanity', 'about']);
+
+export const getHomeFounderTeaser = () =>
+  fetchAndParse(homeFounderTeaserQuery, z.unknown(), {}, ['sanity', 'about']);
 
 export const getContactPage = () =>
   fetchAndParse(contactPageQuery, z.unknown(), {}, ['sanity', 'contact']);

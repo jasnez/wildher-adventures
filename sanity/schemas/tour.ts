@@ -355,6 +355,14 @@ export const tour = defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'soloFriendly',
+      title: 'Solo-friendly',
+      description:
+        'Show a "solo-friendly" badge on this tour. Removes the single-supplement objection.',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
       name: 'sortOrder',
       title: 'Sort order (lower = first)',
       type: 'number',

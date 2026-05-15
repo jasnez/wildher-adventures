@@ -273,7 +273,8 @@
     "newsletterButton": "Pridruži se",
     "newsletterMicro": "Nikad spam. Samo avantura.",
     "finalCtaTitle": "Spremna za svoju sljedeću avanturu?",
-    "finalCtaButton": "Istraži sve ture"
+    "finalCtaButton": "Istraži sve ture",
+    "pressTitle": "Objavljeno u"
   },
   "tours": {
     "heroTitle": "Ture i iskustva",
@@ -301,6 +302,7 @@
     "difficultyDemanding": "Zahtjevno+",
     "difficultyExpert": "Ekspertno",
     "ctaDetailsBooking": "Detalji & Booking",
+    "soloFriendly": "Solo-friendly",
     "emptyResults": "Nema tura koje odgovaraju filterima. Pokušaj promijeniti kriterije.",
     "badgePopular": "Najpopularnije",
     "badgeNew": "Novo",
@@ -340,6 +342,8 @@
     "guests": "Broj osoba",
     "heroGroupMax": "max {count} žena",
     "mailSubjectPrefix": "Upit za turu",
+    "yourGuide": "Tvoja vodičica",
+    "viewGuideProfile": "Pogledaj profil",
     "viaFerrataSubtitle": "Ženska avantura iznad kanjona Neretve",
     "viaFerrataStory": "Jutro počinje u Blagaju dok sunce tek obasjava stijene iznad Neretve. Staza se lagano penje kroz borovu šumu, a pogled na kanjon postaje sve dramatičniji. Nakon kratke pauze stižemo do via ferrata staze — metalni klinovi vode nas uz stijenu, a svaki korak otvara sve veći pogled na rijeku ispod.",
     "stepMeet": "Polazna tačka",

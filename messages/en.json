@@ -273,7 +273,8 @@
     "newsletterButton": "Join",
     "newsletterMicro": "No spam. Just adventure.",
     "finalCtaTitle": "Ready for your next adventure?",
-    "finalCtaButton": "Explore all tours"
+    "finalCtaButton": "Explore all tours",
+    "pressTitle": "Featured in"
   },
   "tours": {
     "heroTitle": "Tours and experiences",
@@ -301,6 +302,7 @@
     "difficultyDemanding": "Demanding",
     "difficultyExpert": "Expert",
     "ctaDetailsBooking": "Details & Booking",
+    "soloFriendly": "Solo-friendly",
     "emptyResults": "No tours match your filters. Try adjusting them.",
     "badgePopular": "Most popular",
     "badgeNew": "New",
@@ -340,6 +342,8 @@
     "guests": "Number of guests",
     "heroGroupMax": "up to {count} women",
     "mailSubjectPrefix": "Tour inquiry",
+    "yourGuide": "Your guide",
+    "viewGuideProfile": "View profile",
     "viaFerrataSubtitle": "Women's adventure above the Neretva canyon",
     "viaFerrataStory": "The morning starts in Blagaj as the sun lights up the cliffs above the Neretva. The path climbs gently through pine forest, and the view of the canyon becomes more dramatic. After a short break we reach the via ferrata — metal rungs lead us up the rock, and each step opens a wider view of the river below.",
     "stepMeet": "Starting point",

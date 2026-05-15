@@ -152,6 +152,7 @@ export default async function BlogPostPage({ params }) {
                   tour={tour}
                   ctaLabel={tTours('ctaDetailsBooking')}
                   priceFromLabel={tTours('priceFrom')}
+                  soloFriendlyLabel={tTours('soloFriendly')}
                   badgeLabels={{
                     popular: tTours('badgePopular'),
                     new: tTours('badgeNew'),
