@@ -194,6 +194,13 @@ export const featuredTestimonialsQuery = groq`
   }
 `;
 
+export const allTestimonialsQuery = groq`
+  *[_type == "testimonial"] | order(publishedAt desc){
+    ${testimonialProjection},
+    tour->{ _id, title, slug }
+  }
+`;
+
 // ---- Page singletons ----
 
 export const homePageQuery = groq`

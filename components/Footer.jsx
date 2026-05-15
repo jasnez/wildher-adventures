@@ -8,11 +8,12 @@ import { Icon } from '@/components/ui';
 
 const FOOTER_NAV = [
   { href: '/ture', key: 'tours' },
+  { href: '/kalendar', key: 'kalendar' },
   { href: '/destinacije', key: 'destinations' },
   { href: '/vodice', key: 'guides' },
   { href: '/o-nama', key: 'about' },
   { href: '/blog', key: 'blog' },
-  { href: '/galerija', key: 'gallery' },
+  { href: '/iskustva', key: 'iskustva' },
   { href: '/kontakt', key: 'contact' },
 ];
 
