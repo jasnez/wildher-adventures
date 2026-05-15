@@ -40,7 +40,10 @@ async function fetchAndParse<T>(
   params: Record<string, unknown> = {},
   tags: string[] = DEFAULT_TAGS
 ): Promise<T | null> {
-  if (!isSanityConfigured()) return null;
+  if (!isSanityConfigured()) {
+    console.warn('[sanity] not configured — set NEXT_PUBLIC_SANITY_PROJECT_ID');
+    return null;
+  }
   try {
     const data = await sanityClient.fetch(query, params, {
       next: { tags, revalidate: 60 },
@@ -48,9 +51,14 @@ async function fetchAndParse<T>(
     if (data == null) return null;
     return schema.parse(data);
   } catch (err) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('[sanity] fetch/parse failed', { query, err });
-    }
+    // Always log so deployment issues are visible in Vercel/Sentry. The raw
+    // GROQ string is helpful for debugging but never contains secrets.
+    const message =
+      err instanceof Error ? err.message : 'unknown error';
+    console.error(
+      `[sanity] fetch/parse failed for query: ${query.replace(/\s+/g, ' ').slice(0, 120)}…`,
+      message
+    );
     return null;
   }
 }
