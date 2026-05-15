@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require("path");
 const createNextIntlPlugin = require('next-intl/plugin');
+const { withSentryConfig } = require('@sentry/nextjs');
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.js');
 
@@ -52,4 +53,22 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+// Sentry wraps the whole config. Source-map upload only runs when both
+// SENTRY_AUTH_TOKEN and SENTRY_ORG/SENTRY_PROJECT are set — otherwise it
+// silently skips the upload step, letting builds succeed without a Sentry
+// account.
+const sentryWebpackPluginOptions = {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  // Don't expose source maps publicly.
+  hideSourceMaps: true,
+  // Strip the Sentry logger from prod bundles.
+  disableLogger: true,
+  // Skip upload entirely if no auth token (avoids build errors on PRs / forks).
+  disableServerWebpackPlugin: !process.env.SENTRY_AUTH_TOKEN,
+  disableClientWebpackPlugin: !process.env.SENTRY_AUTH_TOKEN,
+};
+
+module.exports = withSentryConfig(withNextIntl(nextConfig), sentryWebpackPluginOptions);

@@ -35,10 +35,21 @@ export default async function RootLayout({ children }) {
     // Serverless/edge may not have headers in some contexts
   }
 
+  // Cloudflare Web Analytics — cookieless, no banner needed.
+  // Loads only when NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN is set in env.
+  const cfAnalyticsToken = process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
+
   return (
     <html lang={locale} className={`${plusJakarta.variable} ${playfair.variable}`}>
       <body className="antialiased font-sans text-wildher-text">
         {children}
+        {cfAnalyticsToken && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: cfAnalyticsToken })}
+          />
+        )}
       </body>
     </html>
   );
