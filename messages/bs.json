@@ -159,7 +159,13 @@
   },
   "newsletter": {
     "subject": "Newsletter prijava",
-    "comingSoonNote": "Stiže uskoro — pošalji nam mail da budeš na listi."
+    "comingSoonNote": "Stiže uskoro — pošalji nam mail da budeš na listi.",
+    "emailPlaceholder": "vas@email.com",
+    "submitting": "Šaljem…",
+    "successMessage": "Hvala! Pratit ćeš nas — javit ćemo se kad otvori prvi rok.",
+    "emptyEmail": "Unesi email adresu.",
+    "invalidEmail": "Email izgleda neispravno. Provjeri pa pokušaj ponovo.",
+    "providerError": "Greška pri prijavi. Pokušaj kasnije ili nam pošalji email direktno."
   },
   "contact": {
     "metaTitle": "Kontakt — WildHer Adventures",
@@ -344,6 +350,11 @@
     "mailSubjectPrefix": "Upit za turu",
     "yourGuide": "Tvoja vodičica",
     "viewGuideProfile": "Pogledaj profil",
+    "statusSoldOut": "Trenutno popunjeno",
+    "statusAlmostFull": "Skoro popunjeno",
+    "statusWaitlist": "Otvoren waitlist",
+    "statusByRequest": "Po dogovoru",
+    "nextDateLabel": "Sljedeći termin",
     "bookCtaDeposit": "Rezerviši uz depozit",
     "bookCtaDepositNote": "Sigurna uplata depozita. Ostatak plaćaš pred turu.",
     "bookCtaMailNote": "Pošalji upit — odgovaramo unutar 24h.",

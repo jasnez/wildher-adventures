@@ -103,7 +103,7 @@ export function Header() {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const goingDown = currentY > lastY;
-      const threshold = 160; // header sada nestaje malo ranije pri scrollu nadole
+      const threshold = 160; // header hides slightly earlier when scrolling down
 
       setScrolled(currentY > 16);
 
@@ -154,7 +154,7 @@ export function Header() {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-20 md:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-          {/* Lijevi nav (desktop) */}
+          {/* Left nav (desktop) */}
           <nav className="hidden items-center gap-8 lg:flex" aria-label={t('mainNavAria')}>
             {NAV_LINKS.filter((link) => LEFT_NAV_KEYS.has(link.key)).map((link) => (
               <Link
@@ -172,7 +172,7 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Logo u centru */}
+          {/* Centred logo */}
           <div className="flex items-center justify-start lg:justify-center">
             <Link
               href="/"
@@ -190,7 +190,7 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Desni blok: dodatni linkovi + jezik + booking (desktop) */}
+          {/* Right block: secondary nav + language + booking CTA (desktop) */}
           <div className="hidden items-center justify-end gap-6 lg:flex">
             <div className="flex items-center gap-6">
               {NAV_LINKS.filter((link) => RIGHT_NAV_KEYS.has(link.key)).map((link) => (

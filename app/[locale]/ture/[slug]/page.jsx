@@ -7,6 +7,7 @@ import { getTourBySlug } from '@/lib/tours';
 import { getTourDetail } from '@/lib/tourDetailData';
 import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
 import { mapTourDetail } from '@/lib/sanity/adapters';
+import { resolveKey } from '@/lib/i18nKeys';
 import {
   tourJsonLd,
   serializeJsonLd,
@@ -69,16 +70,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-function resolveKey(tHome, tTours, fullKey) {
-  if (!fullKey) return '';
-  const parts = fullKey.split('.');
-  if (parts.length <= 1) return tHome(fullKey);
-  const ns = parts[0];
-  const key = parts.slice(1).join('.');
-  if (ns === 'tours') return tTours(key);
-  return tHome(key);
-}
-
 function buildBookHref(tTourDetail, title) {
   const mailSubject = encodeURIComponent(`${tTourDetail('mailSubjectPrefix')}: ${title}`);
   return `mailto:bookings@wildheradventures.ba?subject=${mailSubject}`;
@@ -121,11 +112,29 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
     priceFrom: tTourDetail('priceFrom'),
   };
 
-  const upcomingDate = detail.availableDates.find((d) =>
-    ['open', 'almost_full'].includes(d.status)
-  );
+  // Find the earliest upcoming departure. If none are 'open' or 'almost_full',
+  // treat the tour as sold-out (or, if there are no future dates at all, "by request").
+  const upcomingDate = detail.availableDates
+    .filter((d) => d.status !== 'cancelled')
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
+  const status = upcomingDate?.status ?? 'open';
   const spotsLeftText = upcomingDate?.spotsLeft
     ? tTourDetail('spotsLeft', { count: upcomingDate.spotsLeft })
+    : null;
+  const statusLabelKey =
+    status === 'sold_out'
+      ? 'statusSoldOut'
+      : status === 'almost_full'
+        ? 'statusAlmostFull'
+        : status === 'waitlist'
+          ? 'statusWaitlist'
+          : null;
+  const statusLabel = statusLabelKey ? tTourDetail(statusLabelKey) : null;
+  const nextDateText = upcomingDate?.startDate
+    ? new Date(upcomingDate.startDate).toLocaleDateString(
+        locale === 'en' ? 'en-GB' : 'bs-BA',
+        { day: 'numeric', month: 'long', year: 'numeric' }
+      )
     : null;
 
   const featuredTestimonial = detail.testimonials[0];
@@ -284,6 +293,10 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           bookHref={bookHref}
           bookCtaNote={bookCtaNote}
           isExternalPayment={hasPaymentLink}
+          status={status}
+          statusLabel={statusLabel}
+          nextDateText={nextDateText}
+          nextDateLabel={tTourDetail('nextDateLabel')}
         />
       </div>
     </main>
@@ -308,10 +321,10 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
   const tour = getTourBySlug(slug);
   if (!tour) return null;
 
-  const title = resolveKey(tHome, tTours, tour.titleKey) || tHome(tour.titleKey);
-  const location = resolveKey(tHome, tTours, tour.locationKey) || tHome(tour.locationKey);
-  const duration = resolveKey(tHome, tTours, tour.durationKey) || tHome(tour.durationKey);
-  const difficultyLabel = resolveKey(tHome, tTours, tour.difficultyKey) || `${tour.difficulty}/5`;
+  const title = resolveKey({ home: tHome, tours: tTours }, tour.titleKey) || tHome(tour.titleKey);
+  const location = resolveKey({ home: tHome, tours: tTours }, tour.locationKey) || tHome(tour.locationKey);
+  const duration = resolveKey({ home: tHome, tours: tTours }, tour.durationKey) || tHome(tour.durationKey);
+  const difficultyLabel = resolveKey({ home: tHome, tours: tTours }, tour.difficultyKey) || `${tour.difficulty}/5`;
   const detail = getTourDetail(slug);
   const subtitle = tTourDetail(detail.subtitleKey);
   const experienceStory = tTourDetail(detail.experienceStoryKey);
@@ -331,13 +344,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
     .map((s) => getTourBySlug(s))
     .filter(Boolean)
     .map((t) => ({
-      title: resolveKey(tHome, tTours, t.titleKey) || tHome(t.titleKey),
-      location: resolveKey(tHome, tTours, t.locationKey) || tHome(t.locationKey),
-      duration: resolveKey(tHome, tTours, t.durationKey) || tHome(t.durationKey),
+      title: resolveKey({ home: tHome, tours: tTours }, t.titleKey) || tHome(t.titleKey),
+      location: resolveKey({ home: tHome, tours: tTours }, t.locationKey) || tHome(t.locationKey),
+      duration: resolveKey({ home: tHome, tours: tTours }, t.durationKey) || tHome(t.durationKey),
       difficulty: t.difficulty,
-      difficultyLabel: resolveKey(tHome, tTours, t.difficultyKey) || tTours(t.difficultyKey),
+      difficultyLabel: resolveKey({ home: tHome, tours: tTours }, t.difficultyKey) || tTours(t.difficultyKey),
       priceFrom: t.priceFrom,
-      description: t.descKey ? resolveKey(tHome, tTours, t.descKey) : '',
+      description: t.descKey ? resolveKey({ home: tHome, tours: tTours }, t.descKey) : '',
       image: t.image,
       badge: t.badge,
       slug: t.slug,
