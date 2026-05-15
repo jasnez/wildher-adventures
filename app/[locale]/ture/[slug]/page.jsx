@@ -97,8 +97,19 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
   const difficultyLookup = (key) => t(key);
   const detail = mapTourDetail(sanityTour, locale, difficultyLookup, fallbackDurationLabel);
 
-  const bookCta = tTourDetail('bookCta');
-  const bookHref = buildBookHref(tTourDetail, detail.title);
+  // When a Stripe Payment Link is set on the tour, the Book CTA opens Stripe
+  // Checkout directly (deposit flow). Otherwise it falls back to the manual
+  // mailto: pattern used in the Stage-1 booking model.
+  const hasStripe = Boolean(detail.stripePaymentLinkUrl);
+  const bookCta = hasStripe
+    ? tTourDetail('bookCtaStripe')
+    : tTourDetail('bookCta');
+  const bookHref = hasStripe
+    ? detail.stripePaymentLinkUrl
+    : buildBookHref(tTourDetail, detail.title);
+  const bookCtaNote = hasStripe
+    ? tTourDetail('bookCtaStripeNote')
+    : tTourDetail('bookCtaMailNote');
 
   const quickFactsLabels = {
     duration: tTourDetail('quickFacts.duration'),
@@ -140,6 +151,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
         imageName={detail.image}
         bookCta={bookCta}
         bookHref={bookHref}
+        bookHrefIsExternal={hasStripe}
       />
 
       <QuickFactsBar
@@ -164,7 +176,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
               }
               imageName={detail.gallery[0] || detail.image}
               ctaLabel={tTourDetail('experienceCta')}
-              ctaHref={bookHref}
+              ctaHref="#booking"
             />
           )}
 
@@ -263,13 +275,15 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
         </div>
 
         <BookingPanel
-          priceFrom={detail.priceFrom}
+          priceFrom={hasStripe && detail.deposit ? detail.deposit : detail.priceFrom}
           priceLabel={tTourDetail('priceFrom')}
           spotsLeft={spotsLeftText}
           dateLabel={tTourDetail('date')}
           guestsLabel={tTourDetail('guests')}
           bookCta={bookCta}
           bookHref={bookHref}
+          bookCtaNote={bookCtaNote}
+          isStripe={hasStripe}
         />
       </div>
     </main>

@@ -13,7 +13,11 @@ export function TourDetailHero({
   imageName,
   bookCta,
   bookHref,
+  bookHrefIsExternal = false,
 }) {
+  const linkProps = bookHrefIsExternal
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {};
   return (
     <section className="relative min-h-[85vh] flex flex-col justify-end">
       <OptimizedImage
@@ -36,6 +40,7 @@ export function TourDetailHero({
           </div>
           <a
             href={bookHref}
+            {...linkProps}
             className="inline-flex items-center justify-center rounded-lg bg-brand-primary-green px-6 py-3 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
           >
             {bookCta}
