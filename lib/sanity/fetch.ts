@@ -13,6 +13,7 @@ import {
   storyBySlugQuery,
   allFaqsQuery,
   featuredTestimonialsQuery,
+  allTestimonialsQuery,
   homePageQuery,
   aboutPageQuery,
   contactPageQuery,
@@ -147,6 +148,25 @@ export const getFeaturedTestimonials = () =>
     'sanity',
     'testimonial',
   ]);
+
+export const getAllTestimonials = () =>
+  fetchAndParse(
+    allTestimonialsQuery,
+    z.array(
+      testimonialSchema.extend({
+        tour: z
+          .object({
+            _id: z.string(),
+            title: z.object({ bs: z.string(), en: z.string().nullable().optional() }).passthrough(),
+            slug: z.object({ current: z.string() }),
+          })
+          .nullable()
+          .optional(),
+      })
+    ),
+    {},
+    ['sanity', 'testimonial']
+  );
 
 // ---- Singletons ----
 

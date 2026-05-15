@@ -8,17 +8,18 @@ import { ButtonLink } from '@/components/ui';
 
 const NAV_LINKS = [
   { href: '/ture', key: 'tours' },
+  { href: '/kalendar', key: 'kalendar' },
   { href: '/destinacije', key: 'destinations' },
   { href: '/vodice', key: 'guides' },
   { href: '/o-nama', key: 'about' },
   { href: '/blog', key: 'blog' },
+  { href: '/iskustva', key: 'iskustva' },
   { href: '/faq', key: 'faq' },
-  { href: '/galerija', key: 'gallery' },
   { href: '/kontakt', key: 'contact' },
 ];
 
-const LEFT_NAV_KEYS = new Set(['tours', 'destinations', 'guides', 'blog']);
-const RIGHT_NAV_KEYS = new Set(['about', 'gallery', 'faq', 'contact']);
+const LEFT_NAV_KEYS = new Set(['tours', 'kalendar', 'destinations', 'guides']);
+const RIGHT_NAV_KEYS = new Set(['about', 'blog', 'iskustva', 'faq', 'contact']);
 
 export function LanguageToggle({ className = '' }) {
   const locale = useLocale();
