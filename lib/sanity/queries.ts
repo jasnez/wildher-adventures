@@ -61,7 +61,7 @@ export const tourFullProjection = groq`
   ${tourCardProjection},
   subtitle,
   experienceStory,
-  stripePaymentLinkUrl,
+  paymentLinkUrl,
   deposit,
   "gallery": gallery[].asset->url,
   lengthKm,
