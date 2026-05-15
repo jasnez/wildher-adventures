@@ -9,10 +9,10 @@ export function BookingPanel({
   bookCta,
   bookHref,
   bookCtaNote,
-  isStripe = false,
+  isExternalPayment = false,
 }) {
   // External links (Stripe, mailto:) get target=_blank only for Stripe.
-  const linkProps = isStripe
+  const linkProps = isExternalPayment
     ? { target: '_blank', rel: 'noopener noreferrer' }
     : {};
 

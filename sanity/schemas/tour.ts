@@ -174,22 +174,12 @@ export const tour = defineType({
       initialValue: 'EUR',
     }),
     defineField({
-      name: 'stripePaymentLinkUrl',
-      title: 'Stripe Payment Link URL (deposit)',
+      name: 'paymentLinkUrl',
+      title: 'Payment Link URL (deposit)',
       description:
-        'Create a Stripe Payment Link for the deposit amount, paste the full URL here. When set, the "Book" CTA opens Stripe Checkout directly; when empty, it falls back to a mailto: link.',
+        'Paste the deposit payment link from your provider (PayPal, Stripe, Monri…). When set, the "Book" CTA opens this URL directly; when empty, it falls back to a mailto: link. Must be HTTPS.',
       type: 'url',
-      validation: (Rule) =>
-        Rule.uri({
-          scheme: ['https'],
-        }).custom((value) => {
-          if (!value) return true;
-          if (typeof value !== 'string') return 'Must be a URL';
-          if (!value.startsWith('https://buy.stripe.com/')) {
-            return 'Should be a Stripe Payment Link (starts with https://buy.stripe.com/)';
-          }
-          return true;
-        }),
+      validation: (Rule) => Rule.uri({ scheme: ['https'] }),
     }),
 
     // ---- Itinerary ----
