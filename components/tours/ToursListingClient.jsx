@@ -11,6 +11,7 @@ export function ToursListingClient({
   labels = {},
   ctaLabel,
   priceFromLabel,
+  soloFriendlyLabel,
   emptyStateLabel,
   badgeLabels = {},
 }) {
@@ -40,6 +41,7 @@ export function ToursListingClient({
                   tour={tour}
                   ctaLabel={ctaLabel}
                   priceFromLabel={priceFromLabel}
+                  soloFriendlyLabel={soloFriendlyLabel}
                   badgeLabels={badgeLabels}
                 />
               ))}

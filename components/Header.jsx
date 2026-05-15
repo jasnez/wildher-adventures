@@ -214,16 +214,19 @@ export function Header() {
             </ButtonLink>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMobileOpen((o) => !o)}
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-wildher-text lg:hidden"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
-            aria-label={mobileOpen ? t('closeMenu') : t('openMenu')}
-          >
-            <HamburgerIcon open={mobileOpen} />
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <LanguageToggle />
+            <button
+              type="button"
+              onClick={() => setMobileOpen((o) => !o)}
+              className="flex min-h-[44px] min-w-[44px] items-center justify-center text-wildher-text"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileOpen ? t('closeMenu') : t('openMenu')}
+            >
+              <HamburgerIcon open={mobileOpen} />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -250,12 +253,6 @@ export function Header() {
             ))}
           </nav>
           <div className="mt-8 flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <span className="text-small text-wildher-text-muted">
-                {tCommon('language')}
-              </span>
-              <LanguageToggle />
-            </div>
             <ButtonLink
               href="/kontakt"
               variant="primary"

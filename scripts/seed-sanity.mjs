@@ -361,6 +361,7 @@ async function seed() {
     badge: 'popular',
     featured: true,
     sortOrder: 10,
+    soloFriendly: true,
   });
 
   await createOrReplace('tour-lukomir-hike', {
@@ -481,6 +482,7 @@ async function seed() {
     badge: 'new',
     featured: true,
     sortOrder: 20,
+    soloFriendly: true,
   });
 
   await createOrReplace('tour-prenj-weekend', {
@@ -566,6 +568,7 @@ async function seed() {
     ],
     featured: true,
     sortOrder: 30,
+    soloFriendly: false,
   });
 
   console.log('\n[seed] Linking similar tours…');

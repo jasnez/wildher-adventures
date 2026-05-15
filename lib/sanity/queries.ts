@@ -51,7 +51,10 @@ export const tourCardProjection = groq`
   maxGroupSize,
   badge,
   featured,
-  sortOrder
+  soloFriendly,
+  sortOrder,
+  "reviewCount": count(*[_type == "testimonial" && references(^._id)]),
+  "averageRating": math::avg(*[_type == "testimonial" && references(^._id)].rating)
 `;
 
 export const tourFullProjection = groq`
@@ -228,6 +231,18 @@ export const aboutPageQuery = groq`
     mission,
     values[]{ title, text, icon },
     team[]->{${guideRefProjection}, shortBio}
+  }
+`;
+
+/**
+ * Compact projection for the home page founder teaser: pulls the first paragraph
+ * of the founder story + the lead guide photo (first entry of team).
+ */
+export const homeFounderTeaserQuery = groq`
+  *[_type == "aboutPage"][0]{
+    founderStory,
+    "founderPhoto": team[0]->photo.asset->url,
+    "founderName": team[0]->name
   }
 `;
 

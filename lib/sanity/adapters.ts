@@ -68,6 +68,9 @@ export type CardTour = {
   image: string;
   badge: string | null;
   sortOrder: number;
+  soloFriendly: boolean;
+  averageRating: number | null;
+  reviewCount: number;
 };
 
 export function mapTourCard(
@@ -97,6 +100,12 @@ export function mapTourCard(
     image: tour.cover || '',
     badge: tour.badge || null,
     sortOrder: tour.sortOrder ?? 100,
+    soloFriendly: tour.soloFriendly ?? false,
+    averageRating:
+      tour.averageRating != null
+        ? Math.round(tour.averageRating * 10) / 10
+        : null,
+    reviewCount: tour.reviewCount ?? 0,
   };
 }
 

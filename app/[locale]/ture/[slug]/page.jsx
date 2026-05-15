@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import { notFound } from 'next/navigation';
+import { Link } from '@/i18n/navigation';
 import { getTourBySlug } from '@/lib/tours';
 import { getTourDetail } from '@/lib/tourDetailData';
 import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
@@ -165,6 +166,43 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
               ctaLabel={tTourDetail('experienceCta')}
               ctaHref={bookHref}
             />
+          )}
+
+          {detail.guide && (
+            <section className="my-12 rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+              <p className="text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-3">
+                {tTourDetail('yourGuide')}
+              </p>
+              <Link
+                href={`/vodice/${detail.guide.slug}`}
+                className="flex items-center gap-4 group"
+              >
+                {detail.guide.photo && (
+                  <span className="w-16 h-16 rounded-full overflow-hidden bg-neutral-100 flex-shrink-0">
+                    <img
+                      src={`${detail.guide.photo}?w=128&h=128&fit=crop&auto=format`}
+                      alt={detail.guide.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                    />
+                  </span>
+                )}
+                <span className="flex-1">
+                  <span className="block text-h3 font-semibold text-wildher-text group-hover:text-brand-primary-green transition-colors">
+                    {detail.guide.name}
+                  </span>
+                  {detail.guide.role && (
+                    <span className="block text-small text-wildher-text-muted">
+                      {detail.guide.role}
+                    </span>
+                  )}
+                </span>
+                <span className="text-small font-semibold text-brand-primary-green hidden sm:inline-block">
+                  {tTourDetail('viewGuideProfile')} →
+                </span>
+              </Link>
+            </section>
           )}
 
           {detail.itinerary.length > 0 && (

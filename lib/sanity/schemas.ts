@@ -75,7 +75,10 @@ export const tourCardSchema = obj({
   maxGroupSize: z.number(),
   badge: z.string().nullable().optional(),
   featured: z.boolean().nullable().optional(),
+  soloFriendly: z.boolean().nullable().optional(),
   sortOrder: z.number().nullable().optional(),
+  reviewCount: z.number().nullable().optional(),
+  averageRating: z.number().nullable().optional(),
 }).passthrough();
 
 export const itineraryStepSchema = obj({
