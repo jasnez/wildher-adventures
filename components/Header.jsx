@@ -6,20 +6,20 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { ButtonLink } from '@/components/ui';
 
+// Primary nav, 6 items. Destinacije, Vodičice and Iskustva live in the
+// footer; they're reachable via cross-links inside tour detail / blog /
+// about pages but don't compete for primary-nav real estate.
 const NAV_LINKS = [
   { href: '/ture', key: 'tours' },
   { href: '/kalendar', key: 'kalendar' },
-  { href: '/destinacije', key: 'destinations' },
-  { href: '/vodice', key: 'guides' },
   { href: '/o-nama', key: 'about' },
   { href: '/blog', key: 'blog' },
-  { href: '/iskustva', key: 'iskustva' },
   { href: '/faq', key: 'faq' },
   { href: '/kontakt', key: 'contact' },
 ];
 
-const LEFT_NAV_KEYS = new Set(['tours', 'kalendar', 'destinations', 'guides']);
-const RIGHT_NAV_KEYS = new Set(['about', 'blog', 'iskustva', 'faq', 'contact']);
+const LEFT_NAV_KEYS = new Set(['tours', 'kalendar', 'about']);
+const RIGHT_NAV_KEYS = new Set(['blog', 'faq', 'contact']);
 
 export function LanguageToggle({ className = '' }) {
   const locale = useLocale();
