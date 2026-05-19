@@ -22,3 +22,16 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   (globalThis as any).ResizeObserver = ResizeObserverShim;
 }
 
+// jsdom does not implement IntersectionObserver either. MobileBookingBar
+// uses it to detect when the desktop BookingPanel scrolls into view.
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  class IntersectionObserverShim {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords() { return []; }
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (globalThis as any).IntersectionObserver = IntersectionObserverShim;
+}
+

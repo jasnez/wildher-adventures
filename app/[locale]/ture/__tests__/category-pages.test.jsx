@@ -30,6 +30,13 @@ vi.mock('next-intl/server', () => ({
   },
 }));
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key, params) => {
+    if (key === 'resultsCount' && params?.count != null) return `${params.count} tura`;
+    return key;
+  },
+}));
+
 vi.mock('next/image', () => ({
   default: (props) => <img src={props.src} alt={props.alt} />,
 }));
