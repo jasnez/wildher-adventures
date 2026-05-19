@@ -102,7 +102,9 @@ export function TourCard({
         </div>
       </CardImage>
       <CardContent>
-        <p className="text-small text-wildher-text-muted mb-1">{location}</p>
+        {location && (
+          <p className="text-small text-wildher-text-muted mb-1">{location}</p>
+        )}
         <h3 className="text-h3 font-semibold text-wildher-text mb-2">
           {title}
         </h3>

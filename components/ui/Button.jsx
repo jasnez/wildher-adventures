@@ -4,9 +4,9 @@ import React from 'react';
 
 const variantStyles = {
   primary:
-    'bg-brand-primary-green text-white shadow-button hover:bg-primary-700 focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2',
+    'bg-brand-primary-green text-white shadow-button hover:bg-brand-primary-green-hover focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2',
   secondary:
-    'bg-brand-earth-tone text-white shadow-button hover:bg-secondary-700 focus-visible:ring-2 focus-visible:ring-brand-earth-tone focus-visible:ring-offset-2',
+    'bg-brand-earth-tone text-white shadow-button hover:bg-brand-earth-tone-hover focus-visible:ring-2 focus-visible:ring-brand-earth-tone focus-visible:ring-offset-2',
   outline:
     'border-2 border-brand-primary-green text-brand-primary-green bg-transparent hover:bg-primary-50 focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2',
   ghost:

@@ -3,9 +3,9 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import { Icon } from "@/components/ui";
-import { WhySectionIcon } from "@/components/WhySectionIcon";
 import { Card, CardImage, CardContent } from "@/components/ui";
 import { ButtonLink } from "@/components/ui";
+import { TourCard } from "@/components/tours";
 import { Link } from "@/i18n/navigation";
 import { HomeHeroCTAs, ScrollIndicator } from "@/components/HomeHero";
 import { HomeNewsletter } from "@/components/HomeNewsletter";
@@ -13,10 +13,10 @@ import {
   getHomePage,
   getFeaturedTours,
   getFeaturedTestimonials,
-  getAllDestinations,
   getAllStories,
   getHomeFounderTeaser,
 } from "@/lib/sanity/fetch";
+import { mapTourCard } from "@/lib/sanity/adapters";
 import {
   travelAgencyJsonLd,
   serializeJsonLd,
@@ -48,14 +48,12 @@ export default async function HomePage({ params }) {
     homeDoc,
     featuredTours,
     featuredTestimonials,
-    sanityDestinations,
     sanityStories,
     founderTeaser,
   ] = await Promise.all([
     getHomePage(),
     getFeaturedTours(),
     getFeaturedTestimonials(),
-    getAllDestinations(),
     getAllStories(),
     getHomeFounderTeaser(),
   ]);
@@ -71,31 +69,30 @@ export default async function HomePage({ params }) {
     : [t("trust1"), t("trust2"), t("trust3")];
   const trustIcons = ["users", "shield", "zap", "heart"];
 
-  // ---- Why blocks (static i18n — generic marketing copy) -------------------
-  const whyBlocks = [
-    { titleKey: "why1Title", textKey: "why1Text", icon: "why-users" },
-    { titleKey: "why2Title", textKey: "why2Text", icon: "why-backpack" },
-    { titleKey: "why3Title", textKey: "why3Text", icon: "why-nature" },
-    { titleKey: "why4Title", textKey: "why4Text", icon: "why-care" },
-  ];
+  // ---- Tours (Sanity featured -> getFeaturedTours -> none) ----------------
+  // Shape data through mapTourCard so /ture and home featured tours share
+  // the same TourCard component (badges, rating pill, difficulty dots).
+  const fallbackTourDurationLabel = (days) => {
+    if (days <= 1) return tTours("duration1day");
+    if (days <= 2) return tTours("durationWeekend");
+    if (days <= 5) return tTours("duration3to5");
+    return tTours("duration5plus");
+  };
+  const tourDifficultyLookup = (key) => tTours(key);
 
-  // ---- Tours (Sanity featured -> all featured -> mock) ----------------------
   const sanityFeatured = (homeDoc?.featuredTours || featuredTours || []).slice(0, 3);
   const tours = sanityFeatured.length
-    ? sanityFeatured.map((tour) => ({
-        title: pickLocale(tour.title, locale),
-        location: tour.destination ? pickLocale(tour.destination.name, locale) : "",
-        duration: tour.durationLabel
-          ? pickLocale(tour.durationLabel, locale)
-          : `${tour.durationDays} ${locale === "en" ? "day(s)" : "dan(a)"}`,
-        difficulty: tour.difficulty,
-        price: tour.price,
-        currency: tour.currency || "EUR",
-        description: pickLocale(tour.shortDescription, locale),
-        image: tour.cover || "",
-        slug: tour.slug?.current,
-      }))
+    ? sanityFeatured.map((tour) =>
+        mapTourCard(tour, locale, tourDifficultyLookup, fallbackTourDurationLabel)
+      )
     : null;
+
+  const tourCardBadgeLabels = {
+    popular: tTours("badgePopular"),
+    new: tTours("badgeNew"),
+    coming: tTours("badgeComing"),
+  };
+  const tourCardCtaLabel = tTours("ctaDetailsBooking");
 
   // ---- Testimonials (Sanity featured -> founder vision fallback) ----------
   // Pre-launch: until we have real participant reviews, fall back to a
@@ -114,26 +111,6 @@ export default async function HomePage({ params }) {
           author: t("founderVisionAuthor"),
         },
       ];
-
-  // ---- Destinations (Sanity -> static fallback) -----------------------------
-  const destinations = sanityDestinations?.length
-    ? sanityDestinations.slice(0, 4).map((d) => ({
-        name: pickLocale(d.name, locale),
-        meta: pickLocale(d.shortDescription, locale).slice(0, 60),
-        image: d.heroImage || "",
-        slug: d.slug?.current,
-      }))
-    : [
-        { nameKey: "dest1Name", metaKey: "dest1Meta", image: "11" },
-        { nameKey: "dest2Name", metaKey: "dest2Meta", image: "12" },
-        { nameKey: "dest3Name", metaKey: "dest3Meta", image: "13" },
-        { nameKey: "dest4Name", metaKey: "dest4Meta", image: "14" },
-      ].map((d) => ({
-        name: t(d.nameKey),
-        meta: t(d.metaKey),
-        image: d.image,
-        slug: null,
-      }));
 
   // ---- Stories (Sanity stories -> static fallback) -------------------------
   const stories = sanityStories?.length
@@ -154,9 +131,8 @@ export default async function HomePage({ params }) {
         slug: null,
       }));
 
-  const priceFromLabel = tTours("priceFrom");
   const soloFriendlyLabel = tTours("soloFriendly");
-  const learnMore = t("learnMore");
+  const priceFromLabel = tTours("priceFrom");
 
   // ---- Founder teaser (Sanity aboutPage + lead guide) ----------------------
   function blocksFirstParagraph(richText) {
@@ -172,11 +148,6 @@ export default async function HomePage({ params }) {
   const founderExcerpt = blocksFirstParagraph(founderTeaser?.founderStory);
   const founderPhoto = founderTeaser?.founderPhoto || null;
   const founderName = founderTeaser?.founderName || null;
-
-  // ---- Press strip ---------------------------------------------------------
-  const pressMentions = Array.isArray(homeDoc?.pressMentions)
-    ? homeDoc.pressMentions.filter((p) => p?.logo)
-    : [];
 
   const homeJsonLd = travelAgencyJsonLd();
 
@@ -216,65 +187,66 @@ export default async function HomePage({ params }) {
             {heroSubtitle}
           </p>
           <HomeHeroCTAs />
-          <div className="mt-12 flex flex-wrap justify-center gap-4 md:gap-6">
-            {trustBadges.map((label, i) => (
-              <div
-                key={i}
-                className="inline-flex items-center gap-3 rounded-full bg-black/35 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40">
-                  <Icon
-                    name={trustIcons[i % trustIcons.length]}
-                    size={18}
-                    className="text-brand-gold-beige"
-                  />
-                </span>
-                <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-white">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
         <ScrollIndicator />
       </section>
 
-      {/* 2. WHY WILDHER */}
-      <section className="bg-[#f6f1e7] py-16 md:py-24">
+      {/* 2. TRUST STRIP */}
+      <section className="border-b border-neutral-200 bg-neutral-50 py-6 md:py-7">
         <div className="mx-auto max-w-5xl px-4 md:px-6">
-          <div className="mb-10 flex items-center gap-6">
-            <span className="hidden flex-1 border-t border-neutral-200 md:block" />
-            <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center">
-              {t("whyTitle")}
-            </h2>
-            <span className="hidden flex-1 border-t border-neutral-200 md:block" />
-          </div>
-
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {whyBlocks.map(({ titleKey, textKey, icon }) => (
-              <div key={titleKey} className="flex flex-col items-center text-center gap-3">
-                <div
-                  className="mb-2 inline-flex items-center justify-center rounded-full bg-[#e8e4dc] p-3 shadow-[0_2px_6px_rgba(0,0,0,0.06)]"
-                  style={{
-                    ['--why-icon-stroke']: 'var(--color-neutral-700)',
-                    ['--why-icon-fill']: '#e8e4dc',
-                    ['--why-icon-bird']: 'var(--color-neutral-600)',
-                    ['--why-icon-plaster']: '#d4d0c8',
-                  }}
-                >
-                  <WhySectionIcon name={icon} size={44} />
-                </div>
-                <h3 className="font-display text-h3 font-semibold text-wildher-text">
-                  {t(titleKey)}
-                </h3>
-                <p className="text-small text-wildher-text-muted max-w-[14rem]">
-                  {t(textKey)}
-                </p>
-              </div>
+          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10">
+            {trustBadges.map((label, i) => (
+              <li key={i} className="inline-flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-primary-green/10">
+                  <Icon
+                    name={trustIcons[i % trustIcons.length]}
+                    size={16}
+                    className="text-brand-primary-green"
+                  />
+                </span>
+                <span className="text-small font-semibold tracking-wide text-wildher-text">
+                  {label}
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
+
+      {/* 3. FOUNDER MINI — renders only when Sanity has founderName + founderPhoto + founderStory */}
+      {founderName && founderPhoto && founderExcerpt && (
+        <section className="py-12 md:py-16 bg-white">
+          <div className="mx-auto max-w-4xl px-4 md:px-6">
+            <div className="grid gap-6 md:grid-cols-[180px_1fr] md:gap-10 items-center">
+              <div className="rounded-full overflow-hidden aspect-square w-32 md:w-[180px] mx-auto md:mx-0 shadow-card">
+                <OptimizedImage
+                  src={founderPhoto}
+                  alt={founderName}
+                  sizes="(max-width: 768px) 128px, 180px"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-2">
+                  {t("aboutTitle")}
+                </p>
+                <h2 className="font-display text-h2 md:text-h1 font-semibold text-wildher-text mb-3">
+                  {founderName}
+                </h2>
+                <p className="text-body text-wildher-text-muted mb-4">
+                  {founderExcerpt}
+                </p>
+                <Link
+                  href="/o-nama"
+                  className="inline-flex items-center gap-1 text-body font-semibold text-brand-primary-green hover:text-brand-primary-green-hover transition-colors"
+                >
+                  {t("aboutCta")} →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 3. FEATURED TOURS */}
       {tours && tours.length > 0 && (
@@ -284,50 +256,15 @@ export default async function HomePage({ params }) {
               {t("toursTitle")}
             </h2>
             <div className="grid gap-8 md:grid-cols-3">
-              {tours.map((tour, i) => (
-                <Card
-                  key={tour.slug || i}
-                  className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  <CardImage>
-                    <OptimizedImage
-                      src={tour.image}
-                      alt={tour.title}
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </CardImage>
-                  <CardContent>
-                    {tour.location && (
-                      <p className="text-small text-wildher-text-muted mb-1">{tour.location}</p>
-                    )}
-                    <h3 className="text-h3 font-semibold text-wildher-text mb-3">{tour.title}</h3>
-                    <div className="flex flex-wrap gap-3 text-small text-wildher-text-muted mb-3">
-                      <span className="flex items-center gap-1">
-                        <Icon name="calendar" size={16} />
-                        {tour.duration}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Icon name="mountain" size={16} />
-                        {tour.difficulty}/5
-                      </span>
-                    </div>
-                    <p className="text-small text-wildher-text-muted mb-4 line-clamp-2">
-                      {tour.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-brand-primary-green">
-                        {priceFromLabel} {tour.price}€
-                      </span>
-                      <Link
-                        href={tour.slug ? `/ture/${tour.slug}` : "/ture"}
-                        className="text-small font-semibold text-brand-primary-green hover:underline"
-                      >
-                        {learnMore} →
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
+              {tours.map((tour) => (
+                <TourCard
+                  key={tour.id || tour.slug}
+                  tour={tour}
+                  ctaLabel={tourCardCtaLabel}
+                  priceFromLabel={priceFromLabel}
+                  soloFriendlyLabel={soloFriendlyLabel}
+                  badgeLabels={tourCardBadgeLabels}
+                />
               ))}
             </div>
             <div className="text-center mt-10">
@@ -376,130 +313,6 @@ export default async function HomePage({ params }) {
               <p className="text-small text-brand-off-white/80">{t("statRatingLabel")}</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 4b. PRESS STRIP — only renders when Sanity has press mentions */}
-      {pressMentions.length > 0 && (
-        <section className="py-10 md:py-14 bg-white border-y border-neutral-200">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <p className="text-caption uppercase tracking-wide text-wildher-text-muted text-center mb-6">
-              {t("pressTitle")}
-            </p>
-            <ul className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-70">
-              {pressMentions.map((p, i) => {
-                const inner = (
-                  <OptimizedImage
-                    src={p.logo}
-                    alt={p.name || ""}
-                    sizes="120px"
-                    className="h-8 md:h-10 w-auto object-contain"
-                  />
-                );
-                return (
-                  <li key={i}>
-                    {p.url ? (
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={p.name}
-                        className="hover:opacity-100 transition-opacity"
-                      >
-                        {inner}
-                      </a>
-                    ) : (
-                      inner
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </section>
-      )}
-
-      {/* 5. MEET THE FOUNDER */}
-      <section className="py-16 md:py-24 bg-[#fafaf9]">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
-            <div className="rounded-xl overflow-hidden shadow-card aspect-[4/3] md:aspect-[16/10]">
-              <OptimizedImage
-                {...(founderPhoto ? { src: founderPhoto } : { name: "2" })}
-                alt={founderName || "Osnivačica WildHer Adventures"}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text mb-6 text-left">
-                {t("aboutTitle")}
-              </h2>
-              {founderExcerpt ? (
-                <p className="text-body text-wildher-text mb-8 text-left">
-                  {founderExcerpt}
-                </p>
-              ) : (
-                <>
-                  <p className="text-body text-wildher-text mb-6 text-left">
-                    {t("aboutText1")}
-                  </p>
-                  <p className="text-body text-wildher-text mb-8 text-left">
-                    {t("aboutText2")}
-                  </p>
-                </>
-              )}
-              <ButtonLink
-                href="/o-nama"
-                variant="primary"
-                size="md"
-                className="inline-flex items-center gap-2 bg-brand-earth-tone hover:bg-brand-earth-tone/90 text-white shadow-button"
-              >
-                {t("aboutCta")}
-                <Icon name="plus" size={18} className="text-white" />
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. EXPLORE DESTINATIONS */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-10">
-            {t("destinationsTitle")}
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {destinations.map((dest, i) => (
-              <Link
-                key={dest.slug || i}
-                href={dest.slug ? `/destinacije/${dest.slug}` : "/destinacije"}
-                className="group block rounded-2xl overflow-hidden shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="aspect-[4/3] relative">
-                  <OptimizedImage
-                    src={dest.image}
-                    alt={dest.name}
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
-                    <p className="font-semibold text-sm md:text-body">{dest.name}</p>
-                    {dest.meta && <p className="text-small text-white/90">{dest.meta}</p>}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <p className="text-center mt-8">
-            <Link
-              href="/destinacije"
-              className="text-body font-semibold text-wildher-text hover:text-brand-primary-green transition-colors"
-            >
-              {t("destinationsCta")} →
-            </Link>
-          </p>
         </div>
       </section>
 
@@ -568,25 +381,6 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 9. FINAL CTA */}
-      <section className="relative py-24 md:py-32">
-        <OptimizedImage
-          name="9"
-          alt=""
-          aria-hidden
-          sizes="100vw"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
-          <h2 className="font-display text-h2 md:text-4xl font-semibold text-white mb-8 max-w-2xl">
-            {t("finalCtaTitle")}
-          </h2>
-          <ButtonLink href="/ture" variant="primary" size="lg" className="bg-primary-600 hover:bg-primary-700">
-            {t("finalCtaButton")}
-          </ButtonLink>
-        </div>
-      </section>
     </main>
     </>
   );

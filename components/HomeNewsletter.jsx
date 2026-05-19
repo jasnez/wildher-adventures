@@ -75,7 +75,7 @@ export function HomeNewsletter() {
           variant="dark"
           size="md"
           disabled={status === 'loading'}
-          className="shrink-0 bg-brand-primary-green hover:bg-primary-700 border-0"
+          className="shrink-0 bg-brand-primary-green hover:bg-brand-primary-green-hover border-0"
         >
           {status === 'loading' ? tNewsletter('submitting') : t('newsletterButton')}
         </Button>
