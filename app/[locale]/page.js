@@ -6,6 +6,7 @@ import { Icon } from "@/components/ui";
 import { WhySectionIcon } from "@/components/WhySectionIcon";
 import { Card, CardImage, CardContent } from "@/components/ui";
 import { ButtonLink } from "@/components/ui";
+import { TourCard } from "@/components/tours";
 import { Link } from "@/i18n/navigation";
 import { HomeHeroCTAs, ScrollIndicator } from "@/components/HomeHero";
 import { HomeNewsletter } from "@/components/HomeNewsletter";
@@ -17,6 +18,7 @@ import {
   getAllStories,
   getHomeFounderTeaser,
 } from "@/lib/sanity/fetch";
+import { mapTourCard } from "@/lib/sanity/adapters";
 import {
   travelAgencyJsonLd,
   serializeJsonLd,
@@ -79,23 +81,30 @@ export default async function HomePage({ params }) {
     { titleKey: "why4Title", textKey: "why4Text", icon: "why-care" },
   ];
 
-  // ---- Tours (Sanity featured -> all featured -> mock) ----------------------
+  // ---- Tours (Sanity featured -> getFeaturedTours -> none) ----------------
+  // Shape data through mapTourCard so /ture and home featured tours share
+  // the same TourCard component (badges, rating pill, difficulty dots).
+  const fallbackTourDurationLabel = (days) => {
+    if (days <= 1) return tTours("duration1day");
+    if (days <= 2) return tTours("durationWeekend");
+    if (days <= 5) return tTours("duration3to5");
+    return tTours("duration5plus");
+  };
+  const tourDifficultyLookup = (key) => tTours(key);
+
   const sanityFeatured = (homeDoc?.featuredTours || featuredTours || []).slice(0, 3);
   const tours = sanityFeatured.length
-    ? sanityFeatured.map((tour) => ({
-        title: pickLocale(tour.title, locale),
-        location: tour.destination ? pickLocale(tour.destination.name, locale) : "",
-        duration: tour.durationLabel
-          ? pickLocale(tour.durationLabel, locale)
-          : `${tour.durationDays} ${locale === "en" ? "day(s)" : "dan(a)"}`,
-        difficulty: tour.difficulty,
-        price: tour.price,
-        currency: tour.currency || "EUR",
-        description: pickLocale(tour.shortDescription, locale),
-        image: tour.cover || "",
-        slug: tour.slug?.current,
-      }))
+    ? sanityFeatured.map((tour) =>
+        mapTourCard(tour, locale, tourDifficultyLookup, fallbackTourDurationLabel)
+      )
     : null;
+
+  const tourCardBadgeLabels = {
+    popular: tTours("badgePopular"),
+    new: tTours("badgeNew"),
+    coming: tTours("badgeComing"),
+  };
+  const tourCardCtaLabel = tTours("ctaDetailsBooking");
 
   // ---- Testimonials (Sanity featured -> founder vision fallback) ----------
   // Pre-launch: until we have real participant reviews, fall back to a
@@ -154,9 +163,8 @@ export default async function HomePage({ params }) {
         slug: null,
       }));
 
-  const priceFromLabel = tTours("priceFrom");
   const soloFriendlyLabel = tTours("soloFriendly");
-  const learnMore = t("learnMore");
+  const priceFromLabel = tTours("priceFrom");
 
   // ---- Founder teaser (Sanity aboutPage + lead guide) ----------------------
   function blocksFirstParagraph(richText) {
@@ -284,50 +292,15 @@ export default async function HomePage({ params }) {
               {t("toursTitle")}
             </h2>
             <div className="grid gap-8 md:grid-cols-3">
-              {tours.map((tour, i) => (
-                <Card
-                  key={tour.slug || i}
-                  className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  <CardImage>
-                    <OptimizedImage
-                      src={tour.image}
-                      alt={tour.title}
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </CardImage>
-                  <CardContent>
-                    {tour.location && (
-                      <p className="text-small text-wildher-text-muted mb-1">{tour.location}</p>
-                    )}
-                    <h3 className="text-h3 font-semibold text-wildher-text mb-3">{tour.title}</h3>
-                    <div className="flex flex-wrap gap-3 text-small text-wildher-text-muted mb-3">
-                      <span className="flex items-center gap-1">
-                        <Icon name="calendar" size={16} />
-                        {tour.duration}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Icon name="mountain" size={16} />
-                        {tour.difficulty}/5
-                      </span>
-                    </div>
-                    <p className="text-small text-wildher-text-muted mb-4 line-clamp-2">
-                      {tour.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-brand-primary-green">
-                        {priceFromLabel} {tour.price}€
-                      </span>
-                      <Link
-                        href={tour.slug ? `/ture/${tour.slug}` : "/ture"}
-                        className="text-small font-semibold text-brand-primary-green hover:underline"
-                      >
-                        {learnMore} →
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
+              {tours.map((tour) => (
+                <TourCard
+                  key={tour.id || tour.slug}
+                  tour={tour}
+                  ctaLabel={tourCardCtaLabel}
+                  priceFromLabel={priceFromLabel}
+                  soloFriendlyLabel={soloFriendlyLabel}
+                  badgeLabels={tourCardBadgeLabels}
+                />
               ))}
             </div>
             <div className="text-center mt-10">
