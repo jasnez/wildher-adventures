@@ -582,7 +582,7 @@ export default async function HomePage({ params }) {
           <h2 className="font-display text-h2 md:text-4xl font-semibold text-white mb-8 max-w-2xl">
             {t("finalCtaTitle")}
           </h2>
-          <ButtonLink href="/ture" variant="primary" size="lg" className="bg-primary-600 hover:bg-primary-700">
+          <ButtonLink href="/ture" variant="primary" size="lg">
             {t("finalCtaButton")}
           </ButtonLink>
         </div>

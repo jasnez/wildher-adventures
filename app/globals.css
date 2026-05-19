@@ -80,12 +80,16 @@
   /* --------------------------------------------------------------------------
      BRAND PALETTA (iz primary logo slike)
      Dark Forest Green, Off-white, Gold/Beige, Dark Brown — za logotip i brending.
+     Brand-primary-green je kanonska zelena (iz logo-a). Hover varijante drže
+     isti hue — ne miješaj sa primary-600/700 koje su drugog hue-a.
   -------------------------------------------------------------------------- */
-  --color-brand-primary-green: #4a6044;   /* planine, "WildHer" tekst */
-  --color-brand-earth-tone: #715d43;      /* "Adventures" tekst */
-  --color-brand-gold-beige: #b19d70;     /* sunce, staza/rijeka */
-  --color-brand-off-white: #f2f2ec;      /* figura penjača, tekst na tamnoj pozadini */
-  --color-brand-charcoal: #2c2c2c;       /* tamna pozadina (hero, footer) */
+  --color-brand-primary-green: #4a6044;        /* planine, "WildHer" tekst */
+  --color-brand-primary-green-hover: #3a4d35;  /* CTA hover (isti hue, ~20% tamnije) */
+  --color-brand-earth-tone: #715d43;           /* "Adventures" tekst */
+  --color-brand-earth-tone-hover: #5a4934;     /* CTA hover (isti hue, ~20% tamnije) */
+  --color-brand-gold-beige: #b19d70;           /* sunce, staza/rijeka */
+  --color-brand-off-white: #f2f2ec;            /* figura penjača, tekst na tamnoj pozadini */
+  --color-brand-charcoal: #2c2c2c;             /* tamna pozadina (hero, footer) */
 
   /* Aliasi za brzu upotrebu (brand) */
   --color-wildher-green: var(--color-primary-600);
