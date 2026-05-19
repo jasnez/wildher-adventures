@@ -247,7 +247,42 @@ export default async function HomePage({ params }) {
         <ScrollIndicator />
       </section>
 
-      {/* 2. WHY WILDHER */}
+      {/* 2. FOUNDER MINI — renders only when Sanity has founderName + founderPhoto + founderStory */}
+      {founderName && founderPhoto && founderExcerpt && (
+        <section className="py-12 md:py-16 bg-white">
+          <div className="mx-auto max-w-4xl px-4 md:px-6">
+            <div className="grid gap-6 md:grid-cols-[180px_1fr] md:gap-10 items-center">
+              <div className="rounded-full overflow-hidden aspect-square w-32 md:w-[180px] mx-auto md:mx-0 shadow-card">
+                <OptimizedImage
+                  src={founderPhoto}
+                  alt={founderName}
+                  sizes="(max-width: 768px) 128px, 180px"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-2">
+                  {t("aboutTitle")}
+                </p>
+                <h2 className="font-display text-h2 md:text-h1 font-semibold text-wildher-text mb-3">
+                  {founderName}
+                </h2>
+                <p className="text-body text-wildher-text-muted mb-4">
+                  {founderExcerpt}
+                </p>
+                <Link
+                  href="/o-nama"
+                  className="inline-flex items-center gap-1 text-body font-semibold text-brand-primary-green hover:text-brand-primary-green-hover transition-colors"
+                >
+                  {t("aboutCta")} →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 3. WHY WILDHER */}
       <section className="bg-[#f6f1e7] py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-4 md:px-6">
           <div className="mb-10 flex items-center gap-6">
@@ -391,50 +426,6 @@ export default async function HomePage({ params }) {
           </div>
         </section>
       )}
-
-      {/* 5. MEET THE FOUNDER */}
-      <section className="py-16 md:py-24 bg-[#fafaf9]">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
-            <div className="rounded-xl overflow-hidden shadow-card aspect-[4/3] md:aspect-[16/10]">
-              <OptimizedImage
-                {...(founderPhoto ? { src: founderPhoto } : { name: "2" })}
-                alt={founderName || "Osnivačica WildHer Adventures"}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text mb-6 text-left">
-                {t("aboutTitle")}
-              </h2>
-              {founderExcerpt ? (
-                <p className="text-body text-wildher-text mb-8 text-left">
-                  {founderExcerpt}
-                </p>
-              ) : (
-                <>
-                  <p className="text-body text-wildher-text mb-6 text-left">
-                    {t("aboutText1")}
-                  </p>
-                  <p className="text-body text-wildher-text mb-8 text-left">
-                    {t("aboutText2")}
-                  </p>
-                </>
-              )}
-              <ButtonLink
-                href="/o-nama"
-                variant="primary"
-                size="md"
-                className="inline-flex items-center gap-2 bg-brand-earth-tone hover:bg-brand-earth-tone/90 text-white shadow-button"
-              >
-                {t("aboutCta")}
-                <Icon name="plus" size={18} className="text-white" />
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 6. EXPLORE DESTINATIONS */}
       <section className="py-16 md:py-24 bg-white">
