@@ -187,30 +187,33 @@ export default async function HomePage({ params }) {
             {heroSubtitle}
           </p>
           <HomeHeroCTAs />
-          <div className="mt-12 flex flex-wrap justify-center gap-4 md:gap-6">
-            {trustBadges.map((label, i) => (
-              <div
-                key={i}
-                className="inline-flex items-center gap-3 rounded-full bg-black/35 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40">
-                  <Icon
-                    name={trustIcons[i % trustIcons.length]}
-                    size={18}
-                    className="text-brand-gold-beige"
-                  />
-                </span>
-                <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-white">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
         <ScrollIndicator />
       </section>
 
-      {/* 2. FOUNDER MINI — renders only when Sanity has founderName + founderPhoto + founderStory */}
+      {/* 2. TRUST STRIP */}
+      <section className="border-b border-neutral-200 bg-neutral-50 py-6 md:py-7">
+        <div className="mx-auto max-w-5xl px-4 md:px-6">
+          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10">
+            {trustBadges.map((label, i) => (
+              <li key={i} className="inline-flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-primary-green/10">
+                  <Icon
+                    name={trustIcons[i % trustIcons.length]}
+                    size={16}
+                    className="text-brand-primary-green"
+                  />
+                </span>
+                <span className="text-small font-semibold tracking-wide text-wildher-text">
+                  {label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 3. FOUNDER MINI — renders only when Sanity has founderName + founderPhoto + founderStory */}
       {founderName && founderPhoto && founderExcerpt && (
         <section className="py-12 md:py-16 bg-white">
           <div className="mx-auto max-w-4xl px-4 md:px-6">
