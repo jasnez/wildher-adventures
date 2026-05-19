@@ -67,7 +67,7 @@ export function HomeNewsletter() {
           placeholder={tNewsletter('emailPlaceholder')}
           required
           disabled={status === 'loading'}
-          className="flex-1 rounded-lg border border-neutral-500 bg-white/10 px-4 py-3 text-body text-white placeholder:text-neutral-400 focus:border-brand-gold-beige focus:outline-none focus:ring-2 focus:ring-brand-gold-beige/30 disabled:opacity-60"
+          className="flex-1 rounded-radius-button border border-brand-off-white/40 bg-white/15 px-4 py-3 text-body text-white placeholder:text-brand-off-white/65 focus:border-brand-gold-beige focus:outline-none focus:ring-2 focus:ring-brand-gold-beige/30 disabled:opacity-60"
           aria-label={tNewsletter('emailPlaceholder')}
         />
         <Button
