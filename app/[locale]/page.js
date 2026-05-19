@@ -220,16 +220,16 @@ export default async function HomePage({ params }) {
             {trustBadges.map((label, i) => (
               <div
                 key={i}
-                className="inline-flex items-center gap-3 rounded-full bg-white/8 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm"
+                className="inline-flex items-center gap-3 rounded-full bg-black/35 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40">
                   <Icon
                     name={trustIcons[i % trustIcons.length]}
                     size={18}
                     className="text-brand-gold-beige"
                   />
                 </span>
-                <span className="text-[0.78rem] md:text-small font-bold tracking-wide text-primary-800">
+                <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-white">
                   {label}
                 </span>
               </div>
