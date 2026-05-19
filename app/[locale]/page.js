@@ -149,11 +149,6 @@ export default async function HomePage({ params }) {
   const founderPhoto = founderTeaser?.founderPhoto || null;
   const founderName = founderTeaser?.founderName || null;
 
-  // ---- Press strip ---------------------------------------------------------
-  const pressMentions = Array.isArray(homeDoc?.pressMentions)
-    ? homeDoc.pressMentions.filter((p) => p?.logo)
-    : [];
-
   const homeJsonLd = travelAgencyJsonLd();
 
   return (
@@ -317,46 +312,6 @@ export default async function HomePage({ params }) {
           </div>
         </div>
       </section>
-
-      {/* 4b. PRESS STRIP — only renders when Sanity has press mentions */}
-      {pressMentions.length > 0 && (
-        <section className="py-10 md:py-14 bg-white border-y border-neutral-200">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <p className="text-caption uppercase tracking-wide text-wildher-text-muted text-center mb-6">
-              {t("pressTitle")}
-            </p>
-            <ul className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-70">
-              {pressMentions.map((p, i) => {
-                const inner = (
-                  <OptimizedImage
-                    src={p.logo}
-                    alt={p.name || ""}
-                    sizes="120px"
-                    className="h-8 md:h-10 w-auto object-contain"
-                  />
-                );
-                return (
-                  <li key={i}>
-                    {p.url ? (
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={p.name}
-                        className="hover:opacity-100 transition-opacity"
-                      >
-                        {inner}
-                      </a>
-                    ) : (
-                      inner
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </section>
-      )}
 
       {/* 7. BLOG / JOURNAL */}
       <section className="py-16 md:py-24 bg-neutral-50">
