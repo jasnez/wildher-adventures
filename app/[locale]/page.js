@@ -150,7 +150,6 @@ export default async function HomePage({ params }) {
         slug: null,
       }));
 
-  const instagramImages = ["20", "21", "22", "23", "1", "2", "3", "4", "5"];
   const priceFromLabel = tTours("priceFrom");
   const soloFriendlyLabel = tTours("soloFriendly");
   const learnMore = t("learnMore");
@@ -545,44 +544,7 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 8. INSTAGRAM FEED */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-4xl px-4 md:px-6">
-          <h2 className="font-display text-h1 md:text-2xl font-semibold text-wildher-text text-center mb-8">
-            {t("instagramTitle")}
-          </h2>
-          <div className="grid grid-cols-3 gap-2">
-            {instagramImages.map((name, i) => (
-              <a
-                key={i}
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="aspect-square overflow-hidden rounded-radius-button hover:opacity-90 transition-opacity"
-              >
-                <OptimizedImage
-                  name={name}
-                  alt=""
-                  sizes="33vw"
-                  className="w-full h-full object-cover"
-                />
-              </a>
-            ))}
-          </div>
-          <p className="text-center mt-4">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-body font-semibold text-brand-primary-green hover:underline"
-            >
-              @wildheradventures — {t("instagramCta")}
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* 9. NEWSLETTER */}
+      {/* 8. NEWSLETTER */}
       <section className="py-16 md:py-24 bg-brand-charcoal text-brand-off-white relative">
         <OptimizedImage
           name="6"
@@ -602,7 +564,7 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 10. FINAL CTA */}
+      {/* 9. FINAL CTA */}
       <section className="relative py-24 md:py-32">
         <OptimizedImage
           name="9"
