@@ -69,7 +69,7 @@ export default async function IskustvaPage({ params }) {
             {all.map((tm) => (
               <li
                 key={tm._id}
-                className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card flex flex-col"
+                className="rounded-radius-card-lg border border-neutral-200 bg-white p-6 shadow-card flex flex-col"
               >
                 <Stars rating={tm.rating} label={t('ratingLabel', { rating: tm.rating })} />
                 <blockquote className="mt-3 mb-4 flex-1">

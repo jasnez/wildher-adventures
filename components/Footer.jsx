@@ -73,7 +73,6 @@ export function Footer() {
                 width={360}
                 height={92}
                 className="w-[240px] h-auto md:w-[280px]"
-                unoptimized
               />
             </Link>
             <p className="mt-4 text-small text-brand-off-white/80 max-w-xs">

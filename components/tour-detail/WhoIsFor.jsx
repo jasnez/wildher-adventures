@@ -24,7 +24,7 @@ export function WhoIsFor({ title, included, excluded, imageName }) {
             </ul>
           </div>
           {imageName && (
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+            <div className="relative aspect-[4/3] rounded-radius-card overflow-hidden">
               <OptimizedImage
                 name={imageName}
                 alt=""

@@ -198,7 +198,7 @@ export default async function AboutPage({ params }) {
                   member.slug ? (
                     <Link
                       href={`/vodice/${member.slug}`}
-                      className="block rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card hover:shadow-xl transition-shadow"
+                      className="block rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card hover:shadow-xl focus-visible:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green transition-shadow"
                     >
                       {children}
                     </Link>

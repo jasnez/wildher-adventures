@@ -97,7 +97,7 @@ export default async function FaqPage({ params }) {
           </div>
         )}
 
-        <section className="mt-16 text-center bg-neutral-50 rounded-2xl p-8">
+        <section className="mt-16 text-center bg-neutral-50 rounded-radius-card-lg p-8">
           <h2 className="font-display text-xl font-semibold text-wildher-text mb-2">
             {t('ctaTitle')}
           </h2>

@@ -27,6 +27,9 @@ yarn-error.log*
 *.swp
 *.swo
 
+# Claude Code local state (per-worktree permissions, never shared)
+.claude/
+
 # OS
 .DS_Store
 Thumbs.db

@@ -43,7 +43,7 @@ export default async function DestinationsPage({ params }) {
               <li key={d._id}>
                 <Link
                   href={`/destinacije/${d.slug.current}`}
-                  className="block group rounded-2xl overflow-hidden shadow-card hover:shadow-xl transition-all"
+                  className="block group rounded-radius-card-lg overflow-hidden shadow-card hover:shadow-xl focus-visible:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green transition-all"
                 >
                   <div className="aspect-[4/3] relative overflow-hidden bg-neutral-100">
                     {d.heroImage && (

@@ -154,7 +154,7 @@ export default async function KalendarPage({ params }) {
                       <li key={`${entry.tour._id}-${i}`}>
                         <Link
                           href={`/ture/${entry.tour.slug.current}`}
-                          className="flex flex-col sm:flex-row sm:items-center gap-4 rounded-xl border border-neutral-200 bg-white p-4 hover:border-brand-primary-green transition-colors"
+                          className="flex flex-col sm:flex-row sm:items-center gap-4 rounded-radius-card border border-neutral-200 bg-white p-4 hover:border-brand-primary-green transition-colors"
                         >
                           {entry.tour.cover && (
                             <div className="sm:w-32 w-full aspect-[4/3] sm:aspect-square rounded-lg overflow-hidden flex-shrink-0">

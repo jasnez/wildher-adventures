@@ -66,7 +66,7 @@ export function TourCard({
     badge && (badgeLabels[badge] ?? (BADGE_KEYS[badge] ? badge : null));
 
   return (
-    <Card className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+    <Card className="group rounded-radius-card-lg shadow-card hover:shadow-xl focus-within:shadow-xl transition-all duration-300 hover:-translate-y-1 focus-within:-translate-y-1 overflow-hidden">
       <CardImage className="relative">
         <OptimizedImage
           {...(typeof image === 'string' && /^https?:\/\//.test(image)
