@@ -1,5 +1,6 @@
 import React from 'react';
 import OptimizedImage from '@/components/OptimizedImage';
+import { Icon } from '@/components/ui';
 
 export function TourDetailHero({
   title,
@@ -32,11 +33,31 @@ export function TourDetailHero({
         <div className="mx-auto w-full max-w-4xl">
           <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{title}</h1>
           <p className="text-lg md:text-xl text-white/95 mb-6">{subtitle}</p>
-          <div className="flex flex-wrap gap-4 text-sm text-white/90 mb-6">
-            {location && <span>📍 {location}</span>}
-            {duration && <span>⏱ {duration}</span>}
-            {difficultyLabel && <span>🥾 {difficultyPrefix}: {difficultyLabel}</span>}
-            {maxGroup != null && <span>👩‍👩‍👧 {maxGroupLabel}</span>}
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/90 mb-6">
+            {location && (
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="map-pin" size={16} />
+                {location}
+              </span>
+            )}
+            {duration && (
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="calendar" size={16} />
+                {duration}
+              </span>
+            )}
+            {difficultyLabel && (
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="mountain" size={16} />
+                {difficultyPrefix}: {difficultyLabel}
+              </span>
+            )}
+            {maxGroup != null && (
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="users" size={16} />
+                {maxGroupLabel}
+              </span>
+            )}
           </div>
           <a
             href={bookHref}
