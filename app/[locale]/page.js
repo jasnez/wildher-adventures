@@ -13,7 +13,6 @@ import {
   getHomePage,
   getFeaturedTours,
   getFeaturedTestimonials,
-  getAllDestinations,
   getAllStories,
   getHomeFounderTeaser,
 } from "@/lib/sanity/fetch";
@@ -49,14 +48,12 @@ export default async function HomePage({ params }) {
     homeDoc,
     featuredTours,
     featuredTestimonials,
-    sanityDestinations,
     sanityStories,
     founderTeaser,
   ] = await Promise.all([
     getHomePage(),
     getFeaturedTours(),
     getFeaturedTestimonials(),
-    getAllDestinations(),
     getAllStories(),
     getHomeFounderTeaser(),
   ]);
@@ -114,26 +111,6 @@ export default async function HomePage({ params }) {
           author: t("founderVisionAuthor"),
         },
       ];
-
-  // ---- Destinations (Sanity -> static fallback) -----------------------------
-  const destinations = sanityDestinations?.length
-    ? sanityDestinations.slice(0, 4).map((d) => ({
-        name: pickLocale(d.name, locale),
-        meta: pickLocale(d.shortDescription, locale).slice(0, 60),
-        image: d.heroImage || "",
-        slug: d.slug?.current,
-      }))
-    : [
-        { nameKey: "dest1Name", metaKey: "dest1Meta", image: "11" },
-        { nameKey: "dest2Name", metaKey: "dest2Meta", image: "12" },
-        { nameKey: "dest3Name", metaKey: "dest3Meta", image: "13" },
-        { nameKey: "dest4Name", metaKey: "dest4Meta", image: "14" },
-      ].map((d) => ({
-        name: t(d.nameKey),
-        meta: t(d.metaKey),
-        image: d.image,
-        slug: null,
-      }));
 
   // ---- Stories (Sanity stories -> static fallback) -------------------------
   const stories = sanityStories?.length
@@ -380,46 +357,6 @@ export default async function HomePage({ params }) {
           </div>
         </section>
       )}
-
-      {/* 6. EXPLORE DESTINATIONS */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-10">
-            {t("destinationsTitle")}
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {destinations.map((dest, i) => (
-              <Link
-                key={dest.slug || i}
-                href={dest.slug ? `/destinacije/${dest.slug}` : "/destinacije"}
-                className="group block rounded-2xl overflow-hidden shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="aspect-[4/3] relative">
-                  <OptimizedImage
-                    src={dest.image}
-                    alt={dest.name}
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
-                    <p className="font-semibold text-sm md:text-body">{dest.name}</p>
-                    {dest.meta && <p className="text-small text-white/90">{dest.meta}</p>}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <p className="text-center mt-8">
-            <Link
-              href="/destinacije"
-              className="text-body font-semibold text-wildher-text hover:text-brand-primary-green transition-colors"
-            >
-              {t("destinationsCta")} →
-            </Link>
-          </p>
-        </div>
-      </section>
 
       {/* 7. BLOG / JOURNAL */}
       <section className="py-16 md:py-24 bg-neutral-50">
