@@ -150,7 +150,7 @@ export function Header() {
         } ${
           scrolled
             ? 'bg-[#e3ece4]/85 backdrop-blur-md shadow-card'
-            : 'bg-transparent'
+            : 'bg-white/15 backdrop-blur-sm'
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-20 md:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
