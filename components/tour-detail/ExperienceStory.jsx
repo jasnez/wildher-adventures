@@ -19,7 +19,7 @@ export function ExperienceStory({ title, storyText, imageName, ctaLabel, ctaHref
             )}
           </div>
           {imageName && (
-            <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
+            <div className="relative aspect-[3/4] rounded-radius-card overflow-hidden">
               <OptimizedImage
                 name={imageName}
                 alt=""

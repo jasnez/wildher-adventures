@@ -73,7 +73,7 @@ export default async function GiftVoucherPage({ params }) {
               {tiers.map((tier, i) => (
                 <li
                   key={i}
-                  className="rounded-2xl border border-neutral-200 bg-white p-6 text-center shadow-card"
+                  className="rounded-radius-card-lg border border-neutral-200 bg-white p-6 text-center shadow-card"
                 >
                   <p className="text-3xl md:text-4xl font-bold text-brand-primary-green mb-1">
                     {tier.amount}

@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }) {
         )}
 
         {story.coverImage && (
-          <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-8 bg-neutral-100">
+          <div className="aspect-[16/10] rounded-radius-card-lg overflow-hidden mb-8 bg-neutral-100">
             <OptimizedImage
               src={story.coverImage}
               alt={pickLocale(story.title, locale)}

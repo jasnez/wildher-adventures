@@ -7,7 +7,7 @@ export function TestimonialStory({ quote, author, imageName }) {
       <div className="mx-auto max-w-6xl">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {imageName && (
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden order-2 md:order-1">
+            <div className="relative aspect-[4/3] rounded-radius-card overflow-hidden order-2 md:order-1">
               <OptimizedImage
                 name={imageName}
                 alt=""

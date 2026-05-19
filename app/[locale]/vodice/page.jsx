@@ -46,7 +46,7 @@ export default async function GuidesPage({ params }) {
               <li key={guide._id}>
                 <Link
                   href={`/vodice/${guide.slug.current}`}
-                  className="block group rounded-2xl overflow-hidden shadow-card hover:shadow-xl transition-all"
+                  className="block group rounded-radius-card-lg overflow-hidden shadow-card hover:shadow-xl transition-all"
                 >
                   <div className="aspect-[4/5] relative overflow-hidden bg-neutral-100">
                     {guide.photo && (
