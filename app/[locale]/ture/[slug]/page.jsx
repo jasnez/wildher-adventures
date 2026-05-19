@@ -24,6 +24,7 @@ import {
   TestimonialStory,
   SimilarAdventures,
   BookingPanel,
+  MobileBookingBar,
 } from '@/components/tour-detail';
 
 export async function generateMetadata({ params }) {
@@ -147,7 +148,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <main id="main-content" className="min-h-screen">
+      <main id="main-content" className="min-h-screen pb-24 lg:pb-0">
       <TourDetailHero
         title={detail.title}
         subtitle={detail.subtitle}
@@ -228,7 +229,12 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
 
           {detail.itinerary.length > 0 && (
             <VisualItinerary
-              steps={detail.itinerary.map((s) => ({ label: s.label, image: s.image || detail.image }))}
+              steps={detail.itinerary.map((s) => ({
+                label: s.label,
+                time: s.time,
+                description: s.description,
+                image: s.image || detail.image,
+              }))}
             />
           )}
 
@@ -299,6 +305,16 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           nextDateLabel={tTourDetail('nextDateLabel')}
         />
       </div>
+
+      <MobileBookingBar
+        priceFrom={hasPaymentLink && detail.deposit ? detail.deposit : detail.priceFrom}
+        priceLabel={tTourDetail('priceFrom')}
+        bookCta={bookCta}
+        bookHref={bookHref}
+        isExternalPayment={hasPaymentLink}
+        status={status}
+        statusLabel={statusLabel}
+      />
     </main>
     </>
   );
@@ -367,7 +383,7 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
   };
 
   return (
-    <main id="main-content" className="min-h-screen">
+    <main id="main-content" className="min-h-screen pb-24 lg:pb-0">
       <TourDetailHero
         title={title}
         subtitle={subtitle}
@@ -441,6 +457,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
           bookHref={bookHref}
         />
       </div>
+
+      <MobileBookingBar
+        priceFrom={tour.priceFrom}
+        priceLabel={tTourDetail('priceFrom')}
+        bookCta={bookCta}
+        bookHref={bookHref}
+      />
     </main>
   );
 }

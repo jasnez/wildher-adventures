@@ -8,3 +8,4 @@ export { MapElevation } from './MapElevation';
 export { TestimonialStory } from './TestimonialStory';
 export { SimilarAdventures } from './SimilarAdventures';
 export { BookingPanel } from './BookingPanel';
+export { MobileBookingBar } from './MobileBookingBar';
