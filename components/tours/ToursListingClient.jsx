@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import { ToursFilterBar } from '@/components/tours/ToursFilterBar';
 import { TourCard } from '@/components/tours/TourCard';
 import { filterAndSortTours } from '@/lib/toursFilter';
@@ -15,6 +16,7 @@ export function ToursListingClient({
   emptyStateLabel,
   badgeLabels = {},
 }) {
+  const t = useTranslations('tours');
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const handleFilterChange = useCallback((newFilters) => {
     setFilters((prev) => ({ ...prev, ...newFilters }));
@@ -24,8 +26,14 @@ export function ToursListingClient({
   return (
     <>
       <ToursFilterBar labels={labels} onFilterChange={handleFilterChange} />
-      <section className="py-12 md:py-16 bg-neutral-50">
+      <section className="py-8 md:py-12 bg-neutral-50">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <p
+            aria-live="polite"
+            className="text-small text-wildher-text-muted mb-6"
+          >
+            {t('resultsCount', { count: filteredTours.length })}
+          </p>
           {filteredTours.length === 0 ? (
             <p
               role="status"

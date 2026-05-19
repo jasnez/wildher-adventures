@@ -46,6 +46,10 @@ export default async function ToursPage({ params }) {
     difficultyChallenging: t('difficultyChallenging'),
     difficultyDemanding: t('difficultyDemanding'),
     difficultyExpert: t('difficultyExpert'),
+    filtersButton: t('filtersButton'),
+    closeFilters: t('closeFilters'),
+    applyFilters: t('applyFilters'),
+    clearFilters: t('clearFilters'),
   };
 
   const fallbackDurationLabel = (days) => {

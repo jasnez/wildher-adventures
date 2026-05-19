@@ -5,6 +5,12 @@ import { vi } from 'vitest';
 
 vi.mock('next/image', () => ({ default: (props) => <img src={props.src} alt={props.alt} /> }));
 vi.mock('@/i18n/navigation', () => ({ Link: ({ href, children, ...p }) => <a href={href} {...p}>{children}</a> }));
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key, params) => {
+    if (key === 'resultsCount' && params?.count != null) return `${params.count} tura`;
+    return key;
+  },
+}));
 
 import { ToursListingClient } from '@/components/tours/ToursListingClient';
 
