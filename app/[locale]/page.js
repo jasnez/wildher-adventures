@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import { Icon } from "@/components/ui";
-import { WhySectionIcon } from "@/components/WhySectionIcon";
 import { Card, CardImage, CardContent } from "@/components/ui";
 import { ButtonLink } from "@/components/ui";
 import { TourCard } from "@/components/tours";
@@ -72,14 +71,6 @@ export default async function HomePage({ params }) {
     ? trustBadgesFromCms
     : [t("trust1"), t("trust2"), t("trust3")];
   const trustIcons = ["users", "shield", "zap", "heart"];
-
-  // ---- Why blocks (static i18n — generic marketing copy) -------------------
-  const whyBlocks = [
-    { titleKey: "why1Title", textKey: "why1Text", icon: "why-users" },
-    { titleKey: "why2Title", textKey: "why2Text", icon: "why-backpack" },
-    { titleKey: "why3Title", textKey: "why3Text", icon: "why-nature" },
-    { titleKey: "why4Title", textKey: "why4Text", icon: "why-care" },
-  ];
 
   // ---- Tours (Sanity featured -> getFeaturedTours -> none) ----------------
   // Shape data through mapTourCard so /ture and home featured tours share
@@ -281,43 +272,6 @@ export default async function HomePage({ params }) {
           </div>
         </section>
       )}
-
-      {/* 3. WHY WILDHER */}
-      <section className="bg-[#f6f1e7] py-16 md:py-24">
-        <div className="mx-auto max-w-5xl px-4 md:px-6">
-          <div className="mb-10 flex items-center gap-6">
-            <span className="hidden flex-1 border-t border-neutral-200 md:block" />
-            <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center">
-              {t("whyTitle")}
-            </h2>
-            <span className="hidden flex-1 border-t border-neutral-200 md:block" />
-          </div>
-
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {whyBlocks.map(({ titleKey, textKey, icon }) => (
-              <div key={titleKey} className="flex flex-col items-center text-center gap-3">
-                <div
-                  className="mb-2 inline-flex items-center justify-center rounded-full bg-[#e8e4dc] p-3 shadow-[0_2px_6px_rgba(0,0,0,0.06)]"
-                  style={{
-                    ['--why-icon-stroke']: 'var(--color-neutral-700)',
-                    ['--why-icon-fill']: '#e8e4dc',
-                    ['--why-icon-bird']: 'var(--color-neutral-600)',
-                    ['--why-icon-plaster']: '#d4d0c8',
-                  }}
-                >
-                  <WhySectionIcon name={icon} size={44} />
-                </div>
-                <h3 className="font-display text-h3 font-semibold text-wildher-text">
-                  {t(titleKey)}
-                </h3>
-                <p className="text-small text-wildher-text-muted max-w-[14rem]">
-                  {t(textKey)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 3. FEATURED TOURS */}
       {tours && tours.length > 0 && (
