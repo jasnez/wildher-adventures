@@ -528,7 +528,7 @@ export default async function HomePage({ params }) {
                     {post.excerpt}
                   </p>
                   <Link
-                    href={post.slug ? `/price/${post.slug}` : "/blog"}
+                    href={post.slug ? `/blog/${post.slug}` : "/blog"}
                     className="text-small font-semibold text-brand-primary-green hover:underline"
                   >
                     {t("readMore")} →
