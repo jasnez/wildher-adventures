@@ -97,7 +97,9 @@ export default async function HomePage({ params }) {
       }))
     : null;
 
-  // ---- Testimonials (Sanity featured -> static fallback) -------------------
+  // ---- Testimonials (Sanity featured -> founder vision fallback) ----------
+  // Pre-launch: until we have real participant reviews, fall back to a
+  // single founder-vision quote rather than fabricated testimonials.
   const sanityTestimonials = Array.isArray(featuredTestimonials)
     ? featuredTestimonials.slice(0, 3)
     : [];
@@ -106,10 +108,12 @@ export default async function HomePage({ params }) {
         quote: pickLocale(t.quote, locale),
         author: `${t.authorName}${t.authorCity ? `, ${t.authorCity}` : ""}`,
       }))
-    : ["testimonial1", "testimonial2", "testimonial3"].map((k) => ({
-        quote: t(`${k}Quote`),
-        author: t(`${k}Author`),
-      }));
+    : [
+        {
+          quote: t("founderVisionQuote"),
+          author: t("founderVisionAuthor"),
+        },
+      ];
 
   // ---- Destinations (Sanity -> static fallback) -----------------------------
   const destinations = sanityDestinations?.length
@@ -150,7 +154,6 @@ export default async function HomePage({ params }) {
         slug: null,
       }));
 
-  const instagramImages = ["20", "21", "22", "23", "1", "2", "3", "4", "5"];
   const priceFromLabel = tTours("priceFrom");
   const soloFriendlyLabel = tTours("soloFriendly");
   const learnMore = t("learnMore");
@@ -217,16 +220,16 @@ export default async function HomePage({ params }) {
             {trustBadges.map((label, i) => (
               <div
                 key={i}
-                className="inline-flex items-center gap-3 rounded-full bg-white/8 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm"
+                className="inline-flex items-center gap-3 rounded-full bg-black/35 border border-white/25 px-4 py-2 md:px-5 md:py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/30">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40">
                   <Icon
                     name={trustIcons[i % trustIcons.length]}
                     size={18}
                     className="text-brand-gold-beige"
                   />
                 </span>
-                <span className="text-[0.78rem] md:text-small font-bold tracking-wide text-primary-800">
+                <span className="text-[0.78rem] md:text-small font-semibold tracking-wide text-white">
                   {label}
                 </span>
               </div>
@@ -284,14 +287,14 @@ export default async function HomePage({ params }) {
               {tours.map((tour, i) => (
                 <Card
                   key={tour.slug || i}
-                  className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1"
+                  className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <CardImage>
                     <OptimizedImage
                       src={tour.image}
                       alt={tour.title}
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </CardImage>
                   <CardContent>
@@ -478,7 +481,7 @@ export default async function HomePage({ params }) {
                     src={dest.image}
                     alt={dest.name}
                     sizes="(max-width: 768px) 50vw, 25vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
@@ -510,14 +513,14 @@ export default async function HomePage({ params }) {
             {stories.map((post, i) => (
               <Card
                 key={post.slug || i}
-                className="group rounded-2xl hover:shadow-xl transition-all duration-700 hover:-translate-y-1 shadow-card overflow-hidden"
+                className="group rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card overflow-hidden"
               >
                 <CardImage>
                   <OptimizedImage
                     src={post.image}
                     alt={post.title}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </CardImage>
                 <CardContent>
@@ -528,7 +531,7 @@ export default async function HomePage({ params }) {
                     {post.excerpt}
                   </p>
                   <Link
-                    href={post.slug ? `/price/${post.slug}` : "/blog"}
+                    href={post.slug ? `/blog/${post.slug}` : "/blog"}
                     className="text-small font-semibold text-brand-primary-green hover:underline"
                   >
                     {t("readMore")} →
@@ -545,44 +548,7 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 8. INSTAGRAM FEED */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-4xl px-4 md:px-6">
-          <h2 className="font-display text-h1 md:text-2xl font-semibold text-wildher-text text-center mb-8">
-            {t("instagramTitle")}
-          </h2>
-          <div className="grid grid-cols-3 gap-2">
-            {instagramImages.map((name, i) => (
-              <a
-                key={i}
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="aspect-square overflow-hidden rounded-radius-button hover:opacity-90 transition-opacity"
-              >
-                <OptimizedImage
-                  name={name}
-                  alt=""
-                  sizes="33vw"
-                  className="w-full h-full object-cover"
-                />
-              </a>
-            ))}
-          </div>
-          <p className="text-center mt-4">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-body font-semibold text-brand-primary-green hover:underline"
-            >
-              @wildheradventures — {t("instagramCta")}
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* 9. NEWSLETTER */}
+      {/* 8. NEWSLETTER */}
       <section className="py-16 md:py-24 bg-brand-charcoal text-brand-off-white relative">
         <OptimizedImage
           name="6"
@@ -602,7 +568,7 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* 10. FINAL CTA */}
+      {/* 9. FINAL CTA */}
       <section className="relative py-24 md:py-32">
         <OptimizedImage
           name="9"

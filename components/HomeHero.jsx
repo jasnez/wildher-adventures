@@ -8,7 +8,7 @@ export function HomeHeroCTAs() {
   const t = useTranslations('home');
   return (
     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <Button as={Link} href="/ture" variant="primary" size="lg">
+      <Button as={Link} href="/kalendar" variant="primary" size="lg">
         {t('ctaTours')}
       </Button>
       <Button as={Link} href="/o-nama" variant="outline" size="lg" className="border-white text-white hover:bg-white/10 hover:text-white">

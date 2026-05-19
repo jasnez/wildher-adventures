@@ -51,7 +51,7 @@ export default async function DestinationsPage({ params }) {
                         src={d.heroImage}
                         alt={pickLocale(d.name, locale)}
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

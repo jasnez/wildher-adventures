@@ -54,7 +54,7 @@ export default async function GuidesPage({ params }) {
                         src={guide.photo}
                         alt={guide.name}
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     )}
                   </div>
