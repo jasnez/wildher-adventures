@@ -55,28 +55,17 @@ export default async function AboutPage({ params }) {
         { titleKey: "value4Title", textKey: "value4Text", icon: "users" },
       ].map((v) => ({ title: t(v.titleKey), text: t(v.textKey), icon: v.icon }));
 
-  // ---- Team -----------------------------------------------------------------
+  // ---- Team (Sanity-only — no placeholder fallback) ------------------------
+  // Pre-launch we don't have a real team. Show the section only when CMS
+  // returns real guides; otherwise hide entirely.
   const cmsTeam = Array.isArray(aboutDoc?.team) ? aboutDoc.team : [];
-  const team = cmsTeam.length
-    ? cmsTeam.map((g) => ({
-        name: g?.name,
-        slug: g?.slug?.current,
-        role: pickLocale(g?.role, locale),
-        bio: pickLocale(g?.shortBio, locale),
-        photo: g?.photo || null,
-      }))
-    : [
-        { image: "2", nameKey: "member1Name", roleKey: "member1Role", bioKey: "member1Bio" },
-        { image: "3", nameKey: "member2Name", roleKey: "member2Role", bioKey: "member2Bio" },
-        { image: "4", nameKey: "member3Name", roleKey: "member3Role", bioKey: "member3Bio" },
-      ].map((m) => ({
-        name: t(m.nameKey),
-        slug: null,
-        role: t(m.roleKey),
-        bio: t(m.bioKey),
-        photo: null,
-        imageName: m.image,
-      }));
+  const team = cmsTeam.map((g) => ({
+    name: g?.name,
+    slug: g?.slug?.current,
+    role: pickLocale(g?.role, locale),
+    bio: pickLocale(g?.shortBio, locale),
+    photo: g?.photo || null,
+  }));
 
   // ---- Static fallback sections --------------------------------------------
   const mountains = t("mountains").split(", ");
@@ -86,12 +75,6 @@ export default async function AboutPage({ params }) {
     t("safety3"),
     t("safety4"),
     t("safety5"),
-  ];
-  const stats = [
-    { valueKey: "stat1Value", labelKey: "stat1Label" },
-    { valueKey: "stat2Value", labelKey: "stat2Label" },
-    { valueKey: "stat3Value", labelKey: "stat3Label" },
-    { valueKey: "stat4Value", labelKey: "stat4Label" },
   ];
 
   return (
@@ -166,26 +149,6 @@ export default async function AboutPage({ params }) {
           </div>
         </section>
 
-        {/* Brojke */}
-        <section className="mb-16">
-          <h2 className="text-h2 font-semibold text-wildher-text mb-8 text-center">
-            {t("statsTitle")}
-          </h2>
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {stats.map(({ valueKey, labelKey }) => (
-              <div
-                key={valueKey}
-                className="rounded-radius-card-lg border border-neutral-200 bg-white py-6 px-4 text-center shadow-card"
-              >
-                <p className="text-3xl md:text-4xl font-bold text-brand-primary-green mb-1">
-                  {t(valueKey)}
-                </p>
-                <p className="text-small text-wildher-text-muted">{t(labelKey)}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Kvalifikacije i sigurnost */}
         <section className="mb-16">
           <h2 className="text-h2 font-semibold text-wildher-text mb-6">
@@ -225,60 +188,56 @@ export default async function AboutPage({ params }) {
           <p className="text-body text-wildher-text">{t("exploreOutro")}</p>
         </section>
 
-        {/* Naša zajednica */}
-        <section className="mb-16">
-          <h2 className="text-h2 font-semibold text-wildher-text mb-6">{t("communityTitle")}</h2>
-          <p className="text-body-lg font-medium text-wildher-text mb-4">{t("communityP1")}</p>
-          <p className="text-body text-wildher-text mb-4">{t("communityP2")}</p>
-          <p className="text-body text-wildher-text">{t("communityP3")}</p>
-        </section>
-
-        {/* Tim */}
-        <section className="mb-16">
-          <h2 className="text-h2 font-semibold text-wildher-text mb-8">{t("teamTitle")}</h2>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, i) => {
-              const Wrapper = ({ children }) =>
-                member.slug ? (
-                  <Link
-                    href={`/vodice/${member.slug}`}
-                    className="block rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card hover:shadow-xl transition-shadow"
-                  >
-                    {children}
-                  </Link>
-                ) : (
-                  <article className="rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card">
-                    {children}
-                  </article>
+        {/* Tim — renders only when Sanity has team data */}
+        {team.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-h2 font-semibold text-wildher-text mb-8">{t("teamTitle")}</h2>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {team.map((member, i) => {
+                const Wrapper = ({ children }) =>
+                  member.slug ? (
+                    <Link
+                      href={`/vodice/${member.slug}`}
+                      className="block rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card hover:shadow-xl transition-shadow"
+                    >
+                      {children}
+                    </Link>
+                  ) : (
+                    <article className="rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card">
+                      {children}
+                    </article>
+                  );
+                return (
+                  <Wrapper key={member.slug || i}>
+                    {member.photo && (
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <OptimizedImage
+                          src={member.photo}
+                          alt={member.name}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="p-5">
+                      <h3 className="text-h3 font-semibold text-wildher-text mb-1">
+                        {member.name}
+                      </h3>
+                      {member.role && (
+                        <p className="text-small font-medium text-brand-primary-green mb-3">
+                          {member.role}
+                        </p>
+                      )}
+                      {member.bio && (
+                        <p className="text-small text-wildher-text-muted">{member.bio}</p>
+                      )}
+                    </div>
+                  </Wrapper>
                 );
-              return (
-                <Wrapper key={member.slug || i}>
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <OptimizedImage
-                      {...(member.photo ? { src: member.photo } : { name: member.imageName })}
-                      alt={member.name}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-h3 font-semibold text-wildher-text mb-1">
-                      {member.name}
-                    </h3>
-                    {member.role && (
-                      <p className="text-small font-medium text-brand-primary-green mb-3">
-                        {member.role}
-                      </p>
-                    )}
-                    {member.bio && (
-                      <p className="text-small text-wildher-text-muted">{member.bio}</p>
-                    )}
-                  </div>
-                </Wrapper>
-              );
-            })}
-          </div>
-        </section>
+              })}
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section className="rounded-radius-card-lg bg-neutral-100 py-12 px-6 text-center md:py-16">
