@@ -287,14 +287,14 @@ export default async function HomePage({ params }) {
               {tours.map((tour, i) => (
                 <Card
                   key={tour.slug || i}
-                  className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1"
+                  className="group rounded-2xl shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <CardImage>
                     <OptimizedImage
                       src={tour.image}
                       alt={tour.title}
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </CardImage>
                   <CardContent>
@@ -481,7 +481,7 @@ export default async function HomePage({ params }) {
                     src={dest.image}
                     alt={dest.name}
                     sizes="(max-width: 768px) 50vw, 25vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
@@ -513,14 +513,14 @@ export default async function HomePage({ params }) {
             {stories.map((post, i) => (
               <Card
                 key={post.slug || i}
-                className="group rounded-2xl hover:shadow-xl transition-all duration-700 hover:-translate-y-1 shadow-card overflow-hidden"
+                className="group rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card overflow-hidden"
               >
                 <CardImage>
                   <OptimizedImage
                     src={post.image}
                     alt={post.title}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </CardImage>
                 <CardContent>

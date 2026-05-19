@@ -145,7 +145,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-700 ${
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           hiddenByScroll ? '-translate-y-full' : 'translate-y-0'
         } ${
           scrolled
