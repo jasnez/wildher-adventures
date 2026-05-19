@@ -97,7 +97,9 @@ export default async function HomePage({ params }) {
       }))
     : null;
 
-  // ---- Testimonials (Sanity featured -> static fallback) -------------------
+  // ---- Testimonials (Sanity featured -> founder vision fallback) ----------
+  // Pre-launch: until we have real participant reviews, fall back to a
+  // single founder-vision quote rather than fabricated testimonials.
   const sanityTestimonials = Array.isArray(featuredTestimonials)
     ? featuredTestimonials.slice(0, 3)
     : [];
@@ -106,10 +108,12 @@ export default async function HomePage({ params }) {
         quote: pickLocale(t.quote, locale),
         author: `${t.authorName}${t.authorCity ? `, ${t.authorCity}` : ""}`,
       }))
-    : ["testimonial1", "testimonial2", "testimonial3"].map((k) => ({
-        quote: t(`${k}Quote`),
-        author: t(`${k}Author`),
-      }));
+    : [
+        {
+          quote: t("founderVisionQuote"),
+          author: t("founderVisionAuthor"),
+        },
+      ];
 
   // ---- Destinations (Sanity -> static fallback) -----------------------------
   const destinations = sanityDestinations?.length
