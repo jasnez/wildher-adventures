@@ -326,7 +326,7 @@ export default async function HomePage({ params }) {
             {stories.map((post, i) => (
               <Card
                 key={post.slug || i}
-                className="group rounded-radius-card-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-card overflow-hidden"
+                className="group rounded-radius-card-lg hover:shadow-xl focus-within:shadow-xl transition-all duration-300 hover:-translate-y-1 focus-within:-translate-y-1 shadow-card overflow-hidden"
               >
                 <CardImage>
                   <OptimizedImage
