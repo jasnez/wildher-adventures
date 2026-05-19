@@ -228,7 +228,12 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
 
           {detail.itinerary.length > 0 && (
             <VisualItinerary
-              steps={detail.itinerary.map((s) => ({ label: s.label, image: s.image || detail.image }))}
+              steps={detail.itinerary.map((s) => ({
+                label: s.label,
+                time: s.time,
+                description: s.description,
+                image: s.image || detail.image,
+              }))}
             />
           )}
 
