@@ -68,11 +68,12 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block" aria-label="WildHer Adventures">
               <Image
-                src="/logo-primary-dark.png"
+                src="/logo-dark.svg"
                 alt="WildHer Adventures"
-                width={360}
-                height={92}
+                width={280}
+                height={72}
                 className="w-[240px] h-auto md:w-[280px]"
+                priority
               />
             </Link>
             <p className="mt-4 text-small text-brand-off-white/80 max-w-xs">
