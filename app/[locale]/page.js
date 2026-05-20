@@ -252,6 +252,9 @@ export default async function HomePage({ params }) {
       {tours && tours.length > 0 && (
         <section className="py-16 md:py-24 bg-neutral-50">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
+            <p className="text-caption uppercase tracking-wide font-semibold text-brand-primary-green text-center mb-3">
+              {t("toursEyebrow")}
+            </p>
             <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-12">
               {t("toursTitle")}
             </h2>
@@ -277,7 +280,7 @@ export default async function HomePage({ params }) {
       )}
 
       {/* 4. TESTIMONIALS + STATS */}
-      <section className="relative py-16 md:py-24">
+      <section className="relative py-20 md:py-28">
         <Image
           src="/testimonials-bg.png"
           alt=""
@@ -317,8 +320,11 @@ export default async function HomePage({ params }) {
       </section>
 
       {/* 7. BLOG / JOURNAL */}
-      <section className="py-16 md:py-24 bg-neutral-50">
+      <section className="py-14 md:py-20 bg-neutral-50">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <p className="text-caption uppercase tracking-wide font-semibold text-brand-primary-green text-center mb-3">
+            {t("blogEyebrow")}
+          </p>
           <h2 className="font-display text-h1 md:text-3xl font-semibold text-wildher-text text-center mb-12">
             {t("blogTitle")}
           </h2>
@@ -362,7 +368,7 @@ export default async function HomePage({ params }) {
       </section>
 
       {/* 8. NEWSLETTER */}
-      <section className="py-16 md:py-24 bg-brand-charcoal text-brand-off-white relative">
+      <section className="py-20 md:py-28 bg-brand-charcoal text-brand-off-white relative">
         <OptimizedImage
           name="6"
           alt=""

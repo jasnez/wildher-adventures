@@ -18,7 +18,6 @@ const STATIC_PATHS = [
   '/vodice',
   '/destinacije',
   '/blog',
-  '/galerija',
   '/faq',
   '/kontakt',
   '/sigurnost',
