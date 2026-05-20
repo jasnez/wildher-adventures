@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Icon } from '@/components/ui';
+import OptimizedImage from '@/components/OptimizedImage';
 
 const EXPLORE_LINKS = [
   { href: '/ture', key: 'tours' },
@@ -59,8 +60,20 @@ export function Footer() {
   const tNav = useTranslations('nav');
 
   return (
-    <footer className="bg-brand-primary-green text-brand-off-white" role="contentinfo">
-      <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:px-8">
+    <footer className="relative bg-brand-charcoal text-brand-off-white" role="contentinfo">
+      {/* Atmospheric mountain photo bleeds through at 15% under the
+          charcoal overlay — gives the footer some depth instead of a
+          flat green block. */}
+      <OptimizedImage
+        name="9"
+        alt=""
+        aria-hidden
+        sizes="100vw"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div aria-hidden className="absolute inset-0 bg-brand-charcoal/85" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
           {/* Brand column — intentionally outside <nav> so the logo's
              "WildHer Adventures" aria-label isn't surfaced as a nav link
