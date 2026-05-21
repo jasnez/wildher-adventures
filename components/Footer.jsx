@@ -80,13 +80,17 @@ export function Footer() {
              "WildHer Adventures" aria-label isn't surfaced as a nav link
              ("Adventures" substring would otherwise match nav queries). */}
           <div>
-            <Link href="/" className="inline-block" aria-label="WildHer Adventures">
+            <Link
+              href="/"
+              className="inline-flex items-center bg-brand-off-white rounded-radius-card-lg px-5 py-4 md:px-6 md:py-5 shadow-lg"
+              aria-label="WildHer Adventures"
+            >
               <Image
-                src="/logo-dark.svg"
+                src="/logo-primary.png"
                 alt="WildHer Adventures"
-                width={200}
-                height={64}
-                className="w-[260px] h-auto md:w-[320px]"
+                width={160}
+                height={48}
+                className="h-12 w-auto md:h-14"
                 priority
               />
             </Link>
