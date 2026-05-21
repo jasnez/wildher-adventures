@@ -38,12 +38,12 @@ function FooterColumn({ title, links, tNav }) {
       <h3 className="text-caption uppercase tracking-wide font-semibold text-brand-off-white/70 mb-4">
         {title}
       </h3>
-      <ul className="space-y-2">
+      <ul className="space-y-2.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-small font-medium text-brand-off-white/90 hover:text-brand-gold-beige transition-colors"
+              className="text-body font-medium text-brand-off-white/90 hover:text-brand-gold-beige transition-colors"
             >
               {tNav(link.key)}
             </Link>
