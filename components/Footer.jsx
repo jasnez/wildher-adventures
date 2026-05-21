@@ -83,9 +83,9 @@ export function Footer() {
               <Image
                 src="/logo-dark.svg"
                 alt="WildHer Adventures"
-                width={280}
-                height={72}
-                className="w-[240px] h-auto md:w-[280px]"
+                width={200}
+                height={64}
+                className="w-[260px] h-auto md:w-[320px]"
                 priority
               />
             </Link>
