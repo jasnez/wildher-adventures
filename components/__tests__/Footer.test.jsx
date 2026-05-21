@@ -54,8 +54,9 @@ describe('Footer', () => {
 
     const logoLink = screen.getByRole('link', {name: /wildher adventures/i});
     expect(logoLink).toBeInTheDocument();
-    const logoImg = logoLink.querySelector('img');
-    expect(logoImg?.getAttribute('src')).toContain('logo-dark.svg');
+    // Logo is inlined as an <svg> element, not an <img>.
+    const logoSvg = logoLink.querySelector('svg');
+    expect(logoSvg).toBeInTheDocument();
 
     const nav = screen.getByRole('navigation', {name: /footer/i});
     expect(
