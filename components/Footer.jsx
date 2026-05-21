@@ -32,6 +32,71 @@ const SOCIAL_LINKS = [
   { href: 'https://facebook.com', label: 'Facebook', icon: 'facebook' },
 ];
 
+/**
+ * Brand logo inlined as SVG so className sizing always applies.
+ * Visual content is the light-on-dark variant from
+ * /public/logo-dark.svg — kept in sync if that asset changes.
+ */
+function FooterLogo() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 64"
+      fill="none"
+      aria-hidden="true"
+      className="w-64 md:w-80 h-auto"
+    >
+      <g transform="translate(0, 8) scale(0.5)">
+        <circle cx="92" cy="22" r="10" fill="#c9a227" />
+        <g stroke="#c9a227" strokeWidth="1.5" strokeLinecap="round">
+          <line x1="92" y1="10" x2="92" y2="6" />
+          <line x1="92" y1="34" x2="92" y2="38" />
+          <line x1="80" y1="22" x2="76" y2="22" />
+          <line x1="104" y1="22" x2="108" y2="22" />
+          <line x1="84" y1="14" x2="81" y2="11" />
+          <line x1="100" y1="14" x2="103" y2="11" />
+          <line x1="84" y1="30" x2="81" y2="33" />
+          <line x1="100" y1="30" x2="103" y2="33" />
+        </g>
+        <path d="M0 80 L0 35 L35 80 Z" fill="#b8d4c4" />
+        <path d="M28 80 L28 28 L55 80 Z" fill="#c8e0d0" />
+        <path
+          d="M22 80 Q30 55 38 45 Q45 38 52 50 Q58 65 65 80"
+          stroke="#8b7355"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <circle cx="48" cy="32" r="3" fill="#f7f5f2" />
+        <path d="M48 35 L48 48 L45 56 L51 56 L48 48" fill="#f7f5f2" />
+        <path d="M48 38 L42 45" stroke="#f7f5f2" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M48 42 L52 48" stroke="#f7f5f2" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M50 40 L52 46" stroke="#a08060" strokeWidth="1" strokeLinecap="round" />
+      </g>
+      <text
+        x="72"
+        y="38"
+        fontFamily="var(--font-playfair), ui-serif, Georgia, serif"
+        fontSize="26"
+        fontWeight="700"
+        fill="#f7f5f2"
+      >
+        WildHer
+      </text>
+      <text
+        x="72"
+        y="54"
+        fontFamily="var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif"
+        fontSize="14"
+        fontWeight="500"
+        fill="#a08060"
+      >
+        Adventures
+      </text>
+    </svg>
+  );
+}
+
 function FooterColumn({ title, links, tNav }) {
   return (
     <div>
@@ -85,21 +150,16 @@ export function Footer() {
               aria-label="WildHer Adventures"
             >
               {/*
-                Plain <img> on purpose: next/Image renders an inline
-                `style="width: ...; height: ..."` from the width/height
-                props which has higher specificity than Tailwind's
-                w-[...] arbitrary-value classes — that's why earlier
-                attempts to size the SVG via className silently failed.
-                logo-dark.svg has the light-on-dark colour variant
-                (verified by reading the source), so it blends
-                naturally on the green footer without a card wrapper.
+                Inline SVG, not <img>. Two earlier attempts to render
+                /logo-dark.svg through next/Image and plain <img> both
+                ended up with the logo rendering far smaller than the
+                className width — likely a Tailwind v4 + browser
+                interaction with external SVGs that I can't reliably
+                debug in this codebase. Embedding the SVG directly in
+                JSX makes the className apply to the <svg> element
+                itself, so sizing is guaranteed.
               */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo-dark.svg"
-                alt="WildHer Adventures"
-                className="w-64 h-auto md:w-80"
-              />
+              <FooterLogo />
             </Link>
             <p className="mt-4 text-small text-brand-off-white/80 max-w-xs">
               {t('tagline')}
