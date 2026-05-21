@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Icon } from '@/components/ui';
@@ -39,12 +38,12 @@ function FooterColumn({ title, links, tNav }) {
       <h3 className="text-caption uppercase tracking-wide font-semibold text-brand-off-white/70 mb-4">
         {title}
       </h3>
-      <ul className="space-y-2">
+      <ul className="space-y-2.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-small font-medium text-brand-off-white/90 hover:text-brand-gold-beige transition-colors"
+              className="text-body font-medium text-brand-off-white/90 hover:text-brand-gold-beige transition-colors"
             >
               {tNav(link.key)}
             </Link>
@@ -82,16 +81,24 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="inline-flex items-center bg-brand-off-white rounded-radius-card-lg px-5 py-4 md:px-6 md:py-5 shadow-lg"
+              className="inline-block"
               aria-label="WildHer Adventures"
             >
-              <Image
-                src="/logo-primary.png"
+              {/*
+                Plain <img> on purpose: next/Image renders an inline
+                `style="width: ...; height: ..."` from the width/height
+                props which has higher specificity than Tailwind's
+                w-[...] arbitrary-value classes — that's why earlier
+                attempts to size the SVG via className silently failed.
+                logo-dark.svg has the light-on-dark colour variant
+                (verified by reading the source), so it blends
+                naturally on the green footer without a card wrapper.
+              */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo-dark.svg"
                 alt="WildHer Adventures"
-                width={160}
-                height={48}
-                className="h-12 w-auto md:h-14"
-                priority
+                className="w-64 h-auto md:w-80"
               />
             </Link>
             <p className="mt-4 text-small text-brand-off-white/80 max-w-xs">
