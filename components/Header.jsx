@@ -161,7 +161,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive(link.href) ? 'page' : undefined}
-                className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green ${
+                className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2 ${
                   isActive(link.href)
                     ? 'text-brand-primary-green border-brand-primary-green'
                     : 'text-wildher-text'
@@ -198,7 +198,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive(link.href) ? 'page' : undefined}
-                  className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green ${
+                  className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2 ${
                     isActive(link.href)
                       ? 'text-brand-primary-green border-brand-primary-green'
                       : 'text-wildher-text'
@@ -246,7 +246,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 text-body-lg font-medium text-wildher-text hover:text-brand-primary-green border-b border-neutral-200"
+                className="py-3 text-body-lg font-medium text-wildher-text hover:text-brand-primary-green border-b border-neutral-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
               >
                 {t(link.key)}
               </Link>

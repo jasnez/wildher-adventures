@@ -104,7 +104,7 @@ export default async function FaqPage({ params }) {
           <p className="text-body text-wildher-text-muted mb-6">{t('ctaText')}</p>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center rounded-lg bg-brand-primary-green px-6 py-3 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
+            className="inline-flex items-center justify-center rounded-button bg-brand-primary-green px-6 py-3 font-semibold text-white hover:bg-brand-primary-green-hover transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
           >
             {t('ctaButton')}
           </Link>

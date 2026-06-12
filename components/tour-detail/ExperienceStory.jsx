@@ -12,7 +12,7 @@ export function ExperienceStory({ title, storyText, imageName, ctaLabel, ctaHref
             {ctaHref && (
               <a
                 href={ctaHref}
-                className="inline-flex items-center justify-center rounded-lg bg-brand-primary-green px-5 py-2.5 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
+                className="inline-flex items-center justify-center rounded-button bg-brand-primary-green px-5 py-2.5 font-semibold text-white hover:bg-brand-primary-green-hover transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
               >
                 {ctaLabel}
               </a>

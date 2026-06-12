@@ -28,11 +28,11 @@ export function BookingPanel({
   const ctaDisabled = status === 'sold_out';
   const ctaClass = ctaDisabled
     ? 'block w-full text-center rounded-lg bg-neutral-300 px-4 py-3 font-semibold text-neutral-700 cursor-not-allowed'
-    : 'block w-full text-center rounded-lg bg-brand-primary-green px-4 py-3 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors';
+    : 'block w-full text-center rounded-button bg-brand-primary-green px-4 py-3 font-semibold text-white hover:bg-brand-primary-green-hover transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2';
 
   return (
     <aside id="booking" className="sticky top-[var(--quick-facts-height,4rem)] z-10 w-full md:w-80 flex-shrink-0">
-      <div className="rounded-card border border-neutral-200 bg-wildher-surface p-5 shadow-lg">
+      <div className="rounded-card border border-neutral-200 bg-wildher-surface p-5 shadow-card">
         {status && status !== 'open' && statusLabel && (
           <p
             className={`inline-block rounded-full px-3 py-1 text-caption font-semibold mb-3 ${STATUS_STYLES[status] || 'bg-neutral-100 text-neutral-700'}`}
