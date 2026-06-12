@@ -56,7 +56,7 @@ export default async function BlogPage({ params }) {
               <li key={story._id}>
                 <Link
                   href={`/blog/${story.slug.current}`}
-                  className="block group rounded-radius-card-lg overflow-hidden shadow-card hover:shadow-xl focus-visible:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green transition-all bg-white"
+                  className="block group rounded-card-lg overflow-hidden shadow-card hover:shadow-xl focus-visible:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green transition-all bg-white"
                 >
                   {story.coverImage && (
                     <div className="aspect-[16/10] overflow-hidden bg-neutral-100">

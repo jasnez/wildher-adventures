@@ -113,7 +113,8 @@ Koristi i default Tailwind spacing (npr. `p-4`, `gap-6`).
 | radius-card-lg | 1rem       | Velike kartice |
 | radius-full    | 9999px     | Pills, avatari |
 
-**Tailwind:** `rounded-radius-button`, `rounded-radius-card`, `rounded-full`.
+**Tailwind:** `rounded-button`, `rounded-card`, `rounded-card-lg`, `rounded-full`.
+(Tailwind v4 generiše utility iz `--radius-*` tokena kao `rounded-<sufiks>` — token `--radius-button` daje klasu `rounded-button`, NE `rounded-radius-button`.)
 
 ---
 

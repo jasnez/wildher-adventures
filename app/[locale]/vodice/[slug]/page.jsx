@@ -57,7 +57,7 @@ export default async function GuideDetailPage({ params }) {
 
         <div className="grid gap-8 md:grid-cols-[1fr_2fr] items-start">
           {guide.photo && (
-            <div className="aspect-[4/5] relative overflow-hidden rounded-radius-card-lg">
+            <div className="aspect-[4/5] relative overflow-hidden rounded-card-lg">
               <OptimizedImage
                 src={guide.photo}
                 alt={guide.name}

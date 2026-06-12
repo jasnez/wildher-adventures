@@ -32,7 +32,7 @@ export function BookingPanel({
 
   return (
     <aside id="booking" className="sticky top-[var(--quick-facts-height,4rem)] z-10 w-full md:w-80 flex-shrink-0">
-      <div className="rounded-radius-card border border-neutral-200 bg-wildher-surface p-5 shadow-lg">
+      <div className="rounded-card border border-neutral-200 bg-wildher-surface p-5 shadow-lg">
         {status && status !== 'open' && statusLabel && (
           <p
             className={`inline-block rounded-full px-3 py-1 text-caption font-semibold mb-3 ${STATUS_STYLES[status] || 'bg-neutral-100 text-neutral-700'}`}

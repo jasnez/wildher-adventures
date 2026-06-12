@@ -34,7 +34,7 @@ export function LanguageToggle({ className = '' }) {
 
   return (
     <div
-      className={`inline-flex rounded-radius-button border border-neutral-300 bg-white p-0.5 ${className}`}
+      className={`inline-flex rounded-button border border-neutral-300 bg-white p-0.5 ${className}`}
       role="group"
       aria-label={t('language')}
     >

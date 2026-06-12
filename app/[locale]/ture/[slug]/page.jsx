@@ -191,7 +191,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           )}
 
           {detail.guide && (
-            <section className="my-12 rounded-radius-card-lg border border-neutral-200 bg-white p-6 shadow-card">
+            <section className="my-12 rounded-card-lg border border-neutral-200 bg-white p-6 shadow-card">
               <p className="text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-3">
                 {tTourDetail('yourGuide')}
               </p>

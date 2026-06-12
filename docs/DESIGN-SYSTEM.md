@@ -51,7 +51,7 @@ import { CardTour, CardFeature, Icon } from '@/components/ui';
 
 ## 3. Forme (Input, Label, Textarea, Select, Checkbox)
 
-Sva polja koriste `rounded-radius-button`, `border-neutral-300`, focus ring u `brand-primary-green`.  
+Sva polja koriste `rounded-button`, `border-neutral-300`, focus ring u `brand-primary-green`.  
 **Label** — `htmlFor`, `required` (dodaje *).  
 **Input / Textarea / Select** — `label`, `required`, `error` (prikaz poruke), ostali HTML atributi.
 

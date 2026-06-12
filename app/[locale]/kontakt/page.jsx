@@ -28,7 +28,7 @@ export default async function ContactPage({ params }) {
         <p className="text-body text-wildher-text-muted mb-10">{t('intro')}</p>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <section className="rounded-radius-card border border-neutral-200 bg-white p-6 shadow-card">
+          <section className="rounded-card border border-neutral-200 bg-white p-6 shadow-card">
             <h2 className="text-h3 font-semibold text-wildher-text mb-2">
               {t('scheduleTitle')}
             </h2>
@@ -45,7 +45,7 @@ export default async function ContactPage({ params }) {
             </a>
           </section>
 
-          <section className="rounded-radius-card border border-neutral-200 bg-white p-6 shadow-card">
+          <section className="rounded-card border border-neutral-200 bg-white p-6 shadow-card">
             <h2 className="text-h3 font-semibold text-wildher-text mb-2">
               {t('emailTitle')}
             </h2>

@@ -64,7 +64,7 @@ export function MobileBookingBar({
         <a
           href={bookHref}
           {...linkProps}
-          className="inline-flex items-center justify-center rounded-radius-button bg-brand-primary-green hover:bg-brand-primary-green-hover transition-colors px-5 py-3 font-semibold text-white min-h-[48px] flex-shrink-0"
+          className="inline-flex items-center justify-center rounded-button bg-brand-primary-green hover:bg-brand-primary-green-hover transition-colors px-5 py-3 font-semibold text-white min-h-[48px] flex-shrink-0"
         >
           {bookCta}
         </a>

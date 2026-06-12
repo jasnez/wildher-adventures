@@ -3,7 +3,7 @@
 import React from 'react';
 
 const baseCard =
-  'rounded-radius-card bg-wildher-surface shadow-card overflow-hidden transition-shadow duration-200 hover:shadow-card-hover';
+  'rounded-card bg-wildher-surface shadow-card overflow-hidden transition-shadow duration-200 hover:shadow-card-hover';
 
 /**
  * Card — osnovna kartica (wrapper).
