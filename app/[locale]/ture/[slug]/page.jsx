@@ -109,6 +109,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
     ascent: tTourDetail('quickFacts.ascent'),
     length: tTourDetail('quickFacts.length'),
     group: tTourDetail('quickFacts.group'),
+    groupPeople: tTourDetail('people'),
     price: tTourDetail('quickFacts.price'),
     priceFrom: tTourDetail('priceFrom'),
   };
@@ -378,6 +379,7 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
     ascent: tTourDetail('quickFacts.ascent'),
     length: tTourDetail('quickFacts.length'),
     group: tTourDetail('quickFacts.group'),
+    groupPeople: tTourDetail('people'),
     price: tTourDetail('quickFacts.price'),
     priceFrom: tTourDetail('priceFrom'),
   };

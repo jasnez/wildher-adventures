@@ -32,7 +32,7 @@ export function QuickFactsBar({ duration, difficultyLabel, ascent, length, group
     { value: difficultyLabel, label: labels?.difficulty },
     { value: ascent != null ? `${ascent} m` : null, label: labels?.ascent },
     { value: length != null ? `${length} km` : null, label: labels?.length },
-    { value: group != null ? `${group} osoba` : null, label: labels?.group },
+    { value: group != null ? `${group} ${labels?.groupPeople ?? ''}`.trim() : null, label: labels?.group },
     { value: priceFrom != null ? `${labels?.priceFrom ?? ''} ${priceFrom}€` : null, label: labels?.price },
   ].filter((i) => i.value != null);
 
