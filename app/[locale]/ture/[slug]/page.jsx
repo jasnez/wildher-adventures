@@ -258,6 +258,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           {(detail.mapImage || detail.gpxFile) && (
             <MapElevation
               title={tTourDetail('mapElevationTitle')}
+              placeholder={tTourDetail('mapComingSoon')}
               showDetailsLabel={tTourDetail('mapShowDetails')}
             />
           )}
@@ -433,6 +434,7 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
 
           <MapElevation
             title={tTourDetail('mapElevationTitle')}
+            placeholder={tTourDetail('mapComingSoon')}
             showDetailsLabel={tTourDetail('mapShowDetails')}
           />
 
