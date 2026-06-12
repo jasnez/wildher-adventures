@@ -17,7 +17,7 @@ vi.mock('next-intl/server', () => ({
       sortDate: 'Datum',
       sortPrice: 'Cijena',
       sortPopularity: 'Popularnost',
-      ctaDetailsBooking: 'Detalji & Booking',
+      ctaDetailsBooking: 'Detalji i rezervacija',
       giftVoucherTitle: 'Pokloni avanturu',
       giftVoucherCta: 'Kupi vaučer',
     };
@@ -65,10 +65,10 @@ describe('Tours listing page', () => {
     expect(screen.getByText(/sortiraj po/i)).toBeInTheDocument();
   });
 
-  it('has grid of tour cards with CTA "Detalji & Booking"', async () => {
+  it('has grid of tour cards with CTA "Detalji i rezervacija"', async () => {
     const Page = await ToursPage({ params: Promise.resolve({ locale: 'bs' }) });
     render(Page);
-    const ctas = screen.getAllByRole('link', { name: /detalji.*booking/i });
+    const ctas = screen.getAllByRole('link', { name: /detalji.*rezervacija/i });
     expect(ctas.length).toBeGreaterThanOrEqual(1);
   });
 

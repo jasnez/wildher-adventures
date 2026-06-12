@@ -25,7 +25,8 @@ async function resolveTours(tours, t, tHome, tAbout) {
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const title = locale === 'bs' ? 'Vikend ture — WildHer' : 'Weekend tours — WildHer';
-  return { title };
+  const t = await getTranslations({ locale, namespace: 'tours' });
+  return { title, description: t('categoryVikendIntro') };
 }
 
 export default async function VikendPage({ params }) {

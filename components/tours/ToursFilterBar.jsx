@@ -67,7 +67,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
         <button
           type="button"
           onClick={() => setIsSheetOpen(true)}
-          className="inline-flex items-center gap-2 rounded-radius-button border border-neutral-300 bg-white px-4 py-2 text-small font-semibold text-wildher-text min-h-[44px]"
+          className="inline-flex items-center gap-2 rounded-button border border-neutral-300 bg-white px-4 py-2 text-small font-semibold text-wildher-text min-h-[44px]"
           aria-expanded={isSheetOpen}
           aria-controls="filters-sheet"
         >
@@ -121,7 +121,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                 id="filter-type"
                 value={filters.type}
                 onChange={(e) => update({ type: e.target.value })}
-                className="rounded-radius-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
+                className="rounded-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
                 aria-label={labels.filterType}
               >
                 <option value="">—</option>
@@ -140,7 +140,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                 id="filter-duration"
                 value={filters.duration}
                 onChange={(e) => update({ duration: e.target.value })}
-                className="rounded-radius-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
+                className="rounded-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
                 aria-label={labels.filterDuration}
               >
                 <option value="">—</option>
@@ -159,7 +159,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                 id="filter-difficulty"
                 value={filters.difficulty}
                 onChange={(e) => update({ difficulty: e.target.value })}
-                className="rounded-radius-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
+                className="rounded-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
                 aria-label={labels.filterDifficulty}
               >
                 <option value="">—</option>
@@ -183,7 +183,8 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                   value={filters.priceMax}
                   onChange={(e) => update({ priceMax: Number(e.target.value) })}
                   className="w-full lg:w-32"
-                  aria-label={`${labels.filterPrice} ${filters.priceMax}€`}
+                  aria-label={labels.filterPrice}
+                  aria-valuetext={`${filters.priceMax}€`}
                 />
                 <span className="text-small text-wildher-text-muted shrink-0 w-12 text-right">
                   {filters.priceMax}€
@@ -199,7 +200,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                 id="filter-sort"
                 value={filters.sort}
                 onChange={(e) => update({ sort: e.target.value })}
-                className="rounded-radius-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
+                className="rounded-button border border-neutral-300 px-3 py-2 text-small bg-white min-h-[44px] lg:min-h-0 lg:min-w-[140px]"
                 aria-label={labels.sortBy}
               >
                 <option value="date">{labels.sortDate}</option>
@@ -215,7 +216,7 @@ export function ToursFilterBar({ labels, onFilterChange }) {
           <button
             type="button"
             onClick={() => setIsSheetOpen(false)}
-            className="rounded-radius-button bg-brand-primary-green hover:bg-brand-primary-green-hover transition-colors text-white px-4 py-3 font-semibold min-h-[48px]"
+            className="rounded-button bg-brand-primary-green hover:bg-brand-primary-green-hover transition-colors text-white px-4 py-3 font-semibold min-h-[48px]"
           >
             {labels.applyFilters ?? 'Prikaži rezultate'}
           </button>

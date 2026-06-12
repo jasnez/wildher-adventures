@@ -108,7 +108,7 @@ function FooterColumn({ title, links, tNav }) {
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-body font-medium text-brand-off-white/90 hover:text-brand-gold-beige transition-colors"
+              className="text-body font-medium text-brand-off-white/90 hover:text-brand-gold-beige transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-beige"
             >
               {tNav(link.key)}
             </Link>
@@ -171,7 +171,7 @@ export function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-off-white/10 text-brand-off-white/90 hover:bg-brand-off-white/20 hover:text-brand-gold-beige transition-colors"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-off-white/10 text-brand-off-white/90 hover:bg-brand-off-white/20 hover:text-brand-gold-beige transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-beige"
                     aria-label={s.label}
                   >
                     <Icon name={s.icon} size={20} />
@@ -203,7 +203,7 @@ export function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="hover:text-brand-gold-beige transition-colors"
+                  className="hover:text-brand-gold-beige transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-beige"
                 >
                   {t(link.key)}
                 </Link>

@@ -97,14 +97,14 @@ export default async function FaqPage({ params }) {
           </div>
         )}
 
-        <section className="mt-16 text-center bg-neutral-50 rounded-radius-card-lg p-8">
+        <section className="mt-16 text-center bg-neutral-50 rounded-card-lg p-8">
           <h2 className="font-display text-xl font-semibold text-wildher-text mb-2">
             {t('ctaTitle')}
           </h2>
           <p className="text-body text-wildher-text-muted mb-6">{t('ctaText')}</p>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center rounded-lg bg-brand-primary-green px-6 py-3 font-semibold text-white hover:bg-brand-primary-green/90 transition-colors"
+            className="inline-flex items-center justify-center rounded-button bg-brand-primary-green px-6 py-3 font-semibold text-white hover:bg-brand-primary-green-hover transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
           >
             {t('ctaButton')}
           </Link>

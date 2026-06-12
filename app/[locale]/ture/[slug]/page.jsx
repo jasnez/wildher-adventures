@@ -109,6 +109,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
     ascent: tTourDetail('quickFacts.ascent'),
     length: tTourDetail('quickFacts.length'),
     group: tTourDetail('quickFacts.group'),
+    groupPeople: tTourDetail('people'),
     price: tTourDetail('quickFacts.price'),
     priceFrom: tTourDetail('priceFrom'),
   };
@@ -191,7 +192,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           )}
 
           {detail.guide && (
-            <section className="my-12 rounded-radius-card-lg border border-neutral-200 bg-white p-6 shadow-card">
+            <section className="my-12 rounded-card-lg border border-neutral-200 bg-white p-6 shadow-card">
               <p className="text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-3">
                 {tTourDetail('yourGuide')}
               </p>
@@ -257,6 +258,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           {(detail.mapImage || detail.gpxFile) && (
             <MapElevation
               title={tTourDetail('mapElevationTitle')}
+              placeholder={tTourDetail('mapComingSoon')}
               showDetailsLabel={tTourDetail('mapShowDetails')}
             />
           )}
@@ -272,19 +274,15 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           {detail.similarTours.length > 0 && (
             <SimilarAdventures
               title={tTourDetail('similarTitle')}
-              tours={detail.similarTours.map((t) => ({
-                title: t.title,
-                location: t.location,
-                duration: t.duration,
-                difficulty: t.difficulty,
-                difficultyLabel: t.difficultyLabel,
-                priceFrom: t.priceFrom,
-                description: t.description,
-                image: t.image,
-                badge: t.badge,
-                slug: t.slug,
-              }))}
+              tours={detail.similarTours}
               ctaDetailsLabel={tTours('ctaDetailsBooking')}
+              priceFromLabel={tTours('priceFrom')}
+              soloFriendlyLabel={tTours('soloFriendly')}
+              badgeLabels={{
+                popular: tTours('badgePopular'),
+                new: tTours('badgeNew'),
+                coming: tTours('badgeComing'),
+              }}
             />
           )}
         </div>
@@ -378,6 +376,7 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
     ascent: tTourDetail('quickFacts.ascent'),
     length: tTourDetail('quickFacts.length'),
     group: tTourDetail('quickFacts.group'),
+    groupPeople: tTourDetail('people'),
     price: tTourDetail('quickFacts.price'),
     priceFrom: tTourDetail('priceFrom'),
   };
@@ -431,6 +430,7 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
 
           <MapElevation
             title={tTourDetail('mapElevationTitle')}
+            placeholder={tTourDetail('mapComingSoon')}
             showDetailsLabel={tTourDetail('mapShowDetails')}
           />
 
@@ -444,6 +444,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
             title={tTourDetail('similarTitle')}
             tours={similarTours}
             ctaDetailsLabel={tTours('ctaDetailsBooking')}
+            priceFromLabel={tTours('priceFrom')}
+            soloFriendlyLabel={tTours('soloFriendly')}
+            badgeLabels={{
+              popular: tTours('badgePopular'),
+              new: tTours('badgeNew'),
+              coming: tTours('badgeComing'),
+            }}
           />
         </div>
 

@@ -69,7 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     buildEntry(base, `/destinacije/${d.slug.current}`, undefined, 0.6)
   );
   const storyEntries = (stories || []).map((s) =>
-    buildEntry(base, `/price/${s.slug.current}`, s.publishedAt, 0.5)
+    buildEntry(base, `/blog/${s.slug.current}`, s.publishedAt, 0.5)
   );
 
   const staticEntries = STATIC_PATHS.map((p) =>

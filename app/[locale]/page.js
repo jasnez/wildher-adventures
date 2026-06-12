@@ -20,6 +20,7 @@ import { mapTourCard } from "@/lib/sanity/adapters";
 import {
   travelAgencyJsonLd,
   serializeJsonLd,
+  absoluteUrl,
 } from "@/lib/seo/structuredData";
 
 function pickLocale(value, locale) {
@@ -35,7 +36,15 @@ export async function generateMetadata({ params }) {
   const description = locale === "bs"
     ? "Planinarenje samo za žene, via ferrata i ekspedicije kroz planine Bosne i Hercegovine. Licencirani vodič, male grupe."
     : "Women-only hiking tours, via ferrata and expeditions in Bosnia and Herzegovina. Licensed guide, small groups.";
-  return { title, description };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: absoluteUrl("/hero-mountains.png"), alt: "WildHer Adventures" }],
+    },
+  };
 }
 
 export default async function HomePage({ params }) {
@@ -332,7 +341,7 @@ export default async function HomePage({ params }) {
             {stories.map((post, i) => (
               <Card
                 key={post.slug || i}
-                className="group rounded-radius-card-lg hover:shadow-xl focus-within:shadow-xl transition-all duration-300 hover:-translate-y-1 focus-within:-translate-y-1 shadow-card overflow-hidden"
+                className="group rounded-card-lg hover:shadow-xl focus-within:shadow-xl transition-all duration-300 hover:-translate-y-1 focus-within:-translate-y-1 shadow-card overflow-hidden"
               >
                 <CardImage>
                   <OptimizedImage

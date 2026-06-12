@@ -1,7 +1,14 @@
 import React from 'react';
 import { TourCard } from '@/components/tours/TourCard';
 
-export function SimilarAdventures({ title, tours, ctaDetailsLabel }) {
+export function SimilarAdventures({
+  title,
+  tours,
+  ctaDetailsLabel,
+  priceFromLabel,
+  soloFriendlyLabel,
+  badgeLabels,
+}) {
   if (!tours?.length) return null;
   return (
     <section className="py-12 md:py-16 px-4">
@@ -13,6 +20,9 @@ export function SimilarAdventures({ title, tours, ctaDetailsLabel }) {
               key={tour.slug}
               tour={tour}
               ctaLabel={ctaDetailsLabel}
+              priceFromLabel={priceFromLabel}
+              soloFriendlyLabel={soloFriendlyLabel}
+              badgeLabels={badgeLabels}
             />
           ))}
         </div>

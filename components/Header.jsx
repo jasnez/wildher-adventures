@@ -34,7 +34,7 @@ export function LanguageToggle({ className = '' }) {
 
   return (
     <div
-      className={`inline-flex rounded-radius-button border border-neutral-300 bg-white p-0.5 ${className}`}
+      className={`inline-flex rounded-button border border-neutral-300 bg-white p-0.5 ${className}`}
       role="group"
       aria-label={t('language')}
     >
@@ -89,6 +89,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const mobileMenuRef = useRef(null);
+  const hamburgerRef = useRef(null);
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
   const pathname = usePathname();
@@ -121,24 +122,54 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = '';
-    return () => { document.body.style.overflow = ''; };
+    // Lock scroll on <html> as well as <body>: iOS/Android momentum
+    // scrolling can still move the page when only body is locked.
+    const lock = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = lock;
+    document.documentElement.style.overflow = lock;
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
   }, [mobileOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') setMobileOpen(false);
+    const handleKeydown = (e) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        return;
+      }
+      // Simple focus trap: keep Tab cycling inside the open menu.
+      if (e.key === 'Tab' && mobileMenuRef.current) {
+        const focusables = mobileMenuRef.current.querySelectorAll(
+          'a[href], button:not([disabled])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
   }, [mobileOpen]);
 
   useEffect(() => {
     if (mobileOpen && mobileMenuRef.current) {
       const firstLink = mobileMenuRef.current.querySelector('a');
       if (firstLink) firstLink.focus();
+      return () => {
+        // Restore focus to the hamburger when the menu closes so
+        // keyboard users aren't dropped at the top of the document.
+        hamburgerRef.current?.focus();
+      };
     }
   }, [mobileOpen]);
 
@@ -149,7 +180,7 @@ export function Header() {
           hiddenByScroll ? '-translate-y-full' : 'translate-y-0'
         } ${
           scrolled
-            ? 'bg-[#e3ece4]/85 backdrop-blur-md shadow-card'
+            ? 'bg-header-scrolled/85 backdrop-blur-md shadow-card'
             : 'bg-white/15 backdrop-blur-sm'
         }`}
       >
@@ -161,7 +192,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive(link.href) ? 'page' : undefined}
-                className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green ${
+                className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2 ${
                   isActive(link.href)
                     ? 'text-brand-primary-green border-brand-primary-green'
                     : 'text-wildher-text'
@@ -198,7 +229,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive(link.href) ? 'page' : undefined}
-                  className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green ${
+                  className={`text-body font-medium transition-colors border-b-2 border-transparent hover:text-brand-primary-green rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2 ${
                     isActive(link.href)
                       ? 'text-brand-primary-green border-brand-primary-green'
                       : 'text-wildher-text'
@@ -217,6 +248,7 @@ export function Header() {
           <div className="flex items-center gap-2 lg:hidden">
             <LanguageToggle />
             <button
+              ref={hamburgerRef}
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
               className="flex min-h-[44px] min-w-[44px] items-center justify-center text-wildher-text"
@@ -234,6 +266,9 @@ export function Header() {
         id="mobile-menu"
         ref={mobileMenuRef}
         data-testid="mobile-overlay"
+        role="dialog"
+        aria-modal={mobileOpen || undefined}
+        aria-label={t('mobileNavAria')}
         className={`fixed inset-0 z-40 bg-white lg:hidden transition-opacity duration-300 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
@@ -246,7 +281,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 text-body-lg font-medium text-wildher-text hover:text-brand-primary-green border-b border-neutral-200"
+                className="py-3 text-body-lg font-medium text-wildher-text hover:text-brand-primary-green border-b border-neutral-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
               >
                 {t(link.key)}
               </Link>

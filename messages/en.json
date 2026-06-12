@@ -308,6 +308,7 @@
     "whoIsForTitle": "Who is this tour for?",
     "gearTitle": "What to bring",
     "mapElevationTitle": "Map and elevation profile",
+    "mapComingSoon": "Map and elevation profile — coming soon",
     "mapShowDetails": "Show details",
     "similarTitle": "Similar adventures",
     "quickFacts": {
@@ -373,6 +374,8 @@
     "prenjStory": "Multi-day mountain adventure through the wild Prenj massif."
   },
   "about": {
+    "metaTitle": "About Us — WildHer Adventures",
+    "metaDescription": "The story behind WildHer Adventures — a licensed female guide, our values and safety standards. Women-only outdoor adventures in Bosnia and Herzegovina.",
     "heroTitle": "Our Story",
     "heroSubtitle": "WildHer Adventures was born from a love of mountains, freedom, and the belief that women deserve a safe space for adventure, exploration, and connection with nature.",
     "founderTitle": "Founder's story",

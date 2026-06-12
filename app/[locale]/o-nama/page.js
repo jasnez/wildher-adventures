@@ -17,8 +17,10 @@ const VALUE_ICON_FALLBACK = ["shield", "zap", "heart", "users"];
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
   return {
-    title: locale === "bs" ? "O nama — WildHer Adventures" : "About Us — WildHer Adventures",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
   };
 }
 
@@ -95,7 +97,7 @@ export default async function AboutPage({ params }) {
               <>
                 <p>{t("founderP1")}</p>
                 <p>{t("founderP2")}</p>
-                <div className="rounded-radius-card overflow-hidden my-8">
+                <div className="rounded-card overflow-hidden my-8">
                   <OptimizedImage
                     name="1"
                     alt="Planinarenje u prirodi"
@@ -135,7 +137,7 @@ export default async function AboutPage({ params }) {
             {values.map((v, i) => (
               <div
                 key={i}
-                className="rounded-radius-card-lg border border-neutral-200 bg-white p-6 shadow-card"
+                className="rounded-card-lg border border-neutral-200 bg-white p-6 shadow-card"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-brand-primary-green">
@@ -198,12 +200,12 @@ export default async function AboutPage({ params }) {
                   member.slug ? (
                     <Link
                       href={`/vodice/${member.slug}`}
-                      className="block rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card hover:shadow-xl focus-visible:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green transition-shadow"
+                      className="block rounded-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card hover:shadow-xl focus-visible:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green transition-shadow"
                     >
                       {children}
                     </Link>
                   ) : (
-                    <article className="rounded-radius-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card">
+                    <article className="rounded-card-lg overflow-hidden border border-neutral-200 bg-white shadow-card">
                       {children}
                     </article>
                   );
@@ -240,7 +242,7 @@ export default async function AboutPage({ params }) {
         )}
 
         {/* CTA */}
-        <section className="rounded-radius-card-lg bg-neutral-100 py-12 px-6 text-center md:py-16">
+        <section className="rounded-card-lg bg-neutral-100 py-12 px-6 text-center md:py-16">
           <h2 className="text-h2 font-semibold text-wildher-text mb-4">{t("ctaTitle")}</h2>
           <p className="text-body text-wildher-text-muted max-w-xl mx-auto mb-8">{t("ctaText")}</p>
           <AboutCta />

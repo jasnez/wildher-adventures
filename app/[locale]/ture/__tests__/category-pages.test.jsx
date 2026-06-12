@@ -16,7 +16,7 @@ vi.mock('next-intl/server', () => ({
         categoryRetreatIntro: 'Wellness i mindfulness programi.',
         filterType: 'Tip ture',
         filterDuration: 'Trajanje',
-        ctaDetailsBooking: 'Detalji & Booking',
+        ctaDetailsBooking: 'Detalji i rezervacija',
         giftVoucherTitle: 'Pokloni avanturu',
       };
       return map[key] ?? key;

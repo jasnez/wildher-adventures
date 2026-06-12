@@ -25,7 +25,7 @@ export function GiftVoucherBanner({
         )}
         <Link
           href={ctaHref}
-          className="inline-flex items-center justify-center font-semibold rounded-radius-button px-6 py-3 bg-white text-brand-earth-tone hover:bg-white/95 transition-colors"
+          className="inline-flex items-center justify-center font-semibold rounded-button px-6 py-3 bg-white text-brand-earth-tone hover:bg-white/95 transition-colors"
         >
           {ctaLabel}
         </Link>

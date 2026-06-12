@@ -3,7 +3,7 @@
 import React from 'react';
 
 const baseCard =
-  'rounded-radius-card bg-wildher-surface shadow-card overflow-hidden transition-shadow duration-200 hover:shadow-card-hover';
+  'rounded-card bg-wildher-surface shadow-card overflow-hidden transition-shadow duration-200 hover:shadow-card-hover';
 
 /**
  * Card — osnovna kartica (wrapper).
@@ -59,7 +59,7 @@ export function CardTour({
           {ctaHref && (
             <a
               href={ctaHref}
-              className="text-small font-semibold text-brand-primary-green hover:underline"
+              className="text-small font-semibold text-brand-primary-green hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
             >
               {ctaLabel} →
             </a>
@@ -97,7 +97,7 @@ export function CardBlog({ image, title, excerpt, date, href, className = '' }) 
         <h3 className="text-h3 text-wildher-text mb-2 line-clamp-2">{title}</h3>
         {excerpt && <p className="text-small text-wildher-text-muted line-clamp-2 mb-3">{excerpt}</p>}
         {href && (
-          <a href={href} className="text-small font-semibold text-brand-primary-green hover:underline">
+          <a href={href} className="text-small font-semibold text-brand-primary-green hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2">
             Čitaj više →
           </a>
         )}

@@ -118,3 +118,17 @@ export function breadcrumbJsonLd(items: Array<{ name: string; href: string }>) {
 export function siteBaseUrl() {
   return SITE.baseUrl;
 }
+
+/**
+ * Canonical + hreflang alternates for a bs/en page pair.
+ * Routes use Bosnian slugs for both locales; en lives under /en.
+ */
+export function localeAlternates(path: string, locale: 'bs' | 'en') {
+  const base = SITE.baseUrl;
+  const bsUrl = `${base}${path}`;
+  const enUrl = `${base}/en${path}`;
+  return {
+    canonical: locale === 'en' ? enUrl : bsUrl,
+    languages: { bs: bsUrl, en: enUrl, 'x-default': bsUrl },
+  };
+}

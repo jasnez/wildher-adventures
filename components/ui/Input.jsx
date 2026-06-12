@@ -3,7 +3,7 @@
 import React from 'react';
 
 const inputBase =
-  'w-full rounded-radius-button border border-neutral-300 bg-white px-4 py-2.5 text-body text-wildher-text placeholder:text-neutral-400 focus:border-brand-primary-green focus:outline-none focus:ring-2 focus:ring-brand-primary-green/20 transition-colors';
+  'w-full rounded-button border border-neutral-300 bg-white px-4 py-2.5 text-body text-wildher-text placeholder:text-neutral-400 focus:border-brand-primary-green focus:outline-none focus:ring-2 focus:ring-brand-primary-green/20 transition-colors';
 
 /**
  * Label — oznaka za form polje.
