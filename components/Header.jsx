@@ -89,6 +89,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const mobileMenuRef = useRef(null);
+  const hamburgerRef = useRef(null);
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
   const pathname = usePathname();
@@ -121,24 +122,54 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = '';
-    return () => { document.body.style.overflow = ''; };
+    // Lock scroll on <html> as well as <body>: iOS/Android momentum
+    // scrolling can still move the page when only body is locked.
+    const lock = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = lock;
+    document.documentElement.style.overflow = lock;
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
   }, [mobileOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') setMobileOpen(false);
+    const handleKeydown = (e) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        return;
+      }
+      // Simple focus trap: keep Tab cycling inside the open menu.
+      if (e.key === 'Tab' && mobileMenuRef.current) {
+        const focusables = mobileMenuRef.current.querySelectorAll(
+          'a[href], button:not([disabled])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
   }, [mobileOpen]);
 
   useEffect(() => {
     if (mobileOpen && mobileMenuRef.current) {
       const firstLink = mobileMenuRef.current.querySelector('a');
       if (firstLink) firstLink.focus();
+      return () => {
+        // Restore focus to the hamburger when the menu closes so
+        // keyboard users aren't dropped at the top of the document.
+        hamburgerRef.current?.focus();
+      };
     }
   }, [mobileOpen]);
 
@@ -217,6 +248,7 @@ export function Header() {
           <div className="flex items-center gap-2 lg:hidden">
             <LanguageToggle />
             <button
+              ref={hamburgerRef}
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
               className="flex min-h-[44px] min-w-[44px] items-center justify-center text-wildher-text"
@@ -234,6 +266,9 @@ export function Header() {
         id="mobile-menu"
         ref={mobileMenuRef}
         data-testid="mobile-overlay"
+        role="dialog"
+        aria-modal={mobileOpen || undefined}
+        aria-label={t('mobileNavAria')}
         className={`fixed inset-0 z-40 bg-white lg:hidden transition-opacity duration-300 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
