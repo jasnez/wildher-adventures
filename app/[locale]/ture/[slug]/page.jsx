@@ -274,19 +274,15 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           {detail.similarTours.length > 0 && (
             <SimilarAdventures
               title={tTourDetail('similarTitle')}
-              tours={detail.similarTours.map((t) => ({
-                title: t.title,
-                location: t.location,
-                duration: t.duration,
-                difficulty: t.difficulty,
-                difficultyLabel: t.difficultyLabel,
-                priceFrom: t.priceFrom,
-                description: t.description,
-                image: t.image,
-                badge: t.badge,
-                slug: t.slug,
-              }))}
+              tours={detail.similarTours}
               ctaDetailsLabel={tTours('ctaDetailsBooking')}
+              priceFromLabel={tTours('priceFrom')}
+              soloFriendlyLabel={tTours('soloFriendly')}
+              badgeLabels={{
+                popular: tTours('badgePopular'),
+                new: tTours('badgeNew'),
+                coming: tTours('badgeComing'),
+              }}
             />
           )}
         </div>
@@ -448,6 +444,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
             title={tTourDetail('similarTitle')}
             tours={similarTours}
             ctaDetailsLabel={tTours('ctaDetailsBooking')}
+            priceFromLabel={tTours('priceFrom')}
+            soloFriendlyLabel={tTours('soloFriendly')}
+            badgeLabels={{
+              popular: tTours('badgePopular'),
+              new: tTours('badgeNew'),
+              coming: tTours('badgeComing'),
+            }}
           />
         </div>
 
