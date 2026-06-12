@@ -91,6 +91,9 @@
   --color-brand-off-white: #f2f2ec;            /* figura penjača, tekst na tamnoj pozadini */
   --color-brand-charcoal: #2c2c2c;             /* tamna pozadina (hero, footer) */
 
+  /* Header scrolled state (cream-tinted glass; used with /85 opacity) */
+  --color-header-scrolled: #e3ece4;
+
   /* Aliasi za brzu upotrebu (brand) */
   --color-wildher-green: var(--color-primary-600);
   --color-wildher-earth: var(--color-secondary-600);
@@ -173,5 +176,18 @@
   body {
     background-color: var(--color-neutral-50);
     color: var(--color-neutral-800);
+  }
+
+  /* Korisnici sa vestibularnim smetnjama: ugasi dekorativne animacije
+     (scroll-indicator bounce) i skrati tranzicije na neprimjetno. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

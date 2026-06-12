@@ -46,6 +46,7 @@ export function HomeNewsletter() {
     return (
       <p
         role="status"
+        aria-live="polite"
         className="text-body font-medium text-brand-gold-beige max-w-md mx-auto text-center"
       >
         {tNewsletter('successMessage')}
@@ -69,19 +70,21 @@ export function HomeNewsletter() {
           disabled={status === 'loading'}
           className="flex-1 rounded-button border border-brand-off-white/40 bg-white/15 px-4 py-3 text-body text-white placeholder:text-brand-off-white/65 focus:border-brand-gold-beige focus:outline-none focus:ring-2 focus:ring-brand-gold-beige/30 disabled:opacity-60"
           aria-label={tNewsletter('emailPlaceholder')}
+          aria-invalid={status === 'error' || undefined}
+          aria-describedby={status === 'error' && errorKey ? 'newsletter-error' : undefined}
         />
         <Button
           type="submit"
           variant="dark"
           size="md"
           disabled={status === 'loading'}
-          className="shrink-0 bg-brand-primary-green hover:bg-brand-primary-green-hover border-0"
+          className="w-full sm:w-auto sm:shrink-0 bg-brand-primary-green hover:bg-brand-primary-green-hover border-0"
         >
           {status === 'loading' ? tNewsletter('submitting') : t('newsletterButton')}
         </Button>
       </div>
       {status === 'error' && errorKey && (
-        <p role="alert" className="text-caption text-red-300 text-center">
+        <p id="newsletter-error" role="alert" className="text-caption text-red-300 text-center">
           {tNewsletter(errorKey)}
         </p>
       )}

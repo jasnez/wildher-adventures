@@ -183,7 +183,8 @@ export function ToursFilterBar({ labels, onFilterChange }) {
                   value={filters.priceMax}
                   onChange={(e) => update({ priceMax: Number(e.target.value) })}
                   className="w-full lg:w-32"
-                  aria-label={`${labels.filterPrice} ${filters.priceMax}€`}
+                  aria-label={labels.filterPrice}
+                  aria-valuetext={`${filters.priceMax}€`}
                 />
                 <span className="text-small text-wildher-text-muted shrink-0 w-12 text-right">
                   {filters.priceMax}€

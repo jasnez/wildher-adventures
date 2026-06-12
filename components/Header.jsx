@@ -180,7 +180,7 @@ export function Header() {
           hiddenByScroll ? '-translate-y-full' : 'translate-y-0'
         } ${
           scrolled
-            ? 'bg-[#e3ece4]/85 backdrop-blur-md shadow-card'
+            ? 'bg-header-scrolled/85 backdrop-blur-md shadow-card'
             : 'bg-white/15 backdrop-blur-sm'
         }`}
       >
