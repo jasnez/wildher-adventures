@@ -25,7 +25,8 @@ async function resolveTours(tours, t, tHome, tAbout) {
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const title = locale === 'bs' ? 'Retreat — WildHer' : 'Retreat — WildHer';
-  return { title };
+  const t = await getTranslations({ locale, namespace: 'tours' });
+  return { title, description: t('categoryRetreatIntro') };
 }
 
 export default async function RetreatPage({ params }) {

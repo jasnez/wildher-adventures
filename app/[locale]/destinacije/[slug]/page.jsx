@@ -7,6 +7,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { TourCard } from '@/components/tours/TourCard';
 import { mapTourCard } from '@/lib/sanity/adapters';
 import { getDestinationBySlug } from '@/lib/sanity/fetch';
+import { localeAlternates } from '@/lib/seo/structuredData';
 import { RichText, localiseRichText } from '@/lib/sanity/portableText';
 
 export async function generateMetadata({ params }) {
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${name} — WildHer Adventures`,
     description: pickLocale(dest.shortDescription, locale) || undefined,
+    alternates: localeAlternates(`/destinacije/${slug}`, locale === 'en' ? 'en' : 'bs'),
   };
 }
 

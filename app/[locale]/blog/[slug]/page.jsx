@@ -7,6 +7,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { TourCard } from '@/components/tours/TourCard';
 import { mapTourCard } from '@/lib/sanity/adapters';
 import { getStoryBySlug } from '@/lib/sanity/fetch';
+import { localeAlternates } from '@/lib/seo/structuredData';
 import { RichText, localiseRichText } from '@/lib/sanity/portableText';
 
 export async function generateMetadata({ params }) {
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }) {
       description: pickLocale(story.excerpt, locale) || undefined,
       images: story.coverImage ? [{ url: story.coverImage }] : undefined,
     },
+    alternates: localeAlternates(`/blog/${slug}`, locale === 'en' ? 'en' : 'bs'),
   };
 }
 

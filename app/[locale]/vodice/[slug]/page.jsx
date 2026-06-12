@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import OptimizedImage from '@/components/OptimizedImage';
 import { getGuideBySlug } from '@/lib/sanity/fetch';
+import { localeAlternates } from '@/lib/seo/structuredData';
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -13,6 +14,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${guide.name} — WildHer Adventures`,
     description: localised(guide.role, locale) || undefined,
+    alternates: localeAlternates(`/vodice/${slug}`, locale === 'en' ? 'en' : 'bs'),
   };
 }
 

@@ -17,8 +17,10 @@ const VALUE_ICON_FALLBACK = ["shield", "zap", "heart", "users"];
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
   return {
-    title: locale === "bs" ? "O nama — WildHer Adventures" : "About Us — WildHer Adventures",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
   };
 }
 
