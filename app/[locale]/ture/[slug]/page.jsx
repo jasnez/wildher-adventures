@@ -4,6 +4,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import { Icon } from '@/components/ui';
+import { ShareButton } from '@/components/ShareButton';
 import { getTourBySlug } from '@/lib/tours';
 import { getTourDetail } from '@/lib/tourDetailData';
 import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
@@ -183,6 +184,13 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, tHome, t })
 
       <div className="flex flex-col lg:flex-row lg:items-start gap-8 max-w-6xl mx-auto px-4 py-8">
         <div className="flex-1 min-w-0">
+          <div className="flex justify-end mb-4">
+            <ShareButton
+              title={detail.title}
+              label={tTourDetail('share')}
+              copiedLabel={tTourDetail('shareCopied')}
+            />
+          </div>
           {detail.experienceStory && (
             <ExperienceStory
               title={tTourDetail('experienceTitle')}
@@ -439,6 +447,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
 
       <div className="flex flex-col lg:flex-row lg:items-start gap-8 max-w-6xl mx-auto px-4 py-8">
         <div className="flex-1 min-w-0">
+          <div className="flex justify-end mb-4">
+            <ShareButton
+              title={title}
+              label={tTourDetail('share')}
+              copiedLabel={tTourDetail('shareCopied')}
+            />
+          </div>
           <ExperienceStory
             title={tTourDetail('experienceTitle')}
             storyText={experienceStory}

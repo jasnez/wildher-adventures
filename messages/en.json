@@ -126,6 +126,8 @@
     "publishedOn": "Published",
     "by": "By",
     "backToBlog": "All stories",
+    "share": "Share",
+    "shareCopied": "Link copied",
     "relatedTours": "Tours related to this story"
   },
   "giftVoucher": {
@@ -328,6 +330,8 @@
     "mailSubjectPrefix": "Tour inquiry",
     "yourGuide": "Your guide",
     "exploreArea": "Explore this area",
+    "share": "Share",
+    "shareCopied": "Link copied",
     "viewGuideProfile": "View profile",
     "statusSoldOut": "Currently sold out",
     "statusAlmostFull": "Almost full",

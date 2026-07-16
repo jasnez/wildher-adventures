@@ -126,6 +126,8 @@
     "publishedOn": "Objavljeno",
     "by": "Autor:",
     "backToBlog": "Svi putopisi",
+    "share": "Podijeli",
+    "shareCopied": "Link kopiran",
     "relatedTours": "Ture povezane sa ovom pričom"
   },
   "giftVoucher": {
@@ -328,6 +330,8 @@
     "mailSubjectPrefix": "Upit za turu",
     "yourGuide": "Tvoja vodičica",
     "exploreArea": "Istraži ovaj kraj",
+    "share": "Podijeli",
+    "shareCopied": "Link kopiran",
     "viewGuideProfile": "Pogledaj profil",
     "statusSoldOut": "Trenutno popunjeno",
     "statusAlmostFull": "Skoro popunjeno",

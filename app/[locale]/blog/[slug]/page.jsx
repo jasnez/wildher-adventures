@@ -4,6 +4,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import OptimizedImage from '@/components/OptimizedImage';
+import { ShareButton } from '@/components/ShareButton';
 import { TourCard } from '@/components/tours/TourCard';
 import { mapTourCard } from '@/lib/sanity/adapters';
 import { getStoryBySlug } from '@/lib/sanity/fetch';
@@ -93,6 +94,14 @@ export default async function BlogPostPage({ params }) {
             {pickLocale(story.excerpt, locale)}
           </p>
         )}
+
+        <div className="mb-8">
+          <ShareButton
+            title={pickLocale(story.title, locale)}
+            label={t('share')}
+            copiedLabel={t('shareCopied')}
+          />
+        </div>
 
         {story.coverImage && (
           <div className="aspect-[16/10] rounded-card-lg overflow-hidden mb-8 bg-neutral-100">
