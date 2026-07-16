@@ -42,6 +42,7 @@ export function OptimizedImage({
         alt={alt}
         sizes={sizes}
         loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : undefined}
         decoding="async"
         className={className}
         width={width}
@@ -62,6 +63,7 @@ export function OptimizedImage({
         src={defaultSrc}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : undefined}
         decoding="async"
         sizes={sizes}
         className={className}

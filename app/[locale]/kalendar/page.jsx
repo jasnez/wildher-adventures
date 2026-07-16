@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import OptimizedImage from '@/components/OptimizedImage';
+import { HomeNewsletter } from '@/components/HomeNewsletter';
 import { sanityClient } from '@/lib/sanity/client';
 import { isSanityConfigured } from '@/sanity/env';
 import { groq } from 'next-sanity';
@@ -123,9 +124,12 @@ export default async function KalendarPage({ params }) {
         </header>
 
         {upcoming.length === 0 ? (
-          <p role="status" className="text-center text-body text-wildher-text-muted py-16">
-            {t('empty')}
-          </p>
+          <div className="mx-auto max-w-xl my-8 rounded-card-lg bg-brand-charcoal text-brand-off-white px-6 py-10 md:py-12 text-center">
+            <p role="status" className="text-body text-brand-off-white/90 mb-6">
+              {t('empty')}
+            </p>
+            <HomeNewsletter />
+          </div>
         ) : (
           <div className="space-y-12">
             {[...groups.values()].map((group, gi) => (

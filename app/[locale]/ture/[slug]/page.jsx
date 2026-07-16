@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
+import { Icon } from '@/components/ui';
+import { ShareButton } from '@/components/ShareButton';
 import { getTourBySlug } from '@/lib/tours';
 import { getTourDetail } from '@/lib/tourDetailData';
 import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
@@ -76,7 +78,7 @@ function buildBookHref(tTourDetail, title) {
   return `mailto:bookings@wildheradventures.ba?subject=${mailSubject}`;
 }
 
-async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
+async function renderFromSanity({ slug, locale, tTourDetail, tTours, tHome, t }) {
   const sanityTour = await getTourBySlugFromCms(slug);
   if (!sanityTour) return null;
 
@@ -119,7 +121,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
   const upcomingDate = detail.availableDates
     .filter((d) => d.status !== 'cancelled')
     .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
-  const status = upcomingDate?.status ?? 'open';
+  const status = upcomingDate?.status ?? 'by_request';
   const spotsLeftText = upcomingDate?.spotsLeft
     ? tTourDetail('spotsLeft', { count: upcomingDate.spotsLeft })
     : null;
@@ -130,7 +132,9 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
         ? 'statusAlmostFull'
         : status === 'waitlist'
           ? 'statusWaitlist'
-          : null;
+          : status === 'by_request'
+            ? 'statusByRequest'
+            : null;
   const statusLabel = statusLabelKey ? tTourDetail(statusLabelKey) : null;
   const nextDateText = upcomingDate?.startDate
     ? new Date(upcomingDate.startDate).toLocaleDateString(
@@ -140,6 +144,9 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
     : null;
 
   const featuredTestimonial = detail.testimonials[0];
+
+  const trustItems = [tHome('trust1'), tHome('trust2'), tHome('trust3')];
+  const bookingGroupText = tTourDetail('heroGroupMax', { count: detail.maxGroup });
 
   const jsonLd = tourJsonLd(detail, locale === 'en' ? 'en' : 'bs');
 
@@ -177,6 +184,13 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
 
       <div className="flex flex-col lg:flex-row lg:items-start gap-8 max-w-6xl mx-auto px-4 py-8">
         <div className="flex-1 min-w-0">
+          <div className="flex justify-end mb-4">
+            <ShareButton
+              title={detail.title}
+              label={tTourDetail('share')}
+              copiedLabel={tTourDetail('shareCopied')}
+            />
+          </div>
           {detail.experienceStory && (
             <ExperienceStory
               title={tTourDetail('experienceTitle')}
@@ -226,6 +240,23 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
                 </span>
               </Link>
             </section>
+          )}
+
+          {detail.destination && (
+            <Link
+              href={`/destinacije/${detail.destination.slug}`}
+              className="my-12 flex items-center justify-between gap-4 rounded-card-lg border border-neutral-200 bg-white p-6 shadow-card hover:border-brand-primary-green transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
+            >
+              <span className="min-w-0">
+                <span className="block text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-1">
+                  {tTourDetail('exploreArea')}
+                </span>
+                <span className="block text-h3 font-semibold text-wildher-text group-hover:text-brand-primary-green transition-colors">
+                  {detail.destination.name}
+                </span>
+              </span>
+              <Icon name="map-pin" size={24} className="text-brand-primary-green shrink-0" />
+            </Link>
           )}
 
           {detail.itinerary.length > 0 && (
@@ -291,16 +322,17 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           priceFrom={hasPaymentLink && detail.deposit ? detail.deposit : detail.priceFrom}
           priceLabel={tTourDetail('priceFrom')}
           spotsLeft={spotsLeftText}
-          dateLabel={tTourDetail('date')}
-          guestsLabel={tTourDetail('guests')}
+          nextDateText={nextDateText}
+          nextDateLabel={tTourDetail('nextDateLabel')}
+          dateFallback={tTourDetail('dateByRequest')}
+          groupText={bookingGroupText}
           bookCta={bookCta}
           bookHref={bookHref}
           bookCtaNote={bookCtaNote}
           isExternalPayment={hasPaymentLink}
           status={status}
           statusLabel={statusLabel}
-          nextDateText={nextDateText}
-          nextDateLabel={tTourDetail('nextDateLabel')}
+          trustItems={trustItems}
         />
       </div>
 
@@ -352,7 +384,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
   const whoIncluded = detail.whoIsForIncludedKeys.map((k) => tTourDetail(k));
   const whoExcluded = detail.whoIsForExcludedKeys.map((k) => tTourDetail(k));
   const gearItems = detail.gearKeys.map((k) => ({ key: k, label: tTourDetail(k) }));
-  const spotsLeft = tTourDetail('spotsLeft', { count: 4 });
+  // Pre-launch mock tours have no real dates or reviews: no fabricated
+  // scarcity, and availability is by request.
+  const spotsLeft = null;
+  const mockStatus = 'by_request';
+  const mockStatusLabel = tTourDetail('statusByRequest');
+  const trustItems = [tHome('trust1'), tHome('trust2'), tHome('trust3')];
+  const bookingGroupText = tTourDetail('heroGroupMax', { count: tour.maxGroup ?? 8 });
 
   const similarTours = (detail.similarSlugs || [])
     .map((s) => getTourBySlug(s))
@@ -409,6 +447,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
 
       <div className="flex flex-col lg:flex-row lg:items-start gap-8 max-w-6xl mx-auto px-4 py-8">
         <div className="flex-1 min-w-0">
+          <div className="flex justify-end mb-4">
+            <ShareButton
+              title={title}
+              label={tTourDetail('share')}
+              copiedLabel={tTourDetail('shareCopied')}
+            />
+          </div>
           <ExperienceStory
             title={tTourDetail('experienceTitle')}
             storyText={experienceStory}
@@ -434,12 +479,6 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
             showDetailsLabel={tTourDetail('mapShowDetails')}
           />
 
-          <TestimonialStory
-            quote={tTourDetail(detail.testimonialQuoteKey)}
-            author={tTourDetail(detail.testimonialAuthorKey)}
-            imageName={detail.testimonialImage}
-          />
-
           <SimilarAdventures
             title={tTourDetail('similarTitle')}
             tours={similarTours}
@@ -458,10 +497,15 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
           priceFrom={tour.priceFrom}
           priceLabel={tTourDetail('priceFrom')}
           spotsLeft={spotsLeft}
-          dateLabel={tTourDetail('date')}
-          guestsLabel={tTourDetail('guests')}
+          nextDateText={null}
+          dateFallback={tTourDetail('dateByRequest')}
+          groupText={bookingGroupText}
           bookCta={bookCta}
           bookHref={bookHref}
+          bookCtaNote={tTourDetail('bookCtaMailNote')}
+          status={mockStatus}
+          statusLabel={mockStatusLabel}
+          trustItems={trustItems}
         />
       </div>
 
@@ -470,6 +514,8 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
         priceLabel={tTourDetail('priceFrom')}
         bookCta={bookCta}
         bookHref={bookHref}
+        status={mockStatus}
+        statusLabel={mockStatusLabel}
       />
     </main>
   );
@@ -482,7 +528,7 @@ export default async function TourDetailPage({ params }) {
   const tHome = await getTranslations('home');
   const tTours = await getTranslations('tours');
 
-  const sanityResult = await renderFromSanity({ slug, locale, tTourDetail, tTours, t: tTours });
+  const sanityResult = await renderFromSanity({ slug, locale, tTourDetail, tTours, tHome, t: tTours });
   if (sanityResult) return sanityResult;
 
   const mockResult = await renderFromMock({ slug, locale, tTourDetail, tHome, tTours });
