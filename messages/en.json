@@ -332,6 +332,8 @@
     "statusAlmostFull": "Almost full",
     "statusWaitlist": "Waitlist open",
     "statusByRequest": "By request",
+    "dateByRequest": "Dates by request",
+    "bookingTrustTitle": "Why WildHer",
     "nextDateLabel": "Next departure",
     "bookCtaDeposit": "Reserve with deposit",
     "bookCtaDepositNote": "Secure deposit payment. The balance is due before the trip.",

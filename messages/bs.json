@@ -332,6 +332,8 @@
     "statusAlmostFull": "Skoro popunjeno",
     "statusWaitlist": "Otvoren waitlist",
     "statusByRequest": "Po dogovoru",
+    "dateByRequest": "Termin po dogovoru",
+    "bookingTrustTitle": "Zašto WildHer",
     "nextDateLabel": "Sljedeći termin",
     "bookCtaDeposit": "Rezerviši uz depozit",
     "bookCtaDepositNote": "Sigurna uplata depozita. Ostatak plaćaš pred turu.",

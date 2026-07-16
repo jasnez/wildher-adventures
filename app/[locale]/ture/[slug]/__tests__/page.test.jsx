@@ -102,11 +102,6 @@ describe('Tour Detail page', () => {
     expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders testimonial story', () => {
-    const matches = screen.getAllByText(/nezaboravno|via ferrata|sigurno/i);
-    expect(matches.length).toBeGreaterThanOrEqual(1);
-  });
-
   it('renders similar adventures section', () => {
     expect(screen.getByText(/slične avanture|slične ture/i)).toBeInTheDocument();
   });

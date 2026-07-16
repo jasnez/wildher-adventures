@@ -76,7 +76,7 @@ function buildBookHref(tTourDetail, title) {
   return `mailto:bookings@wildheradventures.ba?subject=${mailSubject}`;
 }
 
-async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
+async function renderFromSanity({ slug, locale, tTourDetail, tTours, tHome, t }) {
   const sanityTour = await getTourBySlugFromCms(slug);
   if (!sanityTour) return null;
 
@@ -119,7 +119,7 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
   const upcomingDate = detail.availableDates
     .filter((d) => d.status !== 'cancelled')
     .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
-  const status = upcomingDate?.status ?? 'open';
+  const status = upcomingDate?.status ?? 'by_request';
   const spotsLeftText = upcomingDate?.spotsLeft
     ? tTourDetail('spotsLeft', { count: upcomingDate.spotsLeft })
     : null;
@@ -130,7 +130,9 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
         ? 'statusAlmostFull'
         : status === 'waitlist'
           ? 'statusWaitlist'
-          : null;
+          : status === 'by_request'
+            ? 'statusByRequest'
+            : null;
   const statusLabel = statusLabelKey ? tTourDetail(statusLabelKey) : null;
   const nextDateText = upcomingDate?.startDate
     ? new Date(upcomingDate.startDate).toLocaleDateString(
@@ -140,6 +142,9 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
     : null;
 
   const featuredTestimonial = detail.testimonials[0];
+
+  const trustItems = [tHome('trust1'), tHome('trust2'), tHome('trust3')];
+  const bookingGroupText = tTourDetail('heroGroupMax', { count: detail.maxGroup });
 
   const jsonLd = tourJsonLd(detail, locale === 'en' ? 'en' : 'bs');
 
@@ -291,16 +296,17 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, t }) {
           priceFrom={hasPaymentLink && detail.deposit ? detail.deposit : detail.priceFrom}
           priceLabel={tTourDetail('priceFrom')}
           spotsLeft={spotsLeftText}
-          dateLabel={tTourDetail('date')}
-          guestsLabel={tTourDetail('guests')}
+          nextDateText={nextDateText}
+          nextDateLabel={tTourDetail('nextDateLabel')}
+          dateFallback={tTourDetail('dateByRequest')}
+          groupText={bookingGroupText}
           bookCta={bookCta}
           bookHref={bookHref}
           bookCtaNote={bookCtaNote}
           isExternalPayment={hasPaymentLink}
           status={status}
           statusLabel={statusLabel}
-          nextDateText={nextDateText}
-          nextDateLabel={tTourDetail('nextDateLabel')}
+          trustItems={trustItems}
         />
       </div>
 
@@ -352,7 +358,13 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
   const whoIncluded = detail.whoIsForIncludedKeys.map((k) => tTourDetail(k));
   const whoExcluded = detail.whoIsForExcludedKeys.map((k) => tTourDetail(k));
   const gearItems = detail.gearKeys.map((k) => ({ key: k, label: tTourDetail(k) }));
-  const spotsLeft = tTourDetail('spotsLeft', { count: 4 });
+  // Pre-launch mock tours have no real dates or reviews: no fabricated
+  // scarcity, and availability is by request.
+  const spotsLeft = null;
+  const mockStatus = 'by_request';
+  const mockStatusLabel = tTourDetail('statusByRequest');
+  const trustItems = [tHome('trust1'), tHome('trust2'), tHome('trust3')];
+  const bookingGroupText = tTourDetail('heroGroupMax', { count: tour.maxGroup ?? 8 });
 
   const similarTours = (detail.similarSlugs || [])
     .map((s) => getTourBySlug(s))
@@ -434,12 +446,6 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
             showDetailsLabel={tTourDetail('mapShowDetails')}
           />
 
-          <TestimonialStory
-            quote={tTourDetail(detail.testimonialQuoteKey)}
-            author={tTourDetail(detail.testimonialAuthorKey)}
-            imageName={detail.testimonialImage}
-          />
-
           <SimilarAdventures
             title={tTourDetail('similarTitle')}
             tours={similarTours}
@@ -458,10 +464,15 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
           priceFrom={tour.priceFrom}
           priceLabel={tTourDetail('priceFrom')}
           spotsLeft={spotsLeft}
-          dateLabel={tTourDetail('date')}
-          guestsLabel={tTourDetail('guests')}
+          nextDateText={null}
+          dateFallback={tTourDetail('dateByRequest')}
+          groupText={bookingGroupText}
           bookCta={bookCta}
           bookHref={bookHref}
+          bookCtaNote={tTourDetail('bookCtaMailNote')}
+          status={mockStatus}
+          statusLabel={mockStatusLabel}
+          trustItems={trustItems}
         />
       </div>
 
@@ -470,6 +481,8 @@ async function renderFromMock({ slug, locale, tTourDetail, tHome, tTours }) {
         priceLabel={tTourDetail('priceFrom')}
         bookCta={bookCta}
         bookHref={bookHref}
+        status={mockStatus}
+        statusLabel={mockStatusLabel}
       />
     </main>
   );
@@ -482,7 +495,7 @@ export default async function TourDetailPage({ params }) {
   const tHome = await getTranslations('home');
   const tTours = await getTranslations('tours');
 
-  const sanityResult = await renderFromSanity({ slug, locale, tTourDetail, tTours, t: tTours });
+  const sanityResult = await renderFromSanity({ slug, locale, tTourDetail, tTours, tHome, t: tTours });
   if (sanityResult) return sanityResult;
 
   const mockResult = await renderFromMock({ slug, locale, tTourDetail, tHome, tTours });
