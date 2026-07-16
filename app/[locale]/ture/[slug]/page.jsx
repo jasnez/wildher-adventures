@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
+import { Icon } from '@/components/ui';
 import { getTourBySlug } from '@/lib/tours';
 import { getTourDetail } from '@/lib/tourDetailData';
 import { getTourBySlugFromCms } from '@/lib/sanity/fetch';
@@ -231,6 +232,23 @@ async function renderFromSanity({ slug, locale, tTourDetail, tTours, tHome, t })
                 </span>
               </Link>
             </section>
+          )}
+
+          {detail.destination && (
+            <Link
+              href={`/destinacije/${detail.destination.slug}`}
+              className="my-12 flex items-center justify-between gap-4 rounded-card-lg border border-neutral-200 bg-white p-6 shadow-card hover:border-brand-primary-green transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-green focus-visible:ring-offset-2"
+            >
+              <span className="min-w-0">
+                <span className="block text-caption uppercase tracking-wide text-brand-primary-green font-semibold mb-1">
+                  {tTourDetail('exploreArea')}
+                </span>
+                <span className="block text-h3 font-semibold text-wildher-text group-hover:text-brand-primary-green transition-colors">
+                  {detail.destination.name}
+                </span>
+              </span>
+              <Icon name="map-pin" size={24} className="text-brand-primary-green shrink-0" />
+            </Link>
           )}
 
           {detail.itinerary.length > 0 && (
