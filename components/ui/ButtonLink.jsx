@@ -34,7 +34,7 @@ export function ButtonLink({
   ...props
 }) {
   const base =
-    'inline-flex items-center justify-center font-semibold rounded-button transition-colors duration-200 min-w-[44px]';
+    'inline-flex items-center justify-center font-semibold rounded-button transition-colors duration-200 min-w-[44px] motion-safe:active:scale-[0.98]';
   const variantClass = variantStyles[variant] ?? variantStyles.primary;
   const sizeClass = sizeStyles[size] ?? sizeStyles.md;
 
